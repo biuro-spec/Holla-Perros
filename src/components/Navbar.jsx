@@ -29,12 +29,12 @@ export default function Navbar() {
 
       {/* Desktop Links */}
       <div className="navbar-links" style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
-        <a href="#omnie" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>O mnie</a>
-        <a href="#uslugi" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Usługi</a>
-        <a href="#cennik" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Cennik</a>
-        <Link to="/blog" style={{ textDecoration: 'none', color: 'var(--pink)', fontWeight: 500, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Blog</Link>
-        <a href="#kontakt" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Kontakt</a>
-        <Link to="/regulamin" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Regulamin</Link>
+        <a href="#omnie" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>O mnie</a>
+        <a href="#uslugi" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Usługi</a>
+        <a href="#cennik" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Cennik</a>
+        <Link to="/blog" className="nav-link" style={{ textDecoration: 'none', color: 'var(--pink)', fontWeight: 500, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Blog</Link>
+        <a href="#kontakt" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Kontakt</a>
+        <Link to="/regulamin" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Regulamin</Link>
         <a href="tel:+48512501558" style={{ textDecoration: 'none' }}>
           <button className="btn-primary" style={{ padding: '12px 24px', fontSize: '0.8rem' }}>
             <Phone size={16} /> Umów wizytę

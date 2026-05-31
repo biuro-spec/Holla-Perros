@@ -274,6 +274,15 @@ html, body {
   color: var(--pink);
 }
 
+/* Navbar links hover */
+.nav-link {
+  transition: color 0.25s ease, font-weight 0.25s ease;
+}
+.nav-link:hover {
+  color: var(--gold) !important;
+  font-weight: 600 !important;
+}
+
 /* Mobile Menu Button */
 .mobile-menu-btn {
   display: none;
