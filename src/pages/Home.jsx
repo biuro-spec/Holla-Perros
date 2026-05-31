@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Phone, MapPin, Camera, Sparkles } from 'lucide-react';
+import { Phone, MapPin, Camera, Sparkles, MessageCircle } from 'lucide-react';
 
 const fadeIn = {
   hidden: { opacity: 0, y: 40 },
@@ -348,6 +348,14 @@ export default function Home() {
                   <div style={{ textAlign: 'left' }}>
                     <p style={{ fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px', color: 'var(--text-dark)' }}>Rezerwacje</p>
                     <a href="tel:+48512501558" style={{ textDecoration: 'none', color: 'var(--text-light)', fontSize: '1.05rem' }}>+48 512 501 558</a>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+                  <MessageCircle size={22} style={{ flexShrink: 0, marginTop: '3px', color: '#25D366' }}/>
+                  <div style={{ textAlign: 'left' }}>
+                    <p style={{ fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px', color: 'var(--text-dark)' }}>WhatsApp</p>
+                    <a href="https://wa.me/48512501558" target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: 'var(--text-light)', fontSize: '1.05rem' }}>+48 512 501 558</a>
                   </div>
                 </div>
               </div>
