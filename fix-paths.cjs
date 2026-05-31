@@ -10,9 +10,12 @@ function replaceInDir(dir) {
         } else if (fullPath.endsWith('.jsx') || fullPath.endsWith('.js')) {
             let content = fs.readFileSync(fullPath, 'utf8');
             let original = content;
-            content = content.replace(/src="\/zdjecia/g, 'src="./zdjecia');
-            content = content.replace(/src="\/logo/g, 'src="./logo');
-            content = content.replace(/src="\/icons/g, 'src="./icons');
+            
+            content = content.replace(/'\/zdjecia/g, "'./zdjecia");
+            content = content.replace(/'\/logo/g, "'./logo");
+            content = content.replace(/"\/zdjecia/g, '"./zdjecia');
+            content = content.replace(/"\/logo/g, '"./logo');
+
             if(content !== original) {
                 fs.writeFileSync(fullPath, content, 'utf8');
                 console.log('Updated', fullPath);
