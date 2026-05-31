@@ -337,7 +337,7 @@ export default function Home() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
                   <MapPin size={22} className="text-gold" style={{ flexShrink: 0, marginTop: '3px' }}/>
-                  <div>
+                  <div style={{ textAlign: 'left' }}>
                     <p style={{ fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px', color: 'var(--text-dark)' }}>Adres</p>
                     <p style={{ color: 'var(--text-light)', fontSize: '1.05rem' }}>ul. Opawska 67, 47-400 Racibórz</p>
                   </div>
@@ -345,7 +345,7 @@ export default function Home() {
 
                 <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
                   <Phone size={22} className="text-gold" style={{ flexShrink: 0, marginTop: '3px' }}/>
-                  <div>
+                  <div style={{ textAlign: 'left' }}>
                     <p style={{ fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px', color: 'var(--text-dark)' }}>Rezerwacje</p>
                     <a href="tel:+48512501558" style={{ textDecoration: 'none', color: 'var(--text-light)', fontSize: '1.05rem' }}>+48 512 501 558</a>
                   </div>
