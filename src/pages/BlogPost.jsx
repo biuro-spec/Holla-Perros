@@ -23,7 +23,7 @@ export default function BlogPost() {
   }
 
   return (
-    <article style={{ paddingTop: '120px', minHeight: '100vh', backgroundColor: 'var(--bg-color)', paddingBottom: '100px' }}>
+    <article className="blog-page-wrapper" style={{ paddingTop: '120px', minHeight: '100vh', backgroundColor: 'var(--bg-color)', paddingBottom: '100px' }}>
       <div className="container" style={{ maxWidth: '800px' }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

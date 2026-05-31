@@ -9,7 +9,7 @@ export default function Blog() {
   }, []);
 
   return (
-    <div style={{ paddingTop: '120px', minHeight: '100vh', backgroundColor: 'var(--bg-color)' }}>
+    <div className="blog-page-wrapper" style={{ paddingTop: '120px', minHeight: '100vh', backgroundColor: 'var(--bg-color)' }}>
       <div className="container" style={{ paddingBottom: '100px' }}>
         <div style={{ textAlign: 'center', marginBottom: '80px' }}>
           <p style={{ fontSize: '0.9rem', color: 'var(--gold)', marginBottom: '16px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '2px' }}>Edukacja i Wiedza</p>
@@ -17,7 +17,7 @@ export default function Blog() {
           <div style={{ width: '1px', height: '60px', backgroundColor: 'var(--border-color)', margin: '0 auto' }}></div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '40px' }}>
+        <div className="blog-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '40px' }}>
           {blogPosts.map((post, index) => (
             <motion.div 
               key={post.id}

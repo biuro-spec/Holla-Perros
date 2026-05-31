@@ -345,20 +345,27 @@ html, body {
   .mobile-menu-btn {
     display: flex !important;
   }
-  .navbar-links {
-    display: none !important;
-  }
   h1 { font-size: 3.5rem !important; }
   h2 { font-size: 2.5rem !important; }
   h3 { font-size: 1.8rem !important; }
-  
+
+  /* Override inline section paddings */
+  .hero-section {
+    padding: 90px 24px 60px !important;
+    min-height: auto !important;
+  }
+  section[id] {
+    padding: 80px 0 !important;
+  }
+
   .hero-section .container {
     grid-template-columns: 1fr !important;
+    gap: 40px !important;
     text-align: center;
   }
   .hero-section .container > div:first-child {
     padding-right: 0 !important;
-    margin-bottom: 40px;
+    margin-bottom: 0 !important;
   }
   .hero-section .container > div:first-child p:nth-of-type(2) {
     margin: 0 auto 40px;
@@ -397,11 +404,19 @@ html, body {
   }
   #cennik .container > div:nth-child(2) > div > div {
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    gap: 8px;
   }
-  
+  #cennik .container > div:nth-child(2) > div > div > div:last-child {
+    align-self: flex-end;
+  }
+
   #cennik .container > div:nth-child(3) > div:last-child {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Pakiety side by side → stack */
+  #cennik .container > div:nth-child(4) {
     grid-template-columns: 1fr !important;
   }
 
@@ -410,20 +425,32 @@ html, body {
     gap: 40px !important;
     text-align: center;
   }
-  
+
+  /* Location grid (Jak do mnie trafić + mapa) */
+  .location-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+    text-align: center;
+  }
+  .location-grid > div:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .map-container {
     height: 300px !important;
   }
-  
+
   .floating-actions {
     bottom: 20px;
     right: 20px;
   }
-  
+
   .phone-btn {
     display: flex;
   }
-  
+
   .floating-btn {
     width: 48px;
     height: 48px;
@@ -436,14 +463,38 @@ html, body {
   .mobile-nav-btn {
     display: block;
   }
+}
 
-  .floating-btn.scroll-top {
-    bottom: 90px; /* Above the phone button */
+/* Blog / BlogPost page wrapper */
+.blog-page-wrapper {
+  padding-top: 90px !important;
+}
+
+@media (max-width: 1024px) {
+  .blog-page-wrapper {
+    padding-top: 80px !important;
+  }
+  /* Blog grid - safe min for mobile */
+  .blog-grid {
+    grid-template-columns: 1fr !important;
   }
 }
 
 @media (max-width: 480px) {
-  h1 { font-size: 2.8rem !important; }
-  .container { padding: 0 20px; }
-  .editorial-card { padding: 30px !important; }
+  h1 { font-size: 2.5rem !important; }
+  h2 { font-size: 2rem !important; }
+  h3 { font-size: 1.6rem !important; }
+  .container { padding: 0 16px; }
+  .editorial-card { padding: 24px !important; }
+  .hero-section {
+    padding: 80px 16px 40px !important;
+  }
+  section[id] {
+    padding: 60px 0 !important;
+  }
+
+  /* Cennik prices don't overflow */
+  #cennik .container > div:nth-child(2) > div > div > div:last-child {
+    font-size: 1.1rem !important;
+  }
 }

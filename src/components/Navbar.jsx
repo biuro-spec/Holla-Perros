@@ -21,9 +21,11 @@ export default function Navbar() {
         <Link to="/blog" style={{ textDecoration: 'none', color: 'var(--pink)', fontWeight: 500, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Blog</Link>
         <a href="#kontakt" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Kontakt</a>
         <Link to="/regulamin" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Regulamin</Link>
-        <button className="btn-primary" style={{ padding: '12px 24px', fontSize: '0.8rem' }}>
-          <Phone size={16} /> Umów wizytę
-        </button>
+        <a href="tel:+48512501558" style={{ textDecoration: 'none' }}>
+          <button className="btn-primary" style={{ padding: '12px 24px', fontSize: '0.8rem' }}>
+            <Phone size={16} /> Umów wizytę
+          </button>
+        </a>
       </div>
 
       {/* Mobile Toggle */}
@@ -40,9 +42,11 @@ export default function Navbar() {
           <Link to="/blog" onClick={() => setIsOpen(false)} style={{ textDecoration: 'none', color: 'var(--pink)', fontWeight: 500, fontSize: '1.2rem', letterSpacing: '1px', textTransform: 'uppercase', textAlign: 'center' }}>Blog</Link>
           <a href="#kontakt" onClick={() => setIsOpen(false)} style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '1.2rem', letterSpacing: '1px', textTransform: 'uppercase', textAlign: 'center' }}>Kontakt</a>
           <Link to="/regulamin" onClick={() => setIsOpen(false)} style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '1.2rem', letterSpacing: '1px', textTransform: 'uppercase', textAlign: 'center' }}>Regulamin</Link>
-          <button className="btn-primary" style={{ width: '100%', justifyContent: 'center', marginTop: '10px' }} onClick={() => setIsOpen(false)}>
-            <Phone size={18} /> Umów wizytę
-          </button>
+          <a href="tel:+48512501558" style={{ textDecoration: 'none', width: '100%' }} onClick={() => setIsOpen(false)}>
+            <button className="btn-primary" style={{ width: '100%', justifyContent: 'center', marginTop: '10px' }}>
+              <Phone size={18} /> Umów wizytę
+            </button>
+          </a>
         </div>
       )}
     </nav>
