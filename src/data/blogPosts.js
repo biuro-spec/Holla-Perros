@@ -7,11 +7,13 @@ export const blogPosts = [
     category: 'Edukacja i Wychowanie',
     imageUrl: './zdjecia/blog/post1.png?v=2',
     content: `
-      <h2>Dlaczego pierwsza wizyta jest tak ważna?</h2>
-      <p>Pierwsze doświadczenia szczeniaka kształtują jego nastawienie do zabiegów pielęgnacyjnych na całe życie. W hOla Perros stawiamy na tzw. "wizyty adaptacyjne". Nie wymagamy od psa stania w idealnym bezruchu przez dwie godziny. Naszym celem jest pokazanie maluchowi, że wanna, suszarka i obcinaczki to nic strasznego.</p>
-      
+      <h2>Dlaczego pierwsza wizyta u groomera jest tak ważna?</h2>
+      <p>Pierwsze doświadczenia szczeniaka kształtują jego nastawienie do zabiegów pielęgnacyjnych na całe życie. W <strong>hOla Perros – salonie fryzjerskim dla psów w Raciborzu</strong> stawiamy na tzw. "wizyty adaptacyjne". Nie wymagamy od psa stania w idealnym bezruchu przez dwie godziny. Naszym celem jest pokazanie maluchowi, że wanna, suszarka i obcinaczki to nic strasznego.</p>
+
+      <p>Wielu właścicieli psów z Raciborza, Rybnika, Wodzisławia Śląskiego i okolic pyta nas: <em>kiedy jest właściwy moment na pierwszą wizytę u groomera?</em> Odpowiedź brzmi: najwcześniej jak to możliwe – najlepiej między 3. a 5. miesiącem życia szczeniaka, zaraz po zakończeniu serii szczepień.</p>
+
       <h2>Co możesz zrobić w domu?</h2>
-      <p>Zanim przyprowadzisz pupila do salonu, zacznij od prostych ćwiczeń w domu:</p>
+      <p>Zanim przyprowadzisz pupila do naszego <strong>salonu groomerskiego przy ul. Opawskiej 67 w Raciborzu</strong>, zacznij od prostych ćwiczeń w domu:</p>
       <ul>
         <li><strong>Dotykanie łapek:</strong> Zaczynaj od delikatnego masowania opuszek. Większość psów instynktownie cofa łapki, dlatego warto nagradzać je za spokój.</li>
         <li><strong>Dźwięk suszarki:</strong> Włączaj suszarkę w innym pokoju podczas karmienia lub zabawy, by szczeniak kojarzył ten dźwięk z czymś przyjemnym.</li>
@@ -19,7 +21,10 @@ export const blogPosts = [
       </ul>
 
       <h2>Czego nie robić przed wizytą?</h2>
-      <p>Unikaj stresowania psa dodatkowymi przeżyciami (np. wizyta u weterynarza w tym samym dniu). Staraj się też nie "współczuć" psu przed wejściem do salonu. Twój stres błyskawicznie udzieli się zwierzakowi. Zaufaj ekspertom i pozwól nam przejąć stery!</p>
+      <p>Unikaj stresowania psa dodatkowymi przeżyciami (np. wizyta u weterynarza w tym samym dniu). Staraj się też nie "współczuć" psu przed wejściem do salonu. Twój stres błyskawicznie udzieli się zwierzakowi. Zaufaj profesjonalnemu groomerowi i pozwól nam przejąć stery!</p>
+
+      <h2>Umów pierwszą wizytę adaptacyjną w hOla Perros</h2>
+      <p>Szukasz sprawdzonego <strong>fryzjera dla psów w Raciborzu</strong>? W <strong>hOla Perros</strong> oferujemy wizyty adaptacyjne dla szczeniaków – krótkie, bezstresowe spotkania z salonem, które budują pozytywne skojarzenia. Zapraszamy właścicieli psów z całego regionu: Racibórz, Rybnik, Wodzisław Śląski, Jastrzębie-Zdrój, Nędza, Kuźnia Raciborska. Zadzwoń lub napisz – umówimy termin! <strong>ul. Opawska 67, 47-400 Racibórz.</strong></p>
     `
   },
   {
@@ -31,19 +36,22 @@ export const blogPosts = [
     imageUrl: './zdjecia/blog/post2.png?v=2',
     content: `
       <h2>Błąd 1: Używanie kosmetyków dla ludzi</h2>
-      <p>Skóra psa ma zupełnie inne pH (ok. 7.0-7.5) niż skóra człowieka (ok. 5.5). Użycie nawet najdelikatniejszego szamponu dla dzieci może doprowadzić do poważnych przesuszeń, łupieżu, a nawet stanów zapalnych. Zawsze wybieraj dedykowane, profesjonalne kosmetyki dla zwierząt.</p>
+      <p>Skóra psa ma zupełnie inne pH (ok. 7.0-7.5) niż skóra człowieka (ok. 5.5). Użycie nawet najdelikatniejszego szamponu dla dzieci może doprowadzić do poważnych przesuszeń, łupieżu, a nawet stanów zapalnych. Zawsze wybieraj dedykowane, profesjonalne kosmetyki dla zwierząt. W <strong>salonie groomerskim hOla Perros w Raciborzu</strong> pracujemy wyłącznie na sprawdzonych, wegańskich szamponach i odżywkach.</p>
 
       <h2>Błąd 2: Niewystarczające spłukanie szamponu</h2>
-      <p>Piana uwięziona blisko skóry to gwarancja świądu i drapania. W hOla Perros spłukujemy psy dwu-, a czasem trzykrotnie. W domu również musisz upewnić się, że woda spływająca z sierści jest krystalicznie czysta.</p>
+      <p>Piana uwięziona blisko skóry to gwarancja świądu i drapania. W <strong>hOla Perros</strong> spłukujemy psy dwu-, a czasem trzykrotnie. W domu również musisz upewnić się, że woda spływająca z sierści jest krystalicznie czysta.</p>
 
       <h2>Błąd 3: Kąpanie psa w kołtunach</h2>
-      <p>Woda dramatycznie "zacieśnia" kołtuny. Jeśli wykąpiesz psa, który jest mocno splątany, rozczesanie go po wysuszeniu będzie graniczyło z cudem. Najpierw szczotka, potem wanna!</p>
+      <p>Woda dramatycznie "zacieśnia" kołtuny. Jeśli wykąpiesz psa, który jest mocno splątany, rozczesanie go po wysuszeniu będzie graniczyło z cudem. Najpierw szczotka, potem wanna! To jedna z podstawowych zasad profesjonalnej <strong>pielęgnacji psów</strong>, której uczymy na co dzień właścicieli odwiedzających nasz salon w Raciborzu.</p>
 
       <h2>Błąd 4: Mycie głowy i uszu pod bieżącą wodą</h2>
-      <p>Woda, która dostanie się do kanału słuchowego, to prosta droga do infekcji. Główkę myjemy na samym końcu, używając do tego wilgotnej gąbki lub osłaniając uszy dłonią.</p>
+      <p>Woda, która dostanie się do kanału słuchowego, to prosta droga do infekcji. Główkę myjemy na samym końcu, używając do tego wilgotnej gąbki lub osłaniając uszy dłonią. Czyszczenie uszu wchodzi w skład każdej wizyty <strong>strzyżenia psa w hOla Perros</strong>.</p>
 
       <h2>Błąd 5: Zostawienie psa do samodzielnego wyschnięcia</h2>
-      <p>Rasy z podszerstkiem (np. Pomeraniany) zostawione same sobie mogą nabawić się odparzeń ("hot spots"). Dodatkowo naturalnie schnący włos matowieje i natychmiast się filcuje. Psa należy zawsze dokładnie wysuszyć letnim strumieniem powietrza, jednocześnie przeczesując włos.</p>
+      <p>Rasy z podszerstkiem (np. Pomeraniany, Szpice) zostawione same sobie mogą nabawić się odparzeń ("hot spots"). Dodatkowo naturalnie schnący włos matowieje i natychmiast się filcuje. Psa należy zawsze dokładnie wysuszyć letnim strumieniem powietrza, jednocześnie przeczesując włos.</p>
+
+      <h2>Kiedy warto oddać psa do profesjonalnego groomera?</h2>
+      <p>Domowa kąpiel to dobry nawyk, ale nie zastąpi profesjonalnej <strong>kąpieli i pielęgnacji u groomera</strong>. Jeśli mieszkasz w Raciborzu lub okolicach (Rybnik, Wodzisław, Nędza, Krzyżanowice), zapraszamy do <strong>hOla Perros – Opawska 67, Racibórz</strong>. Zadbamy o Twojego pupila kompleksowo: od kąpieli, przez suszenie i strzyżenie, aż po pielęgnację uszu, oczu i pazurków.</p>
     `
   },
   {
@@ -55,10 +63,10 @@ export const blogPosts = [
     imageUrl: './zdjecia/blog/post3.png?v=2',
     content: `
       <h2>Co to jest trymowanie?</h2>
-      <p>Trymowanie to profesjonalny zabieg polegający na usunięciu (wyskubaniu) martwego włosa okrywowego. Choć brzmi inwazyjnie, dla prawidłowo zakwalifikowanych ras jest to zabieg <strong>całkowicie bezbolesny</strong> (martwy włos luźno tkwi w mieszku włosowym).</p>
+      <p>Trymowanie to profesjonalny zabieg polegający na usunięciu (wyskubaniu) martwego włosa okrywowego. Choć brzmi inwazyjnie, dla prawidłowo zakwalifikowanych ras jest to zabieg <strong>całkowicie bezbolesny</strong> (martwy włos luźno tkwi w mieszku włosowym). To jedna ze specjalizacji <strong>groomera w hOla Perros w Raciborzu</strong>.</p>
 
       <h2>Kogo trymujemy?</h2>
-      <p>Trymowania wymagają przede wszystkim teriery (np. West Highland White Terrier, Jack Russell Terrier, Airedale Terrier), sznaucery oraz niektóre wyżły i jamniki szorstkowłose. Ich sierść nie wypada naturalnie w pełnym cyklu – musimy pomóc zrzucić stary włos, by zrobił miejsce nowemu, mocnemu i wybarwionemu.</p>
+      <p>Trymowania wymagają przede wszystkim teriery (np. West Highland White Terrier, Jack Russell Terrier, Airedale Terrier), sznaucery oraz niektóre wyżły i jamniki szorstkowłose. Ich sierść nie wypada naturalnie w pełnym cyklu – musimy pomóc zrzucić stary włos, by zrobił miejsce nowemu, mocnemu i wybarwionemu. Właściciele tych ras z Raciborza i Śląska często pytają nas o <strong>trymowanie psa w okolicach Raciborza</strong> – zapraszamy!</p>
 
       <h2>Co się stanie, jeśli ogolimy psa szorstkowłosego?</h2>
       <p>Zastosowanie maszynki zamiast trymowania niesie drastyczne skutki:</p>
@@ -69,7 +77,10 @@ export const blogPosts = [
       </ul>
 
       <h2>A kogo strzyżemy?</h2>
-      <p>Strzyżenie (nożyczkami lub maszynką) rezerwujemy dla ras posiadających tzw. włos miękki, rosnący ciągle, np. pudle, bichony, maltańczyki, yorkshire teriery czy shih-tzu. W ich przypadku trymowanie byłoby niemożliwe i bolesne.</p>
+      <p><strong>Strzyżenie psów</strong> (nożyczkami lub maszynką) rezerwujemy dla ras posiadających tzw. włos miękki, rosnący ciągle, np. pudle, bichony, maltańczyki, yorkshire teriery czy shih-tzu. W ich przypadku trymowanie byłoby niemożliwe i bolesne.</p>
+
+      <h2>Profesjonalne strzyżenie i trymowanie psów w Raciborzu</h2>
+      <p>Nie jesteś pewien, czego potrzebuje Twój pies – <strong>strzyżenia czy trymowania</strong>? W <strong>hOla Perros</strong> ocenimy rasę i stan szaty Twojego pupila i dobierzemy właściwą metodę. Jako doświadczony <strong>psi fryzjer w Raciborzu</strong> obsługujemy wszystkie rasy – od terrierów po spaniele. Salon mieści się przy <strong>ul. Opawskiej 67, 47-400 Racibórz</strong>. Zadzwoń i umów termin!</p>
     `
   },
   {
@@ -81,15 +92,18 @@ export const blogPosts = [
     imageUrl: './zdjecia/blog/post4.png?v=2',
     content: `
       <h2>Mity wokół "Psiego Luksusu"</h2>
-      <p>Często słyszymy pytania: <em>"Czy mojemu psu naprawdę potrzebna jest maska z keratyną?"</em>. Odpowiedź brzmi: absolutnie tak! Skóra i sierść psa, zwłaszcza żyjącego w mieście, jest narażona na ekstremalne czynniki: spaliny, suche powietrze z kaloryferów, ostre słońce, sól drogową.</p>
+      <p>Często słyszymy pytania od właścicieli psów z Raciborza i okolic: <em>"Czy mojemu psu naprawdę potrzebna jest maska z keratyną?"</em>. Odpowiedź brzmi: absolutnie tak! Skóra i sierść psa, zwłaszcza żyjącego w mieście na Śląsku, jest narażona na ekstremalne czynniki: spaliny, suche powietrze z kaloryferów, ostre słońce, sól drogową.</p>
 
       <h2>Jak działa profesjonalna maska groomerska?</h2>
-      <p>Podczas naszej usługi Élite Premium stosujemy zaawansowane maski, które wnikają w strukturę włosa, uszczelniają łuskę i przywracają jej naturalną elastyczność. Efekt? Włos przestaje się puszyć, zyskuje spektakularny blask, a co najważniejsze – staje się wysoce odporny na kołtunienie.</p>
+      <p>Podczas naszej usługi <strong>Élite Premium w salonie hOla Perros w Raciborzu</strong> stosujemy zaawansowane maski, które wnikają w strukturę włosa, uszczelniają łuskę i przywracają jej naturalną elastyczność. Efekt? Włos przestaje się puszyć, zyskuje spektakularny blask, a co najważniejsze – staje się wysoce odporny na kołtunienie.</p>
 
       <h2>Masełko ochronne na opuszki i nos</h2>
-      <p>Opuszki łap są amortyzatorami Twojego psa. Pękające opuszki są dla zwierzęcia bolesne i narażone na infekcje. Nasze wegańskie masełko ochronne tworzy niewidzialną barierę zatrzymującą wilgoć i chroniącą przed czynnikami zewnętrznymi (mróz zimą, gorący asfalt latem).</p>
+      <p>Opuszki łap są amortyzatorami Twojego psa. Pękające opuszki są dla zwierzęcia bolesne i narażone na infekcje. Nasze wegańskie masełko ochronne tworzy niewidzialną barierę zatrzymującą wilgoć i chroniącą przed czynnikami zewnętrznymi (mróz zimą, gorący asfalt latem). To zabieg szczególnie polecany psom spacerującym po miejskich chodnikach Raciborza, Rybnika czy Wodzisławia Śląskiego.</p>
 
-      <p>Zabiegi SPA w hOla Perros to <strong>profilaktyka i komfort</strong>, zamknięte w ekskluzywnym, relaksującym rytuale.</p>
+      <p>Zabiegi <strong>SPA dla psów w hOla Perros</strong> to <strong>profilaktyka i komfort</strong>, zamknięte w ekskluzywnym, relaksującym rytuale. Jeśli szukasz <strong>profesjonalnej pielęgnacji psa na Śląsku</strong>, jesteś w dobrym miejscu.</p>
+
+      <h2>Zarezerwuj zabieg SPA dla swojego psa w Raciborzu</h2>
+      <p>Skorzystaj z naszego pakietu <strong>Élite Premium</strong> i podaruj swojemu pupilowi prawdziwy relaks. <strong>hOla Perros – salon groomerski, ul. Opawska 67, 47-400 Racibórz.</strong> Zapraszamy psy z całego regionu raciborskiego i Górnego Śląska.</p>
     `
   },
   {
@@ -101,16 +115,19 @@ export const blogPosts = [
     imageUrl: './zdjecia/blog/post5.png?v=2',
     content: `
       <h2>Problem kamienia nazębnego u psów</h2>
-      <p>Szacuje się, że ponad 80% psów powyżej 3. roku życia cierpi na choroby przyzębia. Kamień nazębny to nie tylko kwestia nieprzyjemnego zapachu z pyska, ale przede wszystkim ognisko bakterii, które mogą uszkadzać serce i nerki.</p>
+      <p>Szacuje się, że ponad 80% psów powyżej 3. roku życia cierpi na choroby przyzębia. Kamień nazębny to nie tylko kwestia nieprzyjemnego zapachu z pyska, ale przede wszystkim ognisko bakterii, które mogą uszkadzać serce i nerki. W <strong>hOla Perros – salonie dla psów w Raciborzu</strong> oferujemy skuteczną profilaktykę stomatologiczną.</p>
 
       <h2>Na czym polega metoda ultradźwiękowa?</h2>
-      <p>W naszym salonie oferujemy <strong>kosmetyczne czyszczenie zębów</strong> szczoteczką ultradźwiękową (typu Emmi-Pet). Urządzenie emituje fale ultradźwiękowe i działa bezpośrednio na specjalną pastę, rozbijając płytkę nazębną na poziomie mikroskopijnym. Co najważniejsze: <strong>urządzenie nie wydaje dźwięków ani nie wibruje</strong>, dzięki czemu psy bardzo dobrze tolerują ten zabieg.</p>
+      <p>W naszym <strong>salonie groomerskim przy ul. Opawskiej 67 w Raciborzu</strong> oferujemy <strong>kosmetyczne czyszczenie zębów psa</strong> szczoteczką ultradźwiękową (typu Emmi-Pet). Urządzenie emituje fale ultradźwiękowe i działa bezpośrednio na specjalną pastę, rozbijając płytkę nazębną na poziomie mikroskopijnym. Co najważniejsze: <strong>urządzenie nie wydaje dźwięków ani nie wibruje</strong>, dzięki czemu psy bardzo dobrze tolerują ten zabieg.</p>
 
       <h2>Bez narkozy = bezpiecznie</h2>
-      <p>Kosmetyczne czyszczenie wykonujemy w pełni na jawie, w przyjaznej atmosferze. Jest to doskonała profilaktyka dla starszych psów lub tych, u których znieczulenie ogólne stanowi duże ryzyko medyczne.</p>
+      <p><strong>Czyszczenie zębów psa bez narkozy w Raciborzu</strong> to usługa, o którą pyta coraz więcej właścicieli – szczególnie seniorów psich lub ras z predyspozycjami do chorób serca. Wykonujemy go w pełni na jawie, w przyjaznej atmosferze naszego salonu.</p>
 
       <h2>Dla kogo ten zabieg NIE JEST?</h2>
-      <p>Pamiętaj, że jest to zabieg <em>kosmetyczny</em>. Jeśli pies ma zaawansowaną paradontozę, ropiejące dziąsła lub zęby kwalifikują się do ekstrakcji (wyrwania) – absolutnie konieczna jest wizyta w gabinecie weterynaryjnym na zabieg sanacji jamy ustnej w znieczuleniu.</p>
+      <p>Pamiętaj, że jest to zabieg <em>kosmetyczny</em>. Jeśli pies ma zaawansowaną paradontozę, ropiejące dziąsła lub zęby kwalifikują się do ekstrakcji – absolutnie konieczna jest wizyta w gabinecie weterynaryjnym.</p>
+
+      <h2>Czyszczenie zębów psa – Racibórz, hOla Perros</h2>
+      <p>Szukasz <strong>czyszczenia zębów dla psa w Raciborzu lub na Śląsku</strong>? Jesteśmy jednym z niewielu salonów w regionie oferujących tę usługę. <strong>hOla Perros, ul. Opawska 67, 47-400 Racibórz.</strong> Zadzwoń pod numer +48 512 501 558 i umów wizytę – Twój pies odwdzięczy się szczerym uśmiechem!</p>
     `
   },
   {
@@ -122,42 +139,48 @@ export const blogPosts = [
     imageUrl: './zdjecia/blog/post6.png?v=2',
     content: `
       <h2>Czym właściwie jest kołtun?</h2>
-      <p>Zaniedbana, martwa sierść łącząca się z rosnącym włosem, łojem i brudem tworzy zbitą warstwę – tzw. filc. Kołtuny tworzą się najczęściej pod pachami, w pachwinach, za uszami i tam, gdzie noszone są szelki.</p>
+      <p>Zaniedbana, martwa sierść łącząca się z rosnącym włosem, łojem i brudem tworzy zbitą warstwę – tzw. filc. Kołtuny tworzą się najczęściej pod pachami, w pachwinach, za uszami i tam, gdzie noszone są szelki. To jeden z najczęstszych problemów, z którymi trafiają do nas psy w <strong>salonie hOla Perros w Raciborzu</strong>.</p>
 
       <h2>Czy zawsze trzeba golić?</h2>
-      <p>W hOla Perros stawiamy dobrostan psa ponad wszystko. Jeśli kołtuny są małe i miejscowe – możemy je delikatnie rozczesać używając specjalistycznych sprayów detanglingowych. Jednak, gdy filc tworzy "pancerz" przylegający do skóry, rozczesywanie staje się potwornie bolesne, a wręcz okrutne. W takiej sytuacji <strong>jedynym słusznym i humanitarnym wyjściem jest zestrzelenie pod filcem</strong> na bardzo krótko.</p>
+      <p>W <strong>hOla Perros</strong> stawiamy dobrostan psa ponad wszystko. Jeśli kołtuny są małe i miejscowe – możemy je delikatnie rozczesać używając specjalistycznych sprayów detanglingowych. Jednak, gdy filc tworzy "pancerz" przylegający do skóry, rozczesywanie staje się potwornie bolesne. W takiej sytuacji <strong>jedynym słusznym i humanitarnym wyjściem jest zestrzelenie pod filcem</strong> na bardzo krótko.</p>
 
       <h2>Mity o rozczesywaniu na siłę</h2>
-      <p>Żaden odpowiedzialny groomer nie podejmie się godzinnego "darcia" włosa, sprawiając psu cierpienie tylko po to, by ratować fryzurę. Po zgoleniu kołtunów, ulga dla skóry psa jest natychmiastowa. Pamiętaj: włos odrośnie, a trauma psa z gabinetu zostaje na długo.</p>
+      <p>Żaden odpowiedzialny <strong>groomer w Raciborzu</strong> nie podejmie się godzinnego "darcia" włosa, sprawiając psu cierpienie tylko po to, by ratować fryzurę. Po zgoleniu kołtunów ulga dla skóry psa jest natychmiastowa. Pamiętaj: włos odrośnie, a trauma z gabinetu zostaje na długo.</p>
 
-      <h2>Złote zasady zapobiegania:</h2>
+      <h2>Złote zasady zapobiegania kołtunom:</h2>
       <ul>
         <li>Czesanie <em>od skóry</em> (najpierw pudlówka, potem grzebień w celu weryfikacji).</li>
         <li>Nigdy nie kąpiemy psa bez uprzedniego, dokładnego rozczesania!</li>
         <li>Zdejmuj psu szelki w domu – tarcie generuje kołtuny w mgnieniu oka.</li>
-        <li>Regularne wizyty u groomera (co 4-6 tygodni) ułatwiają utrzymanie dłuższej i pięknej fryzury.</li>
+        <li>Regularne wizyty u <strong>fryzjera dla psów</strong> (co 4–6 tygodni) ułatwiają utrzymanie dłuższej i pięknej fryzury.</li>
       </ul>
+
+      <h2>Regularny grooming psów w Raciborzu – hOla Perros</h2>
+      <p>Najlepszą metodą walki z kołtunami jest zapobieganie – czyli regularne <strong>strzyżenie i pielęgnacja psa u groomera</strong>. W <strong>hOla Perros przy ul. Opawskiej 67 w Raciborzu</strong> czekamy na Ciebie i Twojego pupila co 4–6 tygodni. Obsługujemy klientów z Raciborza, Rybnika, Wodzisławia Śląskiego, Jastrzębia-Zdroju i okolic. Zadzwoń: +48 512 501 558.</p>
     `
   },
   {
     id: 'pielegnacja-pudla-i-doodle',
-    title: 'Pudle, malpoo i cavapoo – jak dbać o kręcony i puszysty włos?',
+    title: 'Pudle, maltipoo i cavapoo – jak dbać o kręcony i puszysty włos?',
     excerpt: 'Psy typu "doodle" opanowały świat. Ich uroczy wygląd wymaga jednak ogromnego nakładu pracy.',
     date: '02 Czerwiec 2026',
     category: 'Radykalne Cięcia',
     imageUrl: './zdjecia/blog/post7.png?v=2',
     content: `
       <h2>Fenomen popularności i... kłopotów</h2>
-      <p>Mieszańce pudli (Cavapoo, Maltipoo, Goldendoodle) to niezwykle inteligentne i urocze psy, które zyskały miano "hipoalergicznych". Wiele osób decyduje się na nie wierząc, że nie linieją, więc są "bezobsługowe". Niestety, ich włos jest jednym z najtrudniejszych do utrzymania w idealnej kondycji.</p>
+      <p>Mieszańce pudli (Cavapoo, Maltipoo, Goldendoodle) to niezwykle inteligentne i urocze psy, które zyskały miano "hipoalergicznych". Wiele osób z Raciborza i Śląska decyduje się na nie wierząc, że nie linieją, więc są "bezobsługowe". Niestety, ich włos jest jednym z najtrudniejszych do utrzymania w idealnej kondycji.</p>
 
       <h2>Typ włosa to często loteria</h2>
-      <p>Jako krzyżówki, psy te mogą odziedziczyć gęsty, kręcony włos po pudlu, albo prostszy z podszerstkiem po drugim z rodziców. Bardzo często szata jest hybrydowa, co powoduje tendencję do natychmiastowego filcowania.</p>
+      <p>Jako krzyżówki, psy te mogą odziedziczyć gęsty, kręcony włos po pudlu, albo prostszy z podszerstkiem po drugim z rodziców. Bardzo często szata jest hybrydowa, co powoduje tendencję do natychmiastowego filcowania. Dlatego właściciele <strong>pudli i doodle'ów w Raciborzu</strong> są u nas częstymi gośćmi!</p>
 
       <h2>Podstawa pielęgnacji: "Line Brushing"</h2>
       <p>Samo przejechanie szczotką po wierzchu włosa nie wystarczy! Konieczna jest metoda czesania warstwowego (<em>line brushing</em>). Polega ona na podnoszeniu warstw sierści i wyczesywaniu pasmo po paśmie, by mieć pewność, że docieramy narzędziem aż do skóry. Jeśli grzebień utyka – oznacza to, że na dole tworzy się filc.</p>
 
-      <h2>Wizyty w salonie</h2>
-      <p>Żeby utrzymać modną fryzurę na "pluszowego misia", doodle muszą odwiedzać fryzjera dla psów maksymalnie co 4 do 6 tygodni. W hOla Perros specjalizujemy się w przepięknych formach dla hybryd, rzeźbiąc urocze okrągłe główki (tzw. Asian Fusion) oraz zachowując luksusową puszystość włosa za pomocą odżywczych masek.</p>
+      <h2>Wizyty u groomera dla doodle'ów</h2>
+      <p>Żeby utrzymać modną fryzurę na "pluszowego misia", doodle muszą odwiedzać <strong>fryzjera dla psów</strong> maksymalnie co 4 do 6 tygodni. W <strong>hOla Perros w Raciborzu</strong> specjalizujemy się w przepięknych formach dla hybryd, rzeźbiąc urocze okrągłe główki (tzw. Asian Fusion) oraz zachowując luksusową puszystość włosa za pomocą odżywczych masek.</p>
+
+      <h2>Strzyżenie pudla i doodle – Racibórz, hOla Perros</h2>
+      <p>Szukasz sprawdzonego <strong>groomera dla pudla lub doodle'a w Raciborzu i okolicach</strong>? W <strong>hOla Perros</strong> znamy te rasy od podszewki. Umów wizytę już dziś: <strong>ul. Opawska 67, 47-400 Racibórz, tel. +48 512 501 558.</strong> Dojeżdżamy klientami z Rybnika, Wodzisławia, Żor i całego Górnego Śląska.</p>
     `
   },
   {
@@ -169,23 +192,26 @@ export const blogPosts = [
     imageUrl: './zdjecia/blog/post8.png?v=2',
     content: `
       <h2>Subtelna komunikacja psów</h2>
-      <p>Jako groomerzy jesteśmy uczeni czytania psiej mowy ciała. Często właściciel uważa, że "piesek jest super grzeczny", gdy w rzeczywistości pies jest zamrożony ze strachu. Jakie są wczesne sygnały stresu (tzw. Calming Signals)?</p>
+      <p>Jako <strong>groomerzy w hOla Perros w Raciborzu</strong> jesteśmy uczeni czytania psiej mowy ciała. Często właściciel uważa, że "piesek jest super grzeczny", gdy w rzeczywistości pies jest zamrożony ze strachu. Jakie są wczesne sygnały stresu (tzw. Calming Signals)?</p>
       <ul>
         <li>Oblizywanie nosa lub ziewanie w neutralnych sytuacjach</li>
         <li>Dyszenie (kiedy w pomieszczeniu nie jest gorąco)</li>
-        <li>Odwieracanie głowy na bok i "wielorybie oko" (widać białkówki)</li>
+        <li>Odwracanie głowy na bok i "wielorybie oko" (widać białkówki)</li>
         <li>Sztywność całego ciała i napięcie w ogonie</li>
       </ul>
 
       <h2>Metody Fear Free w hOla Perros</h2>
-      <p>Dla nas uroda psa jest ważna, ale jego komfort psychiczny jest priorytetem. Co robimy, by złagodzić stres?</p>
+      <p>Dla nas uroda psa jest ważna, ale jego komfort psychiczny jest priorytetem. W naszym <strong>salonie dla psów przy ul. Opawskiej 67 w Raciborzu</strong> stosujemy podejście Fear Free:</p>
       <ul>
         <li><strong>Czas na zapoznanie:</strong> Nigdy nie kładziemy psa od razu na stół. Dajemy mu czas na obwąchanie nas i salonu.</li>
         <li><strong>Dotyk terapeutyczny:</strong> Zamiast siłowego trzymania, używamy wspierającego dotyku (T-Touch), który informuje psa: "jestem tu z tobą, jesteś bezpieczny".</li>
-        <li><strong>Rozbicie zabiegów:</strong> Jeśli pies wpada w panikę podczas suszenia pyszczka, robimy przerwy, stosujemy Happy Hoodie (opaskę na uszy tłumiącą dźwięk) lub wyłączamy mocną dmuchawę na rzecz cichej, ręcznej suszarki.</li>
+        <li><strong>Rozbicie zabiegów:</strong> Jeśli pies wpada w panikę podczas suszenia pyszczka, robimy przerwy lub stosujemy Happy Hoodie (opaskę tłumiącą dźwięk).</li>
       </ul>
 
       <p>Nasza filozofia to <em>pielęgnacja przez szacunek</em>. Tylko wtedy budujemy długotrwałe relacje ze zwierzętami, a one same chętnie do nas wracają merdając ogonem!</p>
+
+      <h2>Bezstresowy salon fryzjerski dla psów w Raciborzu</h2>
+      <p>Jeśli Twój pies boi się groomera lub miał złe doświadczenia w innym salonie – przyjedź do nas. <strong>hOla Perros</strong> to <strong>bezstresowy salon pielęgnacji psów w Raciborzu</strong>, gdzie każdy pupil jest traktowany z cierpliwością i szacunkiem. <strong>ul. Opawska 67, Racibórz – tel. +48 512 501 558.</strong></p>
     `
   },
   {
@@ -197,12 +223,15 @@ export const blogPosts = [
     imageUrl: './zdjecia/blog/post9.png?v=2',
     content: `
       <h2>Niebezpieczeństwa sezonu zimowego</h2>
-      <p>Zimą ulice sypane są żrącą solą i chemią, co doprowadza do podrażnień przestrzeni międzypalcowych. Śnieg potrafi także przyklejać się do sierści na łapach, tworząc twarde i bolesne lodowe kule.</p>
-      <p><strong>Rada:</strong> Po każdym zimowym spacerze myj łapki psa w letniej wodzie (nie używaj wrzątku ani lodu). Pamiętaj o regularnym, groomerskim wycinaniu włosów z przestrzeni między opuszkami. A przed wyjściem stosuj twarde maści ochronne na bazie wazeliny.</p>
+      <p>Zimą ulice Raciborza i całego Górnego Śląska sypane są żrącą solą i chemią, co doprowadza do podrażnień przestrzeni międzypalcowych. Śnieg potrafi także przyklejać się do sierści na łapach, tworząc twarde i bolesne lodowe kule.</p>
+      <p><strong>Rada od groomera hOla Perros:</strong> Po każdym zimowym spacerze myj łapki psa w letniej wodzie. Pamiętaj o regularnym, groomerskim wycinaniu włosów z przestrzeni między opuszkami. A przed wyjściem stosuj twarde maści ochronne na bazie wazeliny.</p>
 
       <h2>Morderczy asfalt latem</h2>
-      <p>Latem zapominamy o tzw. regule 7 sekund. Połóż dłoń wierzchnią stroną na asfalcie – jeśli nie dasz rady utrzymać jej przez 7 sekund, beton jest zbyt gorący dla psiej łapy! Rozgrzany chodnik powoduje potworne poparzenia opuszek trzeciego stopnia.</p>
-      <p><strong>Rada:</strong> W upalne dni spacerujcie tylko rano i późnym wieczorem. A by zapewnić odpowiednie nawilżenie wysuszonym opuszkom, poproś o kurację Masełkiem w naszym salonie.</p>
+      <p>Latem zapominamy o tzw. regule 7 sekund. Połóż dłoń wierzchnią stroną na asfalcie – jeśli nie dasz rady utrzymać jej przez 7 sekund, beton jest zbyt gorący dla psiej łapy! Rozgrzany chodnik powoduje potworne poparzenia opuszek trzeciego stopnia. Problem ten dotyczy szczególnie psów spacerujących po centrum Raciborza i innych śląskich miast w upalny dzień.</p>
+      <p><strong>Rada:</strong> W upalne dni spacerujcie tylko rano i późnym wieczorem. A by zapewnić odpowiednie nawilżenie wysuszonym opuszkom, poproś o kurację <strong>Masełkiem ochronnym w hOla Perros</strong>.</p>
+
+      <h2>Profesjonalna pielęgnacja łapek w salonie – Racibórz</h2>
+      <p>Dbanie o łapki psa to nie tylko kwestia estetyki – to zdrowie! W <strong>hOla Perros przy ul. Opawskiej 67 w Raciborzu</strong> oferujemy przycinanie włosów między opuszkami, obcinanie pazurków oraz kurację regenerującym masełkiem. <strong>Strzyżenie psów Racibórz – zadzwoń: +48 512 501 558</strong> i zadbaj o komfort swojego pupila przez cały rok.</p>
     `
   },
   {
@@ -214,7 +243,7 @@ export const blogPosts = [
     imageUrl: './zdjecia/blog/post10.png?v=2',
     content: `
       <h2>Struktura włosa jedwabistego</h2>
-      <p>Rasy takie jak Yorkshire Terrier czy Maltańczyk nie posiadają grubego podszerstka, lecz lejący się włos, przypominający strukturą ludzkie włosy. Ich urok zależy bezpośrednio od nawilżenia i ciężkości włosa.</p>
+      <p>Rasy takie jak <strong>Yorkshire Terrier czy Maltańczyk</strong> nie posiadają grubego podszerstka, lecz lejący się włos, przypominający strukturą ludzkie włosy. Ich urok zależy bezpośrednio od nawilżenia i ciężkości włosa. To jedne z najczęściej strzyżonych ras w naszym <strong>salonie groomerskim hOla Perros w Raciborzu</strong>.</p>
 
       <h2>Olejowanie i papiloty</h2>
       <p>Wystawowe egzemplarze są codziennie smarowane dedykowanymi olejkami i owijane w specjalne bibułki (papiloty), aby włos nie łamał się przy bieganiu. W warunkach domowych papilotowanie jest rzadkością, ale odpowiednie odżywienie – obowiązkiem.</p>
@@ -222,10 +251,13 @@ export const blogPosts = [
       <h2>Trzy filary długiego włosa:</h2>
       <ol>
         <li><strong>Nigdy nie czesz na sucho!</strong> Włos zawsze należy zwilżyć dedykowaną odżywką w sprayu. Czesanie suchego włosa bezpowrotnie rwie go i niszczy końcówki.</li>
-        <li><strong>Kąpiele co 7-10 dni.</strong> Zbyt długie przerwy sprawiają, że brud działa jak papier ścierny dla struktury sierści.</li>
-        <li><strong>Szampon to nie wszystko.</strong> Bogata, nawilżająca odżywka pozostawiona na włosie (bez spłukiwania) dociąży szatę i zapobiegnie puszeniu.</li>
+        <li><strong>Kąpiele co 7–10 dni.</strong> Zbyt długie przerwy sprawiają, że brud działa jak papier ścierny dla struktury sierści.</li>
+        <li><strong>Szampon to nie wszystko.</strong> Bogata, nawilżająca odżywka pozostawiona na włosie dociąży szatę i zapobiegnie puszeniu.</li>
       </ol>
-      <p>Utrzymanie włosa ras długowłosych do samej ziemi to pasja i drugie stanowisko pracy. Jeśli wolisz dla psa sportowy komfort - w hOla Perros chętnie zrobimy urocze cięcie "Puppy Clip"!</p>
+      <p>Utrzymanie włosa ras długowłosych do samej ziemi to pasja i drugie stanowisko pracy. Jeśli wolisz dla psa sportowy komfort – w <strong>hOla Perros</strong> chętnie zrobimy urocze cięcie "Puppy Clip"!</p>
+
+      <h2>Strzyżenie Yorkshire Terrier i Shih-Tzu w Raciborzu</h2>
+      <p>Jesteś właścicielem <strong>Yorka, Shih-Tzu, Maltańczyka lub Bichona</strong> w Raciborzu lub okolicach Śląska? Zapraszamy do <strong>hOla Perros – fryzjera dla psów w Raciborzu</strong>. Specjalizujemy się w pielęgnacji ras małych i długowłosych. <strong>ul. Opawska 67, 47-400 Racibórz, tel. +48 512 501 558.</strong> Klientów przyjmujemy z Raciborza, Rybnika, Wodzisławia Śląskiego, Żor, Jastrzębia-Zdroju i całego regionu.</p>
     `
   }
 ];
