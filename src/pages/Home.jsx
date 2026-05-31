@@ -46,7 +46,7 @@ export default function Home() {
               <button className="btn-primary">
                 Zarezerwuj Termin
               </button>
-              <a href="/#uslugi" style={{ textDecoration: 'none' }}>
+              <a href="#uslugi" style={{ textDecoration: 'none' }}>
                 <button className="btn-secondary">
                   Odkryj Usługi
                 </button>
