@@ -276,11 +276,11 @@ html, body {
 
 /* Navbar links hover */
 .nav-link {
-  transition: color 0.25s ease, font-weight 0.25s ease;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
 }
 .nav-link:hover {
   color: var(--gold) !important;
-  font-weight: 600 !important;
+  text-shadow: 0 0 0.4px var(--gold), 0 0 0.4px var(--gold);
 }
 
 /* Mobile Menu Button */
