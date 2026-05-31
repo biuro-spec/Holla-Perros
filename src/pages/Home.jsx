@@ -73,7 +73,7 @@ export default function Home() {
       </section>
 
       {/* O mnie */}
-      <section id="omnie" style={{ padding: '120px 0', backgroundColor: 'var(--bg-color-alt)' }}>
+      <section id="omnie" style={{ padding: '120px 0', background: 'linear-gradient(135deg, var(--bg-color-alt) 0%, rgba(228, 159, 179, 0.25) 100%)' }}>
         <div className="container">
           <motion.div 
             initial="hidden" 
