@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Phone, PawPrint, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const navBg = scrolled
+    ? 'rgba(252, 251, 248, 0.55)'
+    : 'rgba(252, 251, 248, 0.97)';
+
+  const navBlur = scrolled ? 'blur(18px) saturate(180%)' : 'blur(8px)';
+  const navShadow = scrolled ? '0 2px 24px rgba(184,146,42,0.08)' : 'none';
 
   return (
-    <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, backgroundColor: 'rgba(252, 251, 248, 0.95)', borderBottom: '1px solid var(--border-color)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '24px 60px', backdropFilter: 'blur(8px)' }}>
+    <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, backgroundColor: navBg, borderBottom: '1px solid var(--gold)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '24px 60px', backdropFilter: navBlur, WebkitBackdropFilter: navBlur, boxShadow: navShadow, transition: 'background-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease' }}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Link to="/" style={{ textDecoration: 'none' }} onClick={() => setIsOpen(false)}>
           <h2 style={{ margin: 0, fontSize: '1.6rem', fontWeight: 700, color: 'var(--text-dark)', letterSpacing: '2px', textTransform: 'uppercase' }}>hOla Perros</h2>
