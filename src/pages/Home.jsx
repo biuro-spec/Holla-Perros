@@ -334,15 +334,21 @@ export default function Home() {
               <p style={{ fontSize: '0.9rem', color: 'var(--gold)', marginBottom: '16px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '2px' }}>Zapraszam</p>
               <h2 style={{ fontSize: '4rem', fontWeight: 400, marginBottom: '32px' }}>Pozostańmy w <i className="text-italic text-pink">kontakcie</i>.</h2>
               
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-                <div>
-                  <h4 style={{ fontSize: '1.2rem', fontWeight: 500, marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '12px' }}><MapPin size={20} className="text-gold"/> Adres</h4>
-                  <p style={{ color: 'var(--text-light)', fontSize: '1.1rem', marginLeft: '32px' }}>ul. Opawska 67, 47-400 Racibórz</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+                  <MapPin size={22} className="text-gold" style={{ flexShrink: 0, marginTop: '3px' }}/>
+                  <div>
+                    <p style={{ fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px', color: 'var(--text-dark)' }}>Adres</p>
+                    <p style={{ color: 'var(--text-light)', fontSize: '1.05rem' }}>ul. Opawska 67, 47-400 Racibórz</p>
+                  </div>
                 </div>
-                
-                <div>
-                  <h4 style={{ fontSize: '1.2rem', fontWeight: 500, marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '12px' }}><Phone size={20} className="text-gold"/> Rezerwacje</h4>
-                  <p style={{ color: 'var(--text-light)', fontSize: '1.1rem', marginLeft: '32px' }}>+48 512 501 558</p>
+
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+                  <Phone size={22} className="text-gold" style={{ flexShrink: 0, marginTop: '3px' }}/>
+                  <div>
+                    <p style={{ fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px', color: 'var(--text-dark)' }}>Rezerwacje</p>
+                    <a href="tel:+48512501558" style={{ textDecoration: 'none', color: 'var(--text-light)', fontSize: '1.05rem' }}>+48 512 501 558</a>
+                  </div>
                 </div>
               </div>
             </div>
