@@ -23,7 +23,7 @@ const CONFIG = {
   },
   SLOTS: ['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00'],
   MAX_DZIENNIE: 8,
-  EMAIL_OLA: Session.getActiveUser().getEmail(),
+  EMAIL_OLA: 'cichonmariusz06@gmail.com',
   SALON_NAZWA: 'hOla Perros',
   SALON_ADRES: 'ul. Opawska 67, 47-400 Racibórz',
   SALON_TEL: '+48 512 501 558'
