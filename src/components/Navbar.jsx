@@ -29,7 +29,15 @@ export default function Navbar() {
     <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, backgroundColor: navBg, borderBottom: '1px solid var(--gold)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '24px 60px', backdropFilter: navBlur, WebkitBackdropFilter: navBlur, boxShadow: navShadow, transition: 'background-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease' }}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Link to="/" style={{ textDecoration: 'none' }} onClick={() => setIsOpen(false)}>
-          <h2 style={{ margin: 0, fontSize: '1.6rem', fontWeight: 700, color: 'var(--text-dark)', letterSpacing: '2px', textTransform: 'uppercase' }}>hOla Perros</h2>
+          <div style={{
+            width: '54px', height: '54px', borderRadius: '50%',
+            border: '2.5px solid var(--gold)',
+            boxShadow: '0 0 0 1px rgba(184,146,42,0.2)',
+            overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            background: '#1a1008'
+          }}>
+            <img src="./zdjecia/logo.png" alt="hOla Perros" style={{ width: '80%', height: '80%', objectFit: 'contain' }} />
+          </div>
         </Link>
       </div>
 
