@@ -151,7 +151,7 @@ export default function Home() {
 
       {/* Cennik & Pakiety */}
       <section id="cennik" style={{ padding: '120px 0', backgroundColor: 'var(--bg-color-alt)', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: '48%', right: '-2%', width: '32%', maxWidth: '340px', opacity: 0.09, pointerEvents: 'none', zIndex: 0 }}>
+        <div style={{ position: 'absolute', top: '45%', right: '4%', width: '28%', maxWidth: '300px', opacity: 0.09, pointerEvents: 'none', zIndex: 0 }}>
           <img src="./zdjecia/lapka.png" alt="" style={{ width: '100%', height: 'auto', filter: 'hue-rotate(-55deg) saturate(0.7) brightness(1.3)' }} />
         </div>
         <div className="container" style={{ maxWidth: '900px', position: 'relative', zIndex: 1 }}>
