@@ -37,18 +37,17 @@ body{font-family:var(--font-b);background:var(--bg);color:var(--dark);min-height
 
 /* LAYOUT */
 #appScreen{display:none;min-height:100vh}
-.sidebar{position:fixed;top:0;left:0;width:var(--sidebar);height:100vh;background:var(--dark);display:flex;flex-direction:column;z-index:200;overflow-y:auto}
-.sidebar-logo{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,0.08)}
-.sidebar-logo h1{font-family:var(--font-h);font-size:1.4rem;color:var(--gold);letter-spacing:2px}
-.sidebar-logo p{font-size:0.72rem;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase;margin-top:4px}
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar);height:100vh;background:var(--pink);display:flex;flex-direction:column;z-index:200;overflow-y:auto}
+.sidebar-logo{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,0.25)}
+.sidebar-logo h1{font-family:var(--font-h);font-size:1.4rem;color:var(--dark);letter-spacing:2px}
+.sidebar-logo p{font-size:0.72rem;color:rgba(45,40,37,0.5);letter-spacing:2px;text-transform:uppercase;margin-top:4px}
 .nav-items{padding:16px 0;flex:1}
-.nav-item{display:flex;align-items:center;gap:12px;padding:13px 20px;color:rgba(255,255,255,0.6);font-size:0.9rem;cursor:pointer;transition:all .2s;border-left:3px solid transparent}
-.nav-item:hover{color:var(--white);background:rgba(255,255,255,0.05)}
-.nav-item.active{color:var(--gold);border-left-color:var(--gold);background:rgba(184,146,42,0.08)}
-.nav-item .icon{font-size:1.1rem;width:20px;text-align:center}
-.sidebar-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,0.08)}
-.logout-btn{width:100%;padding:10px;background:transparent;border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:rgba(255,255,255,0.5);font-family:var(--font-b);font-size:0.82rem;cursor:pointer;transition:all .2s;letter-spacing:1px}
-.logout-btn:hover{border-color:var(--pink);color:var(--pink)}
+.nav-item{display:flex;align-items:center;padding:13px 20px;color:rgba(45,40,37,0.65);font-size:0.9rem;cursor:pointer;transition:all .2s;border-left:3px solid transparent;font-weight:500}
+.nav-item:hover{color:var(--dark);background:rgba(255,255,255,0.2)}
+.nav-item.active{color:var(--dark);border-left-color:var(--gold);background:rgba(255,255,255,0.3);font-weight:600}
+.sidebar-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,0.25)}
+.logout-btn{width:100%;padding:10px;background:transparent;border:1px solid rgba(45,40,37,0.2);border-radius:6px;color:rgba(45,40,37,0.6);font-family:var(--font-b);font-size:0.82rem;cursor:pointer;transition:all .2s;letter-spacing:1px}
+.logout-btn:hover{border-color:var(--dark);color:var(--dark)}
 
 .content{margin-left:var(--sidebar);padding:32px;min-height:100vh}
 .page{display:none}
@@ -217,12 +216,12 @@ tr:last-child td{border:none}
       <p>Panel Oli</p>
     </div>
     <div class="nav-items">
-      <div class="nav-item active" onclick="showPage('dashboard')"><span class="icon">📊</span> Dashboard</div>
-      <div class="nav-item" onclick="showPage('calendar')"><span class="icon">📅</span> Kalendarz</div>
-      <div class="nav-item" onclick="showPage('reservations')"><span class="icon">📋</span> Rezerwacje</div>
-      <div class="nav-item" onclick="showPage('dogs')"><span class="icon">🐶</span> Pieski</div>
-      <div class="nav-item" onclick="showPage('finances')"><span class="icon">💰</span> Finanse</div>
-      <div class="nav-item" onclick="showPage('settings')"><span class="icon">⚙️</span> Ustawienia</div>
+      <div class="nav-item active" onclick="showPage('dashboard')">Dashboard</div>
+      <div class="nav-item" onclick="showPage('calendar')">Kalendarz</div>
+      <div class="nav-item" onclick="showPage('reservations')">Rezerwacje</div>
+      <div class="nav-item" onclick="showPage('dogs')">Pieski</div>
+      <div class="nav-item" onclick="showPage('finances')">Finanse</div>
+      <div class="nav-item" onclick="showPage('settings')">Ustawienia</div>
     </div>
     <div class="sidebar-footer">
       <button class="logout-btn" onclick="logout()">Wyloguj się</button>
