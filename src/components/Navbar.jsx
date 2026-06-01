@@ -36,7 +36,8 @@ export default function Navbar() {
               width: 'auto',
               objectFit: 'contain',
               transition: 'height 0.4s ease',
-              display: 'block'
+              display: 'block',
+              marginLeft: '40px'
             }}
           />
         </Link>
