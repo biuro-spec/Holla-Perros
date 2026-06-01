@@ -27,21 +27,17 @@ export default function Navbar() {
     <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, backgroundColor: navBg, borderBottom: navBorder, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 60px', backdropFilter: navBlur, WebkitBackdropFilter: navBlur, boxShadow: navShadow, transition: 'all 0.4s ease', overflow: 'visible' }}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Link to="/" style={{ textDecoration: 'none' }} onClick={() => setIsOpen(false)}>
-          <div style={{
-            width: scrolled ? '60px' : '110px',
-            height: scrolled ? '60px' : '110px',
-            borderRadius: '50%',
-            border: '2.5px solid var(--gold)',
-            boxShadow: '0 0 0 1px rgba(184,146,42,0.15), 0 4px 16px rgba(184,146,42,0.12)',
-            overflow: 'hidden',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background: 'rgba(252,251,248,0.95)',
-            transition: 'width 0.4s ease, height 0.4s ease',
-            position: 'relative',
-            zIndex: 101,
-          }}>
-            <img src="./zdjecia/logo.png" alt="hOla Perros" style={{ width: '95%', height: '95%', objectFit: 'contain' }} />
-          </div>
+          <img
+            src="./zdjecia/logo.png"
+            alt="hOla Perros"
+            style={{
+              height: scrolled ? '48px' : '80px',
+              width: 'auto',
+              objectFit: 'contain',
+              transition: 'height 0.4s ease',
+              display: 'block'
+            }}
+          />
         </Link>
       </div>
 
