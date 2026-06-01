@@ -85,7 +85,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Layout */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 130px;
+  scroll-padding-top: 82px;
 }
 
 html, body {
@@ -393,6 +393,13 @@ html, body {
 
   /* Hero title: 2 lines on mobile */
   .hero-br-desktop { display: none; }
+
+  /* Cennik paw bigger on mobile */
+  .cennik-paw {
+    width: 80% !important;
+    right: 5% !important;
+    top: 35% !important;
+  }
 
   /* Logo smaller on mobile, closer to left edge */
   .nav-logo-img {
