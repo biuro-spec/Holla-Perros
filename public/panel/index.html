@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel – hOla Perros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FCFBF8;--bg-alt:#F4F1ED;--gold:#B8922A;--gold-l:rgba(184,146,42,0.1);
+  --pink:#E49FB3;--pink-l:rgba(228,159,179,0.12);--dark:#2D2825;--light:#7A7571;
+  --border:#EBE5DF;--white:#fff;--radius:8px;--shadow:0 4px 24px rgba(0,0,0,0.07);
+  --font-h:'Cormorant Garamond',serif;--font-b:'DM Sans',sans-serif;
+  --sidebar:240px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-b);background:var(--bg);color:var(--dark);min-height:100vh}
+
+/* LOGIN */
+#loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg) 0%,rgba(228,159,179,0.1) 100%)}
+.login-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:48px 40px;box-shadow:var(--shadow);text-align:center;max-width:360px;width:90%}
+.login-logo{font-family:var(--font-h);font-size:2rem;font-weight:700;letter-spacing:2px;margin-bottom:4px}
+.login-sub{color:var(--light);font-size:0.8rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:36px}
+.pin-display{display:flex;gap:8px;justify-content:center;margin-bottom:28px}
+.pin-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--border);background:transparent;transition:all .2s}
+.pin-dot.filled{background:var(--gold);border-color:var(--gold)}
+.pin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:220px;margin:0 auto 16px}
+.pin-btn{padding:16px;border:2px solid var(--border);border-radius:6px;background:var(--white);font-family:var(--font-b);font-size:1.2rem;font-weight:600;cursor:pointer;transition:all .2s}
+.pin-btn:hover{border-color:var(--gold);background:var(--gold-l)}
+.pin-btn:active{transform:scale(0.95)}
+.pin-btn.del{font-size:1rem;color:var(--light)}
+.pin-err{color:#C0392B;font-size:0.85rem;min-height:20px;margin-top:8px}
+
+/* LAYOUT */
+#appScreen{display:none;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar);height:100vh;background:var(--dark);display:flex;flex-direction:column;z-index:200;overflow-y:auto}
+.sidebar-logo{padding:28px 20px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.sidebar-logo h1{font-family:var(--font-h);font-size:1.4rem;color:var(--gold);letter-spacing:2px}
+.sidebar-logo p{font-size:0.72rem;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase;margin-top:4px}
+.nav-items{padding:16px 0;flex:1}
+.nav-item{display:flex;align-items:center;gap:12px;padding:13px 20px;color:rgba(255,255,255,0.6);font-size:0.9rem;cursor:pointer;transition:all .2s;border-left:3px solid transparent}
+.nav-item:hover{color:var(--white);background:rgba(255,255,255,0.05)}
+.nav-item.active{color:var(--gold);border-left-color:var(--gold);background:rgba(184,146,42,0.08)}
+.nav-item .icon{font-size:1.1rem;width:20px;text-align:center}
+.sidebar-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,0.08)}
+.logout-btn{width:100%;padding:10px;background:transparent;border:1px solid rgba(255,255,255,0.15);border-radius:6px;color:rgba(255,255,255,0.5);font-family:var(--font-b);font-size:0.82rem;cursor:pointer;transition:all .2s;letter-spacing:1px}
+.logout-btn:hover{border-color:var(--pink);color:var(--pink)}
+
+.content{margin-left:var(--sidebar);padding:32px;min-height:100vh}
+.page{display:none}
+.page.active{display:block}
+.page-title{font-family:var(--font-h);font-size:2.2rem;font-weight:400;margin-bottom:6px}
+.page-sub{color:var(--light);margin-bottom:28px;font-size:0.95rem}
+
+/* CARDS */
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+.card-title{font-size:0.8rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--light);margin-bottom:16px}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+@media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow)}
+.stat-val{font-family:var(--font-h);font-size:2.4rem;font-weight:400;color:var(--dark);line-height:1}
+.stat-label{font-size:0.78rem;color:var(--light);text-transform:uppercase;letter-spacing:1px;margin-top:8px}
+.stat-card.gold .stat-val{color:var(--gold)}
+.stat-card.pink .stat-val{color:var(--pink)}
+
+/* TABELA */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:0.9rem}
+th{text-align:left;padding:12px 14px;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--light);border-bottom:2px solid var(--border);white-space:nowrap}
+td{padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:hover td{background:var(--bg)}
+tr:last-child td{border:none}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
+.badge-oczekuje{background:#FFF8E7;color:#B8920A}
+.badge-potwierdzona{background:#E8F5E9;color:#2E7D32}
+.badge-zrealizowana{background:var(--gold-l);color:var(--gold)}
+.badge-anulowana{background:#FFEBEE;color:#C62828}
+
+/* KALENDARZ */
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.cal-month-lbl{font-family:var(--font-h);font-size:1.5rem;font-weight:400}
+.cal-nav-btn{border:none;background:none;font-size:1.2rem;cursor:pointer;color:var(--light);padding:6px 12px;border-radius:4px;transition:color .2s}
+.cal-nav-btn:hover{color:var(--gold)}
+.panel-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center}
+.panel-cal-label{font-size:0.72rem;font-weight:600;color:var(--light);text-transform:uppercase;padding:4px}
+.panel-cal-day{padding:8px 4px;border-radius:6px;font-size:0.9rem;cursor:pointer;border:2px solid transparent;transition:all .2s;position:relative}
+.panel-cal-day:hover:not(.disabled):not(.other-month){background:var(--pink-l);border-color:var(--pink)}
+.panel-cal-day.selected{background:var(--gold);color:var(--white)!important;border-color:var(--gold)}
+.panel-cal-day.today{border-color:var(--pink)}
+.panel-cal-day.has-res::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--pink)}
+.panel-cal-day.selected.has-res::after{background:var(--white)}
+.panel-cal-day.blocked-day{background:repeating-linear-gradient(45deg,transparent,transparent 4px,rgba(0,0,0,0.04) 4px,rgba(0,0,0,0.04) 8px);color:var(--light)}
+.panel-cal-day.other-month{color:#D0C8C2}
+.panel-cal-day.disabled{color:#D0C8C2;cursor:default}
+
+/* PANEL DNIA */
+.day-panel{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px;max-height:500px;overflow-y:auto}
+.day-panel-title{font-family:var(--font-h);font-size:1.1rem;margin-bottom:14px;color:var(--dark)}
+.day-res-item{border-left:3px solid var(--pink);padding:10px 14px;margin-bottom:10px;border-radius:0 6px 6px 0;background:var(--bg);cursor:pointer;transition:background .2s}
+.day-res-item:hover{background:var(--pink-l)}
+.day-res-time{font-size:1rem;font-weight:600;color:var(--gold)}
+.day-res-name{font-size:0.9rem;margin-top:2px}
+.day-res-service{font-size:0.8rem;color:var(--light);margin-top:2px}
+
+/* BLOKADY */
+.block-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+@media(max-width:600px){.block-grid{grid-template-columns:repeat(2,1fr)}}
+.block-slot{padding:10px;border:2px solid var(--border);border-radius:6px;text-align:center;font-size:0.9rem;cursor:pointer;transition:all .2s}
+.block-slot:hover{border-color:var(--pink);background:var(--pink-l)}
+.block-slot.blocked{background:#FFEBEE;border-color:#E53935;color:#C62828}
+
+/* PIESKI */
+.dogs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.dog-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);cursor:pointer;transition:all .3s}
+.dog-card:hover{border-color:var(--pink);transform:translateY(-2px)}
+.dog-avatar{width:48px;height:48px;border-radius:50%;background:var(--pink-l);display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:12px}
+.dog-name{font-family:var(--font-h);font-size:1.3rem;font-weight:600}
+.dog-race{font-size:0.85rem;color:var(--light);margin-bottom:8px}
+.dog-tag{display:inline-block;padding:2px 8px;background:var(--gold-l);color:var(--gold);border-radius:20px;font-size:0.75rem;font-weight:600}
+
+/* FINANSE */
+.fin-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+@media(max-width:700px){.fin-summary{grid-template-columns:1fr 1fr}}
+.fin-bar{height:6px;background:var(--bg-alt);border-radius:3px;margin-top:8px;overflow:hidden}
+.fin-bar-fill{height:100%;background:var(--gold);border-radius:3px;transition:width .5s}
+
+/* FORMULARZE */
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:0.78rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--light);margin-bottom:6px}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:11px 14px;border:2px solid var(--border);border-radius:6px;font-family:var(--font-b);font-size:0.95rem;color:var(--dark);background:var(--white);transition:border-color .2s;outline:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--gold)}
+.form-group textarea{resize:vertical;min-height:80px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:500px){.form-row{grid-template-columns:1fr}}
+
+/* PRZYCISKI */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 24px;border:none;border-radius:6px;font-family:var(--font-b);font-size:0.85rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.btn-primary{background:var(--pink);color:var(--dark)}
+.btn-primary:hover{background:var(--dark);color:var(--white)}
+.btn-gold{background:var(--gold);color:var(--white)}
+.btn-gold:hover{background:#9A7A22}
+.btn-danger{background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2}
+.btn-danger:hover{background:#C62828;color:var(--white)}
+.btn-sm{padding:7px 16px;font-size:0.78rem}
+.btn-outline{background:transparent;border:2px solid var(--border);color:var(--dark)}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:999;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-radius:var(--radius);padding:32px;max-width:580px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px}
+.modal-head h2{font-family:var(--font-h);font-size:1.8rem;font-weight:400}
+.modal-close{border:none;background:none;font-size:1.5rem;cursor:pointer;color:var(--light);line-height:1;padding:4px}
+.modal-close:hover{color:var(--dark)}
+
+/* MISC */
+.sep{height:1px;background:var(--border);margin:20px 0}
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.tag{padding:4px 12px;border-radius:20px;font-size:0.78rem;background:var(--bg-alt);color:var(--light);border:1px solid var(--border)}
+.empty{text-align:center;padding:48px;color:var(--light);font-size:0.95rem}
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(0,0,0,0.1);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--dark);color:var(--white);padding:12px 20px;border-radius:6px;font-size:0.9rem;z-index:9999;transform:translateY(100px);opacity:0;transition:all .3s;pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* MOBILE */
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);transition:transform .3s}
+  .sidebar.open{transform:translateX(0)}
+  .content{margin-left:0;padding:20px}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .mobile-menu-btn{display:flex!important}
+}
+.mobile-menu-btn{display:none;position:fixed;top:16px;left:16px;z-index:300;width:42px;height:42px;background:var(--dark);border:none;border-radius:6px;align-items:center;justify-content:center;cursor:pointer;color:var(--white);font-size:1.2rem}
+</style>
+</head>
+<body>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">hOla Perros</div>
+    <div class="login-sub">Panel zarządzania</div>
+    <div class="pin-display" id="pinDisplay">
+      <div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div>
+      <div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div>
+      <div class="pin-dot" id="pd4"></div><div class="pin-dot" id="pd5"></div>
+      <div class="pin-dot" id="pd6"></div><div class="pin-dot" id="pd7"></div>
+    </div>
+    <div class="pin-grid">
+      <button class="pin-btn" onclick="pinPress('1')">1</button>
+      <button class="pin-btn" onclick="pinPress('2')">2</button>
+      <button class="pin-btn" onclick="pinPress('3')">3</button>
+      <button class="pin-btn" onclick="pinPress('4')">4</button>
+      <button class="pin-btn" onclick="pinPress('5')">5</button>
+      <button class="pin-btn" onclick="pinPress('6')">6</button>
+      <button class="pin-btn" onclick="pinPress('7')">7</button>
+      <button class="pin-btn" onclick="pinPress('8')">8</button>
+      <button class="pin-btn" onclick="pinPress('9')">9</button>
+      <button class="pin-btn" onclick="pinClear()" style="font-size:0.85rem">Wyczyść</button>
+      <button class="pin-btn" onclick="pinPress('0')">0</button>
+      <button class="pin-btn del" onclick="pinDel()">⌫</button>
+    </div>
+    <div class="pin-err" id="pinErr"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="appScreen">
+  <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <h1>hOla Perros</h1>
+      <p>Panel Oli</p>
+    </div>
+    <div class="nav-items">
+      <div class="nav-item active" onclick="showPage('dashboard')"><span class="icon">📊</span> Dashboard</div>
+      <div class="nav-item" onclick="showPage('calendar')"><span class="icon">📅</span> Kalendarz</div>
+      <div class="nav-item" onclick="showPage('reservations')"><span class="icon">📋</span> Rezerwacje</div>
+      <div class="nav-item" onclick="showPage('dogs')"><span class="icon">🐶</span> Pieski</div>
+      <div class="nav-item" onclick="showPage('finances')"><span class="icon">💰</span> Finanse</div>
+      <div class="nav-item" onclick="showPage('settings')"><span class="icon">⚙️</span> Ustawienia</div>
+    </div>
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="logout()">Wyloguj się</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- DASHBOARD -->
+    <div class="page active" id="page-dashboard">
+      <div class="page-title">Dzień dobry, Olo! 🐾</div>
+      <div class="page-sub" id="dashDate"></div>
+      <div class="stats-grid" id="statsGrid">
+        <div class="stat-card"><div class="stat-val" id="stat-dzisiaj">—</div><div class="stat-label">Dziś wizyty</div></div>
+        <div class="stat-card pink"><div class="stat-val" id="stat-oczekuje">—</div><div class="stat-label">Oczekuje</div></div>
+        <div class="stat-card"><div class="stat-val" id="stat-miesiac">—</div><div class="stat-label">W tym miesiącu</div></div>
+        <div class="stat-card gold"><div class="stat-val" id="stat-przychod">—</div><div class="stat-label">Przychód (mies.)</div></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Dzisiejsze wizyty</div>
+        <div id="todayList"><div class="empty">Ładowanie...</div></div>
+      </div>
+    </div>
+
+    <!-- KALENDARZ -->
+    <div class="page" id="page-calendar">
+      <div class="page-title">Kalendarz</div>
+      <div class="page-sub">Kliknij dzień aby zobaczyć wizyty lub zarządzać blokadami.</div>
+      <div style="display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start">
+        <div class="card">
+          <div class="cal-header">
+            <button class="cal-nav-btn" onclick="calNav(-1)">&#8592;</button>
+            <div class="cal-month-lbl" id="panelCalMonth"></div>
+            <button class="cal-nav-btn" onclick="calNav(1)">&#8594;</button>
+          </div>
+          <div class="panel-cal-grid" id="panelCalGrid"></div>
+        </div>
+        <div>
+          <div class="day-panel card" id="dayPanel">
+            <div class="day-panel-title" id="dayPanelTitle">Wybierz dzień</div>
+            <div id="dayResList"><div class="empty" style="padding:24px">Kliknij dzień w kalendarzu.</div></div>
+          </div>
+          <div class="card" style="margin-top:16px">
+            <div class="card-title">Blokuj dzień / godzinę</div>
+            <div class="form-group"><label>Powód (opcjonalnie)</label><input type="text" id="blockReason" placeholder="Urlop, choroba..."></div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <button class="btn btn-danger btn-sm" onclick="blockSelectedDay()">🚫 Zablokuj cały dzień</button>
+              <button class="btn btn-outline btn-sm" onclick="unblockSelectedDay()">✓ Odblokuj dzień</button>
+            </div>
+            <div class="block-grid" id="blockSlotsGrid" style="margin-top:16px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REZERWACJE -->
+    <div class="page" id="page-reservations">
+      <div class="page-title">Rezerwacje</div>
+      <div class="page-sub">Pełna lista wszystkich rezerwacji.</div>
+      <div class="card" style="margin-bottom:16px">
+        <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap">
+          <div class="form-group" style="margin:0;flex:1;min-width:160px">
+            <label>Miesiąc</label>
+            <input type="month" id="resFilterMonth" onchange="loadReservations()">
+          </div>
+          <div class="form-group" style="margin:0;flex:1;min-width:160px">
+            <label>Status</label>
+            <select id="resFilterStatus" onchange="loadReservations()">
+              <option value="">Wszystkie</option>
+              <option value="oczekuje">Oczekuje</option>
+              <option value="potwierdzona">Potwierdzona</option>
+              <option value="zrealizowana">Zrealizowana</option>
+              <option value="anulowana">Anulowana</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="openAddModal()">+ Dodaj ręcznie</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="table-wrap">
+          <table id="resTable">
+            <thead><tr><th>ID</th><th>Data</th><th>Godz.</th><th>Klient</th><th>Piesek</th><th>Usługa</th><th>Cena</th><th>Status</th><th>Zapł.</th><th></th></tr></thead>
+            <tbody id="resBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIESKI -->
+    <div class="page" id="page-dogs">
+      <div class="page-title">Pieski</div>
+      <div class="page-sub">Karty psów z historią i notatkami.</div>
+      <div class="card" style="margin-bottom:16px">
+        <input type="text" id="dogSearch" placeholder="🔍 Szukaj psa lub właściciela..." oninput="filterDogs()" style="width:100%;padding:11px 14px;border:2px solid var(--border);border-radius:6px;font-family:var(--font-b);font-size:0.95rem;outline:none">
+      </div>
+      <div class="dogs-grid" id="dogsGrid"><div class="empty">Ładowanie...</div></div>
+    </div>
+
+    <!-- FINANSE -->
+    <div class="page" id="page-finances">
+      <div class="page-title">Finanse</div>
+      <div class="page-sub">Przychody i zestawienia.</div>
+      <div class="card" style="margin-bottom:16px;display:flex;gap:12px;align-items:flex-end">
+        <div class="form-group" style="margin:0;flex:1">
+          <label>Miesiąc</label>
+          <input type="month" id="finMonth" onchange="loadFinances()">
+        </div>
+        <button class="btn btn-gold btn-sm" onclick="openAddFinanceModal()">+ Dodaj wpis</button>
+      </div>
+      <div class="fin-summary" id="finSummary"></div>
+      <div class="card">
+        <div class="card-title">Historia płatności</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Data</th><th>Opis</th><th>Typ</th><th>Metoda</th><th>Kwota</th></tr></thead>
+            <tbody id="finBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- USTAWIENIA -->
+    <div class="page" id="page-settings">
+      <div class="page-title">Ustawienia</div>
+      <div class="page-sub">Zarządzanie salonem.</div>
+      <div class="card" style="max-width:480px">
+        <div class="card-title">Dane salonu</div>
+        <div class="form-group"><label>Nazwa</label><input type="text" value="hOla Perros" readonly></div>
+        <div class="form-group"><label>Adres</label><input type="text" value="ul. Opawska 67, 47-400 Racibórz" readonly></div>
+        <div class="form-group"><label>Telefon</label><input type="text" value="+48 512 501 558" readonly></div>
+        <div class="sep"></div>
+        <div class="card-title">Godziny pracy</div>
+        <div class="form-row">
+          <div class="form-group"><label>Od</label><input type="time" value="09:00" readonly></div>
+          <div class="form-group"><label>Do</label><input type="time" value="17:00" readonly></div>
+        </div>
+        <div class="form-group"><label>Max rezerwacji dziennie</label><input type="number" value="8" readonly></div>
+        <div class="sep"></div>
+        <div class="card-title">Połączenie API</div>
+        <div class="form-group"><label>URL Apps Script</label><input type="text" id="settingsApiUrl" placeholder="https://script.google.com/macros/s/..."></div>
+        <button class="btn btn-primary" onclick="saveApiUrl()">Zapisz URL</button>
+        <div id="apiTestResult" style="margin-top:10px;font-size:0.85rem;color:var(--light)"></div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /appScreen -->
+
+<!-- MODAL REZERWACJA -->
+<div class="modal-overlay" id="resModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="resModalTitle">Rezerwacja</h2>
+      <button class="modal-close" onclick="closeModal('resModal')">×</button>
+    </div>
+    <div id="resModalBody"></div>
+  </div>
+</div>
+
+<!-- MODAL PIESEK -->
+<div class="modal-overlay" id="dogModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="dogModalTitle">Karta psa</h2>
+      <button class="modal-close" onclick="closeModal('dogModal')">×</button>
+    </div>
+    <div id="dogModalBody"></div>
+  </div>
+</div>
+
+<!-- MODAL FINANSE -->
+<div class="modal-overlay" id="finModal">
+  <div class="modal" style="max-width:400px">
+    <div class="modal-head">
+      <h2>Dodaj wpis</h2>
+      <button class="modal-close" onclick="closeModal('finModal')">×</button>
+    </div>
+    <div class="form-group"><label>Data</label><input type="date" id="fin_data"></div>
+    <div class="form-group"><label>Kwota (zł)</label><input type="number" id="fin_kwota" placeholder="0"></div>
+    <div class="form-group"><label>Typ</label>
+      <select id="fin_typ"><option value="usługa">Usługa</option><option value="napiwek">Napiwek</option><option value="wydatek">Wydatek</option></select>
+    </div>
+    <div class="form-group"><label>Opis</label><input type="text" id="fin_opis" placeholder="np. Strzyżenie Burek"></div>
+    <div class="form-group"><label>Metoda płatności</label>
+      <select id="fin_metoda"><option value="gotówka">Gotówka</option><option value="karta">Karta</option><option value="przelew">Przelew</option></select>
+    </div>
+    <button class="btn btn-gold" style="width:100%" onclick="submitFinance()">Zapisz</button>
+  </div>
+</div>
+
+<script>
+// =====================================================
+// KONFIGURACJA
+// =====================================================
+const PIN_HASH = '837194K!'; // <- TWÓJ PIN
+let API_URL = localStorage.getItem('hp_api_url') || 'WSTAW_URL_APPS_SCRIPT_TUTAJ';
+
+// Stan
+const S = {
+  calYear: new Date().getFullYear(),
+  calMonth: new Date().getMonth(),
+  selectedDate: null,
+  reservations: [],
+  dogs: [],
+  blocked: [],
+  allDogs: []
+};
+
+// =====================================================
+// LOGIN / PIN
+// =====================================================
+let pinInput = '';
+
+function pinPress(d) {
+  if (pinInput.length >= 8) return;
+  pinInput += d;
+  updatePinDots();
+  if (pinInput.length === 8) checkPin();
+}
+
+function pinDel() { pinInput = pinInput.slice(0,-1); updatePinDots(); document.getElementById('pinErr').textContent=''; }
+function pinClear() { pinInput=''; updatePinDots(); document.getElementById('pinErr').textContent=''; }
+
+function updatePinDots() {
+  for (let i=0;i<8;i++) {
+    document.getElementById('pd'+i).classList.toggle('filled', i < pinInput.length);
+  }
+}
+
+function checkPin() {
+  if (pinInput === PIN_HASH) {
+    sessionStorage.setItem('hp_auth','1');
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('appScreen').style.display='block';
+    initApp();
+  } else {
+    document.getElementById('pinErr').textContent='Nieprawidłowy PIN. Spróbuj ponownie.';
+    pinInput=''; updatePinDots();
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem('hp_auth');
+  location.reload();
+}
+
+// Auto-login jeśli sesja aktywna
+window.addEventListener('DOMContentLoaded', () => {
+  if (sessionStorage.getItem('hp_auth')==='1') {
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('appScreen').style.display='block';
+    initApp();
+  }
+  // Ustaw bieżący miesiąc w filtrach
+  const now = new Date();
+  const ym = now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
+  document.getElementById('resFilterMonth').value = ym;
+  document.getElementById('finMonth').value = ym;
+  const today = now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
+  document.getElementById('dashDate').textContent = formatDatePL(today) + ' – miło Cię widzieć!';
+  document.getElementById('fin_data').value = today;
+  document.getElementById('settingsApiUrl').value = API_URL !== 'WSTAW_URL_APPS_SCRIPT_TUTAJ' ? API_URL : '';
+});
+
+// =====================================================
+// API
+// =====================================================
+function api(params) {
+  return fetch(API_URL+'?'+new URLSearchParams(params)).then(r=>r.json()).catch(()=>({ok:false,error:'Brak połączenia'}));
+}
+function apiPost(body) {
+  return fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(r=>r.json()).catch(()=>({ok:false,error:'Brak połączenia'}));
+}
+
+// =====================================================
+// INIT
+// =====================================================
+async function initApp() {
+  await loadStats();
+  await loadTodayReservations();
+  await loadBlockedDates();
+  renderPanelCalendar();
+}
+
+// =====================================================
+// NAWIGACJA
+// =====================================================
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  event.currentTarget.classList.add('active');
+
+  if (id==='reservations') loadReservations();
+  if (id==='dogs') loadDogs();
+  if (id==='finances') loadFinances();
+  if (id==='calendar') { loadBlockedDates(); renderPanelCalendar(); }
+
+  // Mobile: zamknij sidebar
+  document.getElementById('sidebar').classList.remove('open');
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+// =====================================================
+// DASHBOARD
+// =====================================================
+async function loadStats() {
+  const r = await api({action:'getStats'});
+  if (!r.ok) return;
+  const d = r.data;
+  document.getElementById('stat-dzisiaj').textContent = d.dzisiaj ?? 0;
+  document.getElementById('stat-oczekuje').textContent = d.oczekuje ?? 0;
+  document.getElementById('stat-miesiac').textContent = d.miesiac ?? 0;
+  document.getElementById('stat-przychod').textContent = (d.przychod ?? 0)+' zł';
+}
+
+async function loadTodayReservations() {
+  const today = fmtDate(new Date());
+  const r = await api({action:'getReservations', date: today});
+  const el = document.getElementById('todayList');
+  if (!r.ok || !r.data.length) { el.innerHTML='<div class="empty">Brak wizyt na dziś.</div>'; return; }
+  el.innerHTML = r.data.map(res=>resRowHtml(res)).join('');
+}
+
+function resRowHtml(res) {
+  return `<div class="day-res-item" onclick='openResModal(${JSON.stringify(res)})'>
+    <div class="day-res-time">${res['Godzina']} <span class="badge badge-${res['Status']||'oczekuje'}">${res['Status']||'oczekuje'}</span></div>
+    <div class="day-res-name">🐶 ${res['Imie_psa']} · ${res['Imie_klienta']}</div>
+    <div class="day-res-service">${res['Usługa']} · ${res['Cena']} zł</div>
+  </div>`;
+}
+
+// =====================================================
+// KALENDARZ PANELU
+// =====================================================
+async function loadBlockedDates() {
+  const r = await api({action:'getBlocked'});
+  if (r.ok) S.blocked = r.data;
+}
+
+function renderPanelCalendar() {
+  const y=S.calYear, m=S.calMonth;
+  const months=['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'];
+  document.getElementById('panelCalMonth').textContent = months[m]+' '+y;
+
+  const grid = document.getElementById('panelCalGrid');
+  grid.innerHTML='';
+  ['Pn','Wt','Śr','Cz','Pt','So','Nd'].forEach(d=>{
+    const el=document.createElement('div'); el.className='panel-cal-label'; el.textContent=d; grid.appendChild(el);
+  });
+
+  const first=new Date(y,m,1), startDow=(first.getDay()+6)%7;
+  const dim=new Date(y,m+1,0).getDate(), dip=new Date(y,m,0).getDate();
+
+  for(let i=startDow-1;i>=0;i--){
+    const el=document.createElement('div'); el.className='panel-cal-day other-month'; el.textContent=dip-i; grid.appendChild(el);
+  }
+  for(let d=1;d<=dim;d++){
+    const dt=new Date(y,m,d), ds=fmtDate(dt), dow=dt.getDay();
+    const isBlocked=S.blocked.some(b=>b.data===ds&&b.godzina==='ALL');
+    const el=document.createElement('div'); el.className='panel-cal-day'; el.textContent=d;
+    if(ds===fmtDate(new Date())) el.classList.add('today');
+    if(ds===S.selectedDate) el.classList.add('selected');
+    if(isBlocked) el.classList.add('blocked-day');
+    if(dow===0) el.classList.add('disabled');
+    else el.onclick=()=>selectCalDay(ds,el);
+    grid.appendChild(el);
+  }
+}
+
+async function selectCalDay(ds, el) {
+  S.selectedDate=ds;
+  document.querySelectorAll('.panel-cal-day').forEach(c=>c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('dayPanelTitle').textContent = formatDatePL(ds);
+
+  // Wczytaj wizyty dnia
+  const r = await api({action:'getReservations',date:ds});
+  const list = document.getElementById('dayResList');
+  if(!r.ok||!r.data.length){list.innerHTML='<div class="empty" style="padding:20px">Brak wizyt.</div>';}
+  else list.innerHTML=r.data.map(res=>resRowHtml(res)).join('');
+
+  // Sloty blokady
+  renderBlockSlots(ds);
+}
+
+function renderBlockSlots(ds) {
+  const slots=['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00'];
+  const grid=document.getElementById('blockSlotsGrid');
+  grid.innerHTML='';
+  slots.forEach(s=>{
+    const isBlocked=S.blocked.some(b=>b.data===ds&&(b.godzina===s||b.godzina==='ALL'));
+    const btn=document.createElement('div');
+    btn.className='block-slot'+(isBlocked?' blocked':'');
+    btn.textContent=s+(isBlocked?' 🚫':'');
+    btn.onclick=()=>toggleSlotBlock(ds,s,isBlocked,btn);
+    grid.appendChild(btn);
+  });
+}
+
+async function toggleSlotBlock(ds,slot,isBlocked,btn) {
+  if(isBlocked){
+    await apiPost({action:'unblockDate',data:ds,godzina:slot});
+    S.blocked=S.blocked.filter(b=>!(b.data===ds&&b.godzina===slot));
+    btn.className='block-slot'; btn.textContent=slot;
+  } else {
+    await apiPost({action:'blockDate',data:ds,godzina:slot,powod:document.getElementById('blockReason').value});
+    S.blocked.push({data:ds,godzina:slot});
+    btn.className='block-slot blocked'; btn.textContent=slot+' 🚫';
+  }
+  toast('Zmieniono status slotu');
+}
+
+async function blockSelectedDay() {
+  if(!S.selectedDate){toast('Wybierz dzień w kalendarzu','err');return;}
+  const powod=document.getElementById('blockReason').value;
+  await apiPost({action:'blockDate',data:S.selectedDate,godzina:'ALL',powod});
+  S.blocked=S.blocked.filter(b=>b.data!==S.selectedDate);
+  S.blocked.push({data:S.selectedDate,godzina:'ALL',powod});
+  renderPanelCalendar();
+  renderBlockSlots(S.selectedDate);
+  toast('Dzień zablokowany');
+}
+
+async function unblockSelectedDay() {
+  if(!S.selectedDate){toast('Wybierz dzień','err');return;}
+  await apiPost({action:'unblockDate',data:S.selectedDate});
+  S.blocked=S.blocked.filter(b=>b.data!==S.selectedDate);
+  renderPanelCalendar();
+  renderBlockSlots(S.selectedDate);
+  toast('Dzień odblokowany');
+}
+
+function calNav(dir) {
+  S.calMonth+=dir;
+  if(S.calMonth<0){S.calMonth=11;S.calYear--;}
+  if(S.calMonth>11){S.calMonth=0;S.calYear++;}
+  renderPanelCalendar();
+}
+
+// =====================================================
+// REZERWACJE
+// =====================================================
+async function loadReservations() {
+  const month=document.getElementById('resFilterMonth').value;
+  const status=document.getElementById('resFilterStatus').value;
+  const params={action:'getReservations',month};
+  if(status) params.status=status;
+  const r=await api(params);
+  const tbody=document.getElementById('resBody');
+  if(!r.ok||!r.data.length){tbody.innerHTML='<tr><td colspan="10" class="empty">Brak rezerwacji.</td></tr>';return;}
+  tbody.innerHTML=r.data.map(res=>`
+    <tr>
+      <td><small style="font-size:0.78rem;color:var(--light)">${res['ID']}</small></td>
+      <td>${res['Data']}</td>
+      <td><strong>${res['Godzina']}</strong></td>
+      <td>${res['Imie_klienta']}<br><small style="color:var(--light)">${res['Email']}</small></td>
+      <td>🐶 ${res['Imie_psa']}<br><small style="color:var(--light)">${res['Rasa']||''}</small></td>
+      <td style="max-width:160px">${res['Usługa']}</td>
+      <td><strong style="color:var(--gold)">${res['Cena']} zł</strong></td>
+      <td><span class="badge badge-${res['Status']||'oczekuje'}">${res['Status']||'oczekuje'}</span></td>
+      <td>${res['Zaplacono']==='tak'?'✅':'⬜'}</td>
+      <td><button class="btn btn-outline btn-sm" onclick='openResModal(${JSON.stringify(res)})'>Edytuj</button></td>
+    </tr>`).join('');
+}
+
+function openResModal(res) {
+  document.getElementById('resModalTitle').textContent = res['ID'];
+  document.getElementById('resModalBody').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
+      <div><small style="color:var(--light);font-size:0.75rem;text-transform:uppercase;letter-spacing:1px">Data i godzina</small><div style="font-size:1.1rem;font-weight:600">${res['Data']} ${res['Godzina']}</div></div>
+      <div><small style="color:var(--light);font-size:0.75rem;text-transform:uppercase;letter-spacing:1px">Usługa</small><div>${res['Usługa']}</div></div>
+      <div><small style="color:var(--light);font-size:0.75rem;text-transform:uppercase;letter-spacing:1px">Klient</small><div>${res['Imie_klienta']}<br><a href="tel:${res['Telefon']}" style="color:var(--gold)">${res['Telefon']}</a></div></div>
+      <div><small style="color:var(--light);font-size:0.75rem;text-transform:uppercase;letter-spacing:1px">Piesek</small><div>🐶 ${res['Imie_psa']} (${res['Rasa']||'?'})</div></div>
+    </div>
+    ${res['Uwagi']?`<div style="background:var(--bg-alt);padding:12px;border-radius:6px;font-size:0.88rem;margin-bottom:16px;color:var(--light)">📝 ${res['Uwagi']}</div>`:''}
+    <div class="sep"></div>
+    <div class="form-group"><label>Status</label>
+      <select id="md_status" onchange="updateRes('${res['ID']}','status',this.value)">
+        <option ${res['Status']==='oczekuje'?'selected':''}>oczekuje</option>
+        <option ${res['Status']==='potwierdzona'?'selected':''}>potwierdzona</option>
+        <option ${res['Status']==='zrealizowana'?'selected':''}>zrealizowana</option>
+        <option ${res['Status']==='anulowana'?'selected':''}>anulowana</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Cena końcowa (zł)</label><input type="number" id="md_cena" value="${res['Cena']||''}" onblur="updateRes('${res['ID']}','cena',this.value)"></div>
+      <div class="form-group"><label>Metoda płatności</label>
+        <select id="md_metoda" onchange="updateRes('${res['ID']}','metoda_platnosci',this.value)">
+          <option ${res['Metoda_platnosci']==='gotówka'?'selected':''} value="gotówka">Gotówka</option>
+          <option ${res['Metoda_platnosci']==='karta'?'selected':''} value="karta">Karta</option>
+          <option ${res['Metoda_platnosci']==='przelew'?'selected':''} value="przelew">Przelew</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label><input type="checkbox" id="md_zapl" ${res['Zaplacono']==='tak'?'checked':''} onchange="updateRes('${res['ID']}','zaplacono',this.checked?'tak':'nie')"> Opłacona</label>
+    </div>
+    <div class="form-group"><label>Co było robione</label><textarea id="md_co" onblur="updateRes('${res['ID']}','co_robiono',this.value)">${res['Co_robiono']||''}</textarea></div>
+    <div class="form-group"><label>Notatki Oli</label><textarea id="md_notatki" onblur="updateRes('${res['ID']}','notatki_ola',this.value)">${res['Notatki_Ola']||''}</textarea></div>`;
+  openModal('resModal');
+}
+
+async function updateRes(id, field, val) {
+  const payload={action:'updateReservation',id,[field]:val};
+  if(field==='zaplacono'&&val==='tak'){
+    payload.cena=document.getElementById('md_cena')?.value;
+    payload.metoda_platnosci=document.getElementById('md_metoda')?.value;
+  }
+  const r=await apiPost(payload);
+  if(r.ok) toast('Zapisano');
+  else toast('Błąd: '+r.error,'err');
+}
+
+function openAddModal() {
+  document.getElementById('resModalTitle').textContent='Nowa rezerwacja';
+  document.getElementById('resModalBody').innerHTML=`
+    <div class="form-row">
+      <div class="form-group"><label>Data</label><input type="date" id="add_data"></div>
+      <div class="form-group"><label>Godzina</label>
+        <select id="add_godz"><option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option></select>
+      </div>
+    </div>
+    <div class="form-group"><label>Usługa</label><input type="text" id="add_usl" placeholder="np. Strzyżenie – Rasy mini"></div>
+    <div class="form-group"><label>Cena (zł)</label><input type="number" id="add_cena"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Imię klienta</label><input type="text" id="add_imie"></div>
+      <div class="form-group"><label>Telefon</label><input type="tel" id="add_tel"></div>
+    </div>
+    <div class="form-group"><label>E-mail</label><input type="email" id="add_email"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Imię psa</label><input type="text" id="add_pies"></div>
+      <div class="form-group"><label>Rasa</label><input type="text" id="add_rasa"></div>
+    </div>
+    <div class="form-group"><label>Uwagi</label><textarea id="add_uwagi"></textarea></div>
+    <button class="btn btn-primary" style="width:100%;margin-top:8px" onclick="submitAddRes()">Dodaj rezerwację</button>`;
+  openModal('resModal');
+}
+
+async function submitAddRes() {
+  const payload={
+    action:'createReservation',
+    data:document.getElementById('add_data').value,
+    godzina:document.getElementById('add_godz').value,
+    usluga:document.getElementById('add_usl').value,
+    cena:document.getElementById('add_cena').value,
+    imie_klienta:document.getElementById('add_imie').value,
+    telefon:document.getElementById('add_tel').value,
+    email:document.getElementById('add_email').value,
+    imie_psa:document.getElementById('add_pies').value,
+    rasa:document.getElementById('add_rasa').value,
+    uwagi:document.getElementById('add_uwagi').value
+  };
+  const r=await apiPost(payload);
+  if(r.ok){closeModal('resModal');loadReservations();toast('Rezerwacja dodana: '+r.data.id);}
+  else toast('Błąd: '+r.error,'err');
+}
+
+// =====================================================
+// PIESKI
+// =====================================================
+async function loadDogs() {
+  const r=await api({action:'getReservations',month:''});
+  if(!r.ok){document.getElementById('dogsGrid').innerHTML='<div class="empty">Błąd ładowania.</div>';return;}
+
+  // Zbierz unikalne pieski z rezerwacji
+  const dogs={};
+  r.data.forEach(res=>{
+    const key=res['Email']+':'+res['Imie_psa'];
+    if(!dogs[key]) dogs[key]={email:res['Email'],imie_psa:res['Imie_psa'],rasa:res['Rasa'],klient:res['Imie_klienta'],wizyty:0};
+    dogs[key].wizyty++;
+  });
+
+  S.allDogs=Object.values(dogs);
+  renderDogs(S.allDogs);
+}
+
+function renderDogs(list) {
+  const grid=document.getElementById('dogsGrid');
+  if(!list.length){grid.innerHTML='<div class="empty">Brak psów w bazie.</div>';return;}
+  grid.innerHTML=list.map(d=>`
+    <div class="dog-card" onclick='openDogModal(${JSON.stringify(d)})'>
+      <div class="dog-avatar">🐶</div>
+      <div class="dog-name">${d.imie_psa}</div>
+      <div class="dog-race">${d.rasa||'Rasa nieznana'} · ${d.klient}</div>
+      <div class="tag-row"><span class="dog-tag">${d.wizyty} ${d.wizyty===1?'wizyta':'wizyty'}</span></div>
+    </div>`).join('');
+}
+
+function filterDogs() {
+  const q=document.getElementById('dogSearch').value.toLowerCase();
+  renderDogs(S.allDogs.filter(d=>(d.imie_psa+d.rasa+d.klient+d.email).toLowerCase().includes(q)));
+}
+
+function openDogModal(d) {
+  document.getElementById('dogModalTitle').textContent='🐶 '+d.imie_psa;
+  document.getElementById('dogModalBody').innerHTML=`
+    <div style="margin-bottom:20px">
+      <div style="color:var(--light);font-size:0.85rem">${d.klient} · <a href="mailto:${d.email}" style="color:var(--gold)">${d.email}</a></div>
+      <div style="font-size:0.9rem;margin-top:4px">Rasa: <strong>${d.rasa||'nieznana'}</strong> · Wizyty: <strong>${d.wizyty}</strong></div>
+    </div>
+    <div class="sep"></div>
+    <div class="form-group"><label>Uwagi behawioralne</label><textarea id="dog_uwagi" placeholder="Charakter, reakcje, ulubione miejsca..."></textarea></div>
+    <div class="form-group"><label>Alergie / problemy zdrowotne</label><textarea id="dog_alergie" placeholder="np. alergia na kukurydzę w szamponie..."></textarea></div>
+    <div class="form-group"><label>Notatki Oli</label><textarea id="dog_notatki" placeholder="Dodatkowe obserwacje..."></textarea></div>
+    <button class="btn btn-gold" style="width:100%" onclick='saveDogNotes(${JSON.stringify(d)})'>Zapisz notatki</button>`;
+  openModal('dogModal');
+}
+
+async function saveDogNotes(d) {
+  const r=await apiPost({action:'saveDog',email:d.email,imie_psa:d.imie_psa,rasa:d.rasa,
+    uwagi_behawioralne:document.getElementById('dog_uwagi').value,
+    alergie:document.getElementById('dog_alergie').value,
+    notatki:document.getElementById('dog_notatki').value
+  });
+  if(r.ok){closeModal('dogModal');toast('Notatki zapisane');}
+  else toast('Błąd: '+r.error,'err');
+}
+
+// =====================================================
+// FINANSE
+// =====================================================
+async function loadFinances() {
+  const month=document.getElementById('finMonth').value;
+  const r=await api({action:'getFinances',month});
+  const tbody=document.getElementById('finBody');
+  const sum=document.getElementById('finSummary');
+
+  if(!r.ok){tbody.innerHTML='<tr><td colspan="5" class="empty">Błąd ładowania.</td></tr>';return;}
+
+  const {entries,total}=r.data;
+  const gotowka=entries.filter(e=>e['Metoda']==='gotówka').reduce((a,e)=>a+Number(e['Kwota']),0);
+  const karta=entries.filter(e=>e['Metoda']==='karta').reduce((a,e)=>a+Number(e['Kwota']),0);
+  const przelew=entries.filter(e=>e['Metoda']==='przelew').reduce((a,e)=>a+Number(e['Kwota']),0);
+
+  sum.innerHTML=`
+    <div class="card"><div class="card-title">Łączny przychód</div><div style="font-family:var(--font-h);font-size:2rem;color:var(--gold)">${total} zł</div></div>
+    <div class="card"><div class="card-title">Gotówka / Karta</div><div style="font-size:1rem">${gotowka} zł / ${karta} zł</div></div>
+    <div class="card"><div class="card-title">Liczba płatności</div><div style="font-family:var(--font-h);font-size:2rem">${entries.length}</div></div>`;
+
+  if(!entries.length){tbody.innerHTML='<tr><td colspan="5" class="empty">Brak wpisów.</td></tr>';return;}
+  tbody.innerHTML=entries.map(e=>`
+    <tr>
+      <td>${e['Data']}</td>
+      <td>${e['Opis']}</td>
+      <td><span class="badge" style="background:var(--bg-alt);color:var(--light)">${e['Typ']}</span></td>
+      <td>${e['Metoda']}</td>
+      <td><strong style="color:var(--gold)">${e['Kwota']} zł</strong></td>
+    </tr>`).join('');
+}
+
+function openAddFinanceModal() { openModal('finModal'); }
+
+async function submitFinance() {
+  const r=await apiPost({action:'addFinance',
+    data:document.getElementById('fin_data').value,
+    kwota:document.getElementById('fin_kwota').value,
+    typ:document.getElementById('fin_typ').value,
+    opis:document.getElementById('fin_opis').value,
+    metoda:document.getElementById('fin_metoda').value
+  });
+  if(r.ok){closeModal('finModal');loadFinances();toast('Wpis dodany');}
+  else toast('Błąd: '+r.error,'err');
+}
+
+// =====================================================
+// USTAWIENIA
+// =====================================================
+async function saveApiUrl() {
+  const url=document.getElementById('settingsApiUrl').value.trim();
+  if(!url){return;}
+  API_URL=url;
+  localStorage.setItem('hp_api_url',url);
+  const res=document.getElementById('apiTestResult');
+  res.textContent='Testowanie połączenia...';
+  const r=await api({action:'test'});
+  if(r.ok) res.textContent='✅ Połączenie działa: '+r.data.msg;
+  else res.textContent='❌ Błąd: '+r.error;
+  toast('URL zapisany');
+}
+
+// =====================================================
+// UTILS
+// =====================================================
+function openModal(id){ document.getElementById(id).classList.add('open'); document.body.style.overflow='hidden'; }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); document.body.style.overflow=''; }
+
+function toast(msg,type='ok') {
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.style.background=type==='err'?'#C62828':'var(--dark)';
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+function fmtDate(d) {
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+
+function formatDatePL(ds) {
+  const [y,m,d]=ds.split('-');
+  const months=['stycznia','lutego','marca','kwietnia','maja','czerwca','lipca','sierpnia','września','października','listopada','grudnia'];
+  return Number(d)+' '+months[Number(m)-1]+' '+y;
+}
+
+// Kliknij poza modalem → zamknij
+document.querySelectorAll('.modal-overlay').forEach(el=>{
+  el.addEventListener('click',e=>{ if(e.target===el) el.classList.remove('open'); document.body.style.overflow=''; });
+});
+</script>
+</body>
+</html>
