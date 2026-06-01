@@ -31,7 +31,7 @@ export default function Navbar() {
             src="./zdjecia/logo.png"
             alt="hOla Perros"
             style={{
-              height: scrolled ? '48px' : '80px',
+              height: scrolled ? '48px' : '96px',
               width: 'auto',
               objectFit: 'contain',
               transition: 'height 0.4s ease',
