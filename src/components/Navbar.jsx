@@ -26,17 +26,23 @@ export default function Navbar() {
   const navShadow = scrolled ? '0 2px 24px rgba(184,146,42,0.08)' : 'none';
 
   return (
-    <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, backgroundColor: navBg, borderBottom: '1px solid var(--gold)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '24px 60px', backdropFilter: navBlur, WebkitBackdropFilter: navBlur, boxShadow: navShadow, transition: 'background-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease' }}>
+    <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, backgroundColor: navBg, borderBottom: '1px solid var(--gold)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 60px', backdropFilter: navBlur, WebkitBackdropFilter: navBlur, boxShadow: navShadow, transition: 'background-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease', overflow: 'visible' }}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Link to="/" style={{ textDecoration: 'none' }} onClick={() => setIsOpen(false)}>
           <div style={{
-            width: '80px', height: '80px', borderRadius: '50%',
+            width: scrolled ? '60px' : '110px',
+            height: scrolled ? '60px' : '110px',
+            borderRadius: '50%',
             border: '2.5px solid var(--gold)',
-            boxShadow: '0 0 0 1px rgba(184,146,42,0.2)',
-            overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background: 'transparent'
+            boxShadow: '0 0 0 1px rgba(184,146,42,0.15), 0 4px 16px rgba(184,146,42,0.12)',
+            overflow: 'hidden',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            background: 'rgba(252,251,248,0.95)',
+            transition: 'width 0.4s ease, height 0.4s ease',
+            position: 'relative',
+            zIndex: 101,
           }}>
-            <img src="./zdjecia/logo.png" alt="hOla Perros" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            <img src="./zdjecia/logo.png" alt="hOla Perros" style={{ width: '95%', height: '95%', objectFit: 'contain' }} />
           </div>
         </Link>
       </div>
