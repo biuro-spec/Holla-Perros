@@ -30,13 +30,13 @@ export default function Navbar() {
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Link to="/" style={{ textDecoration: 'none' }} onClick={() => setIsOpen(false)}>
           <div style={{
-            width: '54px', height: '54px', borderRadius: '50%',
+            width: '60px', height: '60px', borderRadius: '50%',
             border: '2.5px solid var(--gold)',
             boxShadow: '0 0 0 1px rgba(184,146,42,0.2)',
             overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background: '#1a1008'
+            background: 'transparent'
           }}>
-            <img src="./zdjecia/logo.png" alt="hOla Perros" style={{ width: '80%', height: '80%', objectFit: 'contain' }} />
+            <img src="./zdjecia/logo.png" alt="hOla Perros" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
         </Link>
       </div>
