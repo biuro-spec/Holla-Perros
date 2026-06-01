@@ -30,6 +30,7 @@ export default function Navbar() {
           <img
             src="./zdjecia/logo.png"
             alt="hOla Perros"
+            className="nav-logo-img"
             style={{
               height: scrolled ? '48px' : '96px',
               width: 'auto',

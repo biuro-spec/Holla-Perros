@@ -387,8 +387,13 @@ html, body {
 
   /* Override inline section paddings */
   .hero-section {
-    padding: 90px 24px 60px !important;
+    padding: 130px 24px 60px !important;
     min-height: auto !important;
+  }
+
+  /* Logo smaller on mobile */
+  .nav-logo-img {
+    height: 60px !important;
   }
   section[id] {
     padding: 80px 0 !important;
