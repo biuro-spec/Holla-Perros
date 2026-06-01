@@ -43,8 +43,8 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Toggle */}
-      <div className="mobile-menu-btn" onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? <X size={36} color="var(--text-dark)" /> : <PawPrint size={36} color="var(--pink)" />}
+      <div className="mobile-menu-btn hamburger-btn" onClick={() => setIsOpen(!isOpen)}>
+        {isOpen ? <X size={38} color="var(--text-dark)" /> : <PawPrint size={44} color="var(--pink)" />}
       </div>
 
       {/* Mobile Dropdown */}
