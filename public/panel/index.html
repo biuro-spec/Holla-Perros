@@ -25,11 +25,14 @@ body{font-family:var(--font-b);background:var(--bg);color:var(--dark);min-height
 .pin-display{display:flex;gap:8px;justify-content:center;margin-bottom:28px}
 .pin-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--border);background:transparent;transition:all .2s}
 .pin-dot.filled{background:var(--gold);border-color:var(--gold)}
-.pin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:220px;margin:0 auto 16px}
-.pin-btn{padding:16px;border:2px solid var(--border);border-radius:6px;background:var(--white);font-family:var(--font-b);font-size:1.2rem;font-weight:600;cursor:pointer;transition:all .2s}
+.pin-mode-btn{padding:6px 14px;border:2px solid var(--border);border-radius:20px;background:var(--white);font-family:var(--font-b);font-size:0.8rem;font-weight:600;cursor:pointer;transition:all .2s;color:var(--light)}
+.pin-mode-btn.active{border-color:var(--gold);background:var(--gold);color:var(--white)}
+.pin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:240px;margin:0 auto 16px}
+.pin-btn{padding:14px 8px;border:2px solid var(--border);border-radius:6px;background:var(--white);font-family:var(--font-b);font-size:1.1rem;font-weight:600;cursor:pointer;transition:all .2s;color:var(--dark)}
 .pin-btn:hover{border-color:var(--gold);background:var(--gold-l)}
 .pin-btn:active{transform:scale(0.95)}
-.pin-btn.del{font-size:1rem;color:var(--light)}
+.pin-btn.del{font-size:0.9rem;color:var(--light)}
+.pin-btn.wide{grid-column:span 1;font-size:0.78rem}
 .pin-err{color:#C0392B;font-size:0.85rem;min-height:20px;margin-top:8px}
 
 /* LAYOUT */
@@ -194,20 +197,12 @@ tr:last-child td{border:none}
       <div class="pin-dot" id="pd4"></div><div class="pin-dot" id="pd5"></div>
       <div class="pin-dot" id="pd6"></div><div class="pin-dot" id="pd7"></div>
     </div>
-    <div class="pin-grid">
-      <button class="pin-btn" onclick="pinPress('1')">1</button>
-      <button class="pin-btn" onclick="pinPress('2')">2</button>
-      <button class="pin-btn" onclick="pinPress('3')">3</button>
-      <button class="pin-btn" onclick="pinPress('4')">4</button>
-      <button class="pin-btn" onclick="pinPress('5')">5</button>
-      <button class="pin-btn" onclick="pinPress('6')">6</button>
-      <button class="pin-btn" onclick="pinPress('7')">7</button>
-      <button class="pin-btn" onclick="pinPress('8')">8</button>
-      <button class="pin-btn" onclick="pinPress('9')">9</button>
-      <button class="pin-btn" onclick="pinClear()" style="font-size:0.85rem">Wyczyść</button>
-      <button class="pin-btn" onclick="pinPress('0')">0</button>
-      <button class="pin-btn del" onclick="pinDel()">⌫</button>
+    <div style="display:flex;gap:6px;justify-content:center;margin-bottom:10px">
+      <button class="pin-mode-btn active" id="mode123" onclick="setMode('123')">123</button>
+      <button class="pin-mode-btn" id="modeABC" onclick="setMode('ABC')">ABC</button>
+      <button class="pin-mode-btn" id="modeSYM" onclick="setMode('!@#')">!@#</button>
     </div>
+    <div class="pin-grid" id="pinGrid"></div>
     <div class="pin-err" id="pinErr"></div>
   </div>
 </div>
@@ -440,6 +435,35 @@ const S = {
 // LOGIN / PIN
 // =====================================================
 let pinInput = '';
+let pinMode = '123';
+
+const PIN_KEYS = {
+  '123': ['1','2','3','4','5','6','7','8','9','CLR','0','⌫'],
+  'ABC': ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','R','S','T','U','W','X','Y','Z','CLR','⌫'],
+  '!@#': ['!','@','#','$','%','&','*','-','_','+','=','?','CLR','⌫']
+};
+
+function setMode(mode) {
+  pinMode = mode;
+  document.querySelectorAll('.pin-mode-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('mode'+mode.replace('!@#','SYM')).classList.add('active');
+  renderPinGrid();
+}
+
+function renderPinGrid() {
+  const grid = document.getElementById('pinGrid');
+  grid.innerHTML = '';
+  const keys = PIN_KEYS[pinMode];
+  keys.forEach(k => {
+    const btn = document.createElement('button');
+    btn.className = 'pin-btn' + (k==='CLR'||k==='⌫'?' wide':'');
+    btn.textContent = k;
+    if (k === '⌫') btn.onclick = pinDel;
+    else if (k === 'CLR') btn.onclick = pinClear;
+    else btn.onclick = () => pinPress(k);
+    grid.appendChild(btn);
+  });
+}
 
 function pinPress(d) {
   if (pinInput.length >= 8) return;
@@ -476,6 +500,7 @@ function logout() {
 
 // Auto-login jeśli sesja aktywna
 window.addEventListener('DOMContentLoaded', () => {
+  renderPinGrid();
   if (sessionStorage.getItem('hp_auth')==='1') {
     document.getElementById('loginScreen').style.display='none';
     document.getElementById('appScreen').style.display='block';
