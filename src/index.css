@@ -373,7 +373,7 @@ html, body {
 /* Responsywność */
 @media (max-width: 1024px) {
   nav {
-    padding: 16px 24px !important;
+    padding: 16px 16px !important;
   }
   .navbar-links {
     display: none !important;
@@ -391,9 +391,10 @@ html, body {
     min-height: auto !important;
   }
 
-  /* Logo smaller on mobile */
+  /* Logo smaller on mobile, closer to left edge */
   .nav-logo-img {
     height: 60px !important;
+    margin-left: 0 !important;
   }
   section[id] {
     padding: 80px 0 !important;
