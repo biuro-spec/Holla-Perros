@@ -327,7 +327,7 @@ function api(params) {
 function apiPost(body) {
   return fetch(API_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'text/plain' },
     body: JSON.stringify(body)
   }).then(r => r.json()).catch(() => ({ ok:false, error:'Brak połączenia z serwerem' }));
 }

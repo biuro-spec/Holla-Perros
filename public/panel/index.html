@@ -226,7 +226,7 @@ tr:last-child td{border:none}
 
     <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
-      <div class="page-title">Dzień dobry, Olo! 🐾</div>
+      <div class="page-title">Dzień dobry, Olu! 🐾</div>
       <div class="page-sub" id="dashDate"></div>
       <div class="stats-grid" id="statsGrid">
         <div class="stat-card"><div class="stat-val" id="stat-dzisiaj">—</div><div class="stat-label">Dziś wizyty</div></div>
@@ -502,7 +502,7 @@ function api(params) {
   return fetch(API_URL+'?'+new URLSearchParams(params)).then(r=>r.json()).catch(()=>({ok:false,error:'Brak połączenia'}));
 }
 function apiPost(body) {
-  return fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(r=>r.json()).catch(()=>({ok:false,error:'Brak połączenia'}));
+  return fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(body)}).then(r=>r.json()).catch(()=>({ok:false,error:'Brak połączenia'}));
 }
 
 // =====================================================
@@ -748,7 +748,28 @@ async function updateRes(id, field, val) {
   else toast('Błąd: '+r.error,'err');
 }
 
+const USLUGI_PANEL = [
+  { nazwa:'Strzyżenie – Rasy mini',     cena:180 },
+  { nazwa:'Strzyżenie – Rasy małe',     cena:195 },
+  { nazwa:'Strzyżenie – Rasy średnie',  cena:220 },
+  { nazwa:'Stylizacja – Rasy mini',     cena:175 },
+  { nazwa:'Stylizacja – Rasy małe',     cena:190 },
+  { nazwa:'Stylizacja – Rasy średnie',  cena:230 },
+  { nazwa:'Kąpiel & SPA – Rasy mini',   cena:130 },
+  { nazwa:'Kąpiel & SPA – Rasy małe',   cena:150 },
+  { nazwa:'Kąpiel & SPA – Rasy średnie',cena:170 },
+  { nazwa:'Czyszczenie zębów',          cena:190 },
+  { nazwa:'Obcinanie pazurków',         cena:35  },
+  { nazwa:'Czyszczenie uszu',           cena:25  },
+  { nazwa:'Czyszczenie okolic oczu',    cena:25  },
+  { nazwa:'Pakiet Élite Premium (+50 zł do ceny bazowej)', cena:50 },
+];
+
 function openAddModal() {
+  const opts = USLUGI_PANEL.map(u =>
+    `<option value="${u.nazwa}" data-cena="${u.cena}">${u.nazwa} — ${u.cena} zł</option>`
+  ).join('');
+
   document.getElementById('resModalTitle').textContent='Nowa rezerwacja';
   document.getElementById('resModalBody').innerHTML=`
     <div class="form-row">
@@ -757,8 +778,15 @@ function openAddModal() {
         <select id="add_godz"><option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option></select>
       </div>
     </div>
-    <div class="form-group"><label>Usługa</label><input type="text" id="add_usl" placeholder="np. Strzyżenie – Rasy mini"></div>
-    <div class="form-group"><label>Cena (zł)</label><input type="number" id="add_cena"></div>
+    <div class="form-group"><label>Usługa</label>
+      <select id="add_usl" onchange="onUslugaChange(this)">
+        <option value="">— wybierz usługę —</option>
+        ${opts}
+      </select>
+    </div>
+    <div class="form-group"><label>Cena (zł) <span style="color:var(--light);font-weight:400;text-transform:none;letter-spacing:0">— możesz ręcznie zmienić</span></label>
+      <input type="number" id="add_cena" placeholder="0">
+    </div>
     <div class="form-row">
       <div class="form-group"><label>Imię klienta</label><input type="text" id="add_imie"></div>
       <div class="form-group"><label>Telefon</label><input type="tel" id="add_tel"></div>
@@ -773,12 +801,18 @@ function openAddModal() {
   openModal('resModal');
 }
 
+function onUslugaChange(sel) {
+  const opt = sel.options[sel.selectedIndex];
+  const cena = opt.dataset.cena;
+  if (cena) document.getElementById('add_cena').value = cena;
+}
+
 async function submitAddRes() {
   const payload={
     action:'createReservation',
     data:document.getElementById('add_data').value,
     godzina:document.getElementById('add_godz').value,
-    usluga:document.getElementById('add_usl').value,
+    usluga:document.getElementById('add_usl').value || '—',
     cena:document.getElementById('add_cena').value,
     imie_klienta:document.getElementById('add_imie').value,
     telefon:document.getElementById('add_tel').value,
