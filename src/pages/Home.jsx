@@ -150,8 +150,11 @@ export default function Home() {
       </section>
 
       {/* Cennik & Pakiety */}
-      <section id="cennik" style={{ padding: '120px 0', backgroundColor: 'var(--bg-color-alt)' }}>
-        <div className="container" style={{ maxWidth: '900px' }}>
+      <section id="cennik" style={{ padding: '120px 0', backgroundColor: 'var(--bg-color-alt)', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '70%', maxWidth: '600px', opacity: 0.06, pointerEvents: 'none', zIndex: 0 }}>
+          <img src="./zdjecia/lapka.png" alt="" style={{ width: '100%', height: 'auto' }} />
+        </div>
+        <div className="container" style={{ maxWidth: '900px', position: 'relative', zIndex: 1 }}>
           <div style={{ textAlign: 'center', marginBottom: '30px' }}>
             <h2 style={{ fontSize: '4rem', fontWeight: 400, marginBottom: '24px' }}>Cennik & <i className="text-italic text-gold">Pakiety</i></h2>
             <div style={{ width: '1px', height: '30px', backgroundColor: 'var(--border-color)', margin: '0 auto' }}></div>
