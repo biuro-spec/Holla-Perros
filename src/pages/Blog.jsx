@@ -14,7 +14,7 @@ export default function Blog() {
         <div style={{ textAlign: 'center', marginBottom: '80px' }}>
           <p style={{ fontSize: '0.9rem', color: 'var(--gold)', marginBottom: '16px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '2px' }}>Edukacja i Wiedza</p>
           <h1 style={{ fontSize: '4.5rem', fontWeight: 400, marginBottom: '24px' }}>Magazyn <i className="text-italic text-pink">hOla Perros</i></h1>
-          <div style={{ width: '1px', height: '60px', backgroundColor: 'var(--border-color)', margin: '0 auto' }}></div>
+          <div style={{ width: '120px', height: '3px', backgroundColor: 'var(--gold)', margin: '0 auto', borderRadius: '2px' }}></div>
         </div>
 
         <div className="blog-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '40px' }}>
