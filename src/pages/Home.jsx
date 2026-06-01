@@ -43,7 +43,7 @@ export default function Home() {
               Jako profesjonalny <strong style={{ color: 'var(--text-dark)', fontWeight: 500 }}>fryzjer dla psów</strong>, zapraszam na luksusowe strzyżenie i SPA w bezstresowej atmosferze. Zapewniamy cierpliwość i miłość, aby Twój pupil wyglądał i czuł się doskonale.
             </p>
             <div style={{ display: 'flex', gap: '16px' }}>
-              <a href="./rezerwacja/" style={{ textDecoration: 'none' }}>
+              <a href="tel:+48512501558" style={{ textDecoration: 'none' }}>
                 <button className="btn-primary">
                   Zarezerwuj Termin
                 </button>
