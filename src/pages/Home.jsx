@@ -37,7 +37,7 @@ export default function Home() {
               Ekskluzywny Groomer w Raciborzu
             </p>
             <h1 style={{ fontSize: '5.5rem', fontWeight: 400, lineHeight: 0.95, marginBottom: '30px', color: 'var(--text-dark)' }}>
-              Cięcie na <br/><i className="text-italic">miarę</i> psich <br/>marzeń.
+              Cięcie na <br className="hero-br-desktop"/><i className="text-italic">miarę</i> psich <br className="hero-br-desktop"/>marzeń.
             </h1>
             <p style={{ fontSize: '1.2rem', color: 'var(--text-light)', marginBottom: '50px', fontWeight: 400, lineHeight: 1.6, maxWidth: '450px' }}>
               Jako profesjonalny <strong style={{ color: 'var(--text-dark)', fontWeight: 500 }}>fryzjer dla psów</strong>, zapraszam na luksusowe strzyżenie i SPA w bezstresowej atmosferze. Zapewniamy cierpliwość i miłość, aby Twój pupil wyglądał i czuł się doskonale.

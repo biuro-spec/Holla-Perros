@@ -391,6 +391,9 @@ html, body {
     min-height: auto !important;
   }
 
+  /* Hero title: 2 lines on mobile */
+  .hero-br-desktop { display: none; }
+
   /* Logo smaller on mobile, closer to left edge */
   .nav-logo-img {
     height: 60px !important;
