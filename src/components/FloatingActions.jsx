@@ -12,7 +12,7 @@ export default function FloatingActions() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const toggleVisibility = () => setIsVisible(window.scrollY > 300);
+    const toggleVisibility = () => setIsVisible(window.scrollY > 100);
     window.addEventListener('scroll', toggleVisibility, { passive: true });
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
