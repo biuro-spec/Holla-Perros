@@ -46,7 +46,7 @@ export default function Navbar() {
       </div>
 
       {/* Desktop Links */}
-      <div className="navbar-links" style={{ display: 'flex', gap: '32px', alignItems: 'center', opacity: scrolled ? 1 : 0, pointerEvents: scrolled ? 'auto' : 'none', transition: 'opacity 0.4s ease' }}>
+      <div className="navbar-links" style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
         <a href="#omnie" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>O mnie</a>
         <a href="#uslugi" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Usługi</a>
         <a href="#cennik" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Cennik</a>
