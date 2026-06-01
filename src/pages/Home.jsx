@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="hero-section" style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', padding: '120px 60px 40px', backgroundColor: 'var(--bg-color)', overflow: 'hidden' }}>
+      <section className="hero-section" style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', padding: '160px 60px 40px', backgroundColor: 'var(--bg-color)', overflow: 'hidden' }}>
         <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center', width: '100%' }}>
           <motion.div 
             initial="hidden" 
