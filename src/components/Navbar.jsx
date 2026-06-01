@@ -30,7 +30,7 @@ export default function Navbar() {
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Link to="/" style={{ textDecoration: 'none' }} onClick={() => setIsOpen(false)}>
           <div style={{
-            width: '60px', height: '60px', borderRadius: '50%',
+            width: '80px', height: '80px', borderRadius: '50%',
             border: '2.5px solid var(--gold)',
             boxShadow: '0 0 0 1px rgba(184,146,42,0.2)',
             overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center',
