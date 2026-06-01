@@ -158,65 +158,90 @@ export default function Home() {
           </div>
 
           <div style={{ marginBottom: '60px' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '40px' }}>
               {/* STRZYŻENIE */}
               <div>
                 <h3 style={{ fontSize: '2rem', fontWeight: 400, marginBottom: '24px', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px', letterSpacing: '2px', textTransform: 'uppercase' }}>Strzyżenie</h3>
-                
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                    <div style={{ paddingRight: '20px' }}>
-                      <h4 style={{ fontSize: '1.4rem', fontWeight: 500, letterSpacing: '1px', marginBottom: '8px' }}>Rasy mini</h4>
-                      <p style={{ fontSize: '0.95rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Yorkshire terrier, Maltańczyk, Bolończyk, Maltipoo, Papillon)</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+                  {[
+                    { rasa: 'Rasy mini', przyklad: 'Yorkshire terrier, Maltańczyk, Bolończyk, Maltipoo, Papillon', cena: '160–200 zł' },
+                    { rasa: 'Rasy małe', przyklad: 'Shih-tzu, West Highland White Terrier, Bichon Frise', cena: '170–220 zł' },
+                    { rasa: 'Rasy średnie', przyklad: 'Pudel, Goldendoodle', cena: '190–250 zł' },
+                  ].map(r => (
+                    <div key={r.rasa} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                      <div style={{ paddingRight: '16px' }}>
+                        <h4 style={{ fontSize: '1.3rem', fontWeight: 500, marginBottom: '6px' }}>{r.rasa}</h4>
+                        <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. {r.przyklad})</p>
+                      </div>
+                      <div style={{ fontSize: '1.2rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>{r.cena}</div>
                     </div>
-                    <div style={{ fontSize: '1.3rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>160-200 zł</div>
-                  </div>
-                  
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                    <div style={{ paddingRight: '20px' }}>
-                      <h4 style={{ fontSize: '1.4rem', fontWeight: 500, letterSpacing: '1px', marginBottom: '8px' }}>Rasy małe</h4>
-                      <p style={{ fontSize: '0.95rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Shih-tzu, west highland white terrier, Bichon frise)</p>
-                    </div>
-                    <div style={{ fontSize: '1.3rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>170-220 zł</div>
-                  </div>
+                  ))}
+                </div>
+              </div>
 
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                    <div style={{ paddingRight: '20px' }}>
-                      <h4 style={{ fontSize: '1.4rem', fontWeight: 500, letterSpacing: '1px', marginBottom: '8px' }}>Rasy średnie</h4>
-                      <p style={{ fontSize: '0.95rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Pudel, Goldendoodle)</p>
+              {/* TRYMOWANIE */}
+              <div>
+                <h3 style={{ fontSize: '2rem', fontWeight: 400, marginBottom: '24px', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px', letterSpacing: '2px', textTransform: 'uppercase' }}>Trymowanie</h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+                  {[
+                    { rasa: 'Rasy małe', przyklad: 'Jack Russell Terrier, Parson Russell Terrier, Sznaucer miniaturowy, Jamnik szorstkowłosy', cena: '190–290 zł' },
+                    { rasa: 'Rasy średnie', przyklad: 'Cocker Spaniel, Sznaucer średni, West Highland White Terrier', cena: '200–330 zł' },
+                    { rasa: 'Rasy duże', przyklad: 'Sznaucer olbrzym', cena: '230–390 zł' },
+                  ].map(r => (
+                    <div key={r.rasa} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                      <div style={{ paddingRight: '16px' }}>
+                        <h4 style={{ fontSize: '1.3rem', fontWeight: 500, marginBottom: '6px' }}>{r.rasa}</h4>
+                        <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. {r.przyklad})</p>
+                      </div>
+                      <div style={{ fontSize: '1.2rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>{r.cena}</div>
                     </div>
-                    <div style={{ fontSize: '1.3rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>190-250 zł</div>
-                  </div>
+                  ))}
                 </div>
               </div>
 
               {/* STYLIZACJA/PIELĘGNACJA */}
               <div>
                 <h3 style={{ fontSize: '2rem', fontWeight: 400, marginBottom: '24px', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px', letterSpacing: '2px', textTransform: 'uppercase' }}>Stylizacja/Pielęgnacja</h3>
-                
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                    <div style={{ paddingRight: '20px' }}>
-                      <h4 style={{ fontSize: '1.4rem', fontWeight: 500, letterSpacing: '1px', marginBottom: '8px' }}>Rasy mini</h4>
-                      <p style={{ fontSize: '0.95rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Szpic miniaturowy, Chihuahua, Pekińczyk, Chart włoski)</p>
+                    <div style={{ paddingRight: '16px' }}>
+                      <h4 style={{ fontSize: '1.3rem', fontWeight: 500, marginBottom: '6px' }}>Rasy mini</h4>
+                      <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Szpic miniaturowy, Chihuahua, Pekińczyk, Chart włoski)</p>
                     </div>
-                    <div style={{ fontSize: '1.3rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>150-200 zł</div>
-                  </div>
-                  
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                    <div style={{ paddingRight: '20px' }}>
-                      <h4 style={{ fontSize: '1.4rem', fontWeight: 500, letterSpacing: '1px', marginBottom: '8px' }}>Rasy małe</h4>
-                      <p style={{ fontSize: '0.95rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Jamnik, Mops, Boston terrier)</p>
-                    </div>
-                    <div style={{ fontSize: '1.3rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>160-220 zł</div>
+                    <div style={{ fontSize: '1.2rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>150–200 zł</div>
                   </div>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                    <div style={{ paddingRight: '20px' }}>
-                      <h4 style={{ fontSize: '1.4rem', fontWeight: 500, letterSpacing: '1px', marginBottom: '8px' }}>Rasy średnie</h4>
-                      <p style={{ fontSize: '0.95rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Beagle, Buldog francuski, Shiba Inu)</p>
+                    <div style={{ paddingRight: '16px' }}>
+                      <h4 style={{ fontSize: '1.3rem', fontWeight: 500, marginBottom: '6px' }}>Rasy małe</h4>
+                      <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Jamnik, Mops, Boston terrier)</p>
                     </div>
-                    <div style={{ fontSize: '1.3rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>180-280 zł</div>
+                    <div style={{ fontSize: '1.2rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>160–220 zł</div>
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                    <div style={{ paddingRight: '16px' }}>
+                      <h4 style={{ fontSize: '1.3rem', fontWeight: 500, marginBottom: '6px' }}>Rasy średnie</h4>
+                      <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Beagle, Buldog francuski, Shiba Inu, Cavalier, Owczarek Szetlandzki)</p>
+                    </div>
+                    <div style={{ fontSize: '1.2rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>180–280 zł</div>
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                    <div style={{ paddingRight: '16px' }}>
+                      <h4 style={{ fontSize: '1.3rem', fontWeight: 500, marginBottom: '6px' }}>Rasy duże</h4>
+                      <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Border Collie, Owczarek australijski, Owczarek niemiecki, Golden retriever, Labrador, Husky)</p>
+                    </div>
+                    <div style={{ fontSize: '1.2rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>190–390 zł</div>
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                    <div style={{ paddingRight: '16px' }}>
+                      <h4 style={{ fontSize: '1.3rem', fontWeight: 500, marginBottom: '6px' }}>Rasy olbrzymie</h4>
+                      <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Berneński pies pasterski, Malamut, Akita, Nowofundland)</p>
+                    </div>
+                    <div style={{ fontSize: '1.2rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>450–800 zł</div>
                   </div>
                 </div>
               </div>
