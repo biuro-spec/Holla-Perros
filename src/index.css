@@ -274,6 +274,14 @@ html, body {
   color: var(--pink);
 }
 
+/* Footer social hover */
+.footer-social:hover {
+  background-color: var(--gold);
+  border-color: var(--gold) !important;
+  color: var(--text-dark) !important;
+  transform: translateY(-3px);
+}
+
 /* Navbar links hover */
 .nav-link {
   transition: color 0.25s ease, text-shadow 0.25s ease;
@@ -483,6 +491,12 @@ html, body {
   .contact-channels {
     grid-template-columns: 1fr !important;
     max-width: 360px !important;
+  }
+
+  /* Footer info → kolumna */
+  .footer-info {
+    flex-direction: column;
+    gap: 16px !important;
   }
 
   /* Location grid (Jak do mnie trafić + mapa) */
