@@ -2,6 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Phone, MapPin, Camera, Sparkles, MessageCircle } from 'lucide-react';
 
+const InstagramIcon = ({ size = 26, color = 'currentColor' }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+  </svg>
+);
+
 const fadeIn = {
   hidden: { opacity: 0, y: 40 },
   visible: { 
@@ -43,7 +51,7 @@ export default function Home() {
               Jako profesjonalny <strong style={{ color: 'var(--text-dark)', fontWeight: 500 }}>fryzjer dla psów</strong>, zapraszam na luksusowe strzyżenie i SPA w bezstresowej atmosferze. Zapewniamy cierpliwość i miłość, aby Twój pupil wyglądał i czuł się doskonale.
             </p>
             <div style={{ display: 'flex', gap: '16px' }}>
-              <a href="tel:+48512501558" style={{ textDecoration: 'none' }}>
+              <a href="#kontakt" style={{ textDecoration: 'none' }}>
                 <button className="btn-primary">
                   Zarezerwuj Termin
                 </button>
@@ -357,6 +365,57 @@ export default function Home() {
       {/* Kontakt */}
       <section id="kontakt" style={{ padding: '120px 0', borderTop: '1px solid var(--border-color)' }}>
         <div className="container">
+
+          {/* Umów wizytę – 3 kanały */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={fadeIn}
+            style={{ textAlign: 'center', marginBottom: '80px' }}
+          >
+            <p style={{ fontSize: '0.9rem', color: 'var(--gold)', marginBottom: '16px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '2px' }}>Rezerwacja</p>
+            <h2 style={{ fontSize: '3.5rem', fontWeight: 400, marginBottom: '20px' }}>Umów wizytę <i className="text-italic text-pink">dla pupila</i></h2>
+            <p style={{ color: 'var(--text-light)', fontSize: '1.15rem', maxWidth: '560px', margin: '0 auto 48px', lineHeight: 1.7 }}>
+              Wybierz wygodny dla Ciebie sposób kontaktu. Zadzwoń, napisz na WhatsApp lub Instagramie — chętnie dobiorę termin i odpowiem na wszystkie pytania.
+            </p>
+
+            <div className="contact-channels" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px', maxWidth: '760px', margin: '0 auto' }}>
+              {/* Telefon */}
+              <a href="tel:+48512501558" style={{ textDecoration: 'none' }}>
+                <div className="channel-card editorial-card" style={{ padding: '36px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '14px', height: '100%' }}>
+                  <div style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: 'var(--gold-l, rgba(184,146,42,0.12))', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Phone size={26} className="text-gold" />
+                  </div>
+                  <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', color: 'var(--text-dark)' }}>Zadzwoń</span>
+                  <span style={{ fontSize: '0.95rem', color: 'var(--text-light)' }}>512 501 558</span>
+                </div>
+              </a>
+
+              {/* WhatsApp */}
+              <a href="https://wa.me/48512501558?text=Dzie%C5%84%20dobry!%20Chcia%C5%82(a)bym%20um%C3%B3wi%C4%87%20wizyt%C4%99%20dla%20mojego%20psa%20%F0%9F%90%BE" target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
+                <div className="channel-card editorial-card" style={{ padding: '36px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '14px', height: '100%' }}>
+                  <div style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: 'rgba(37,211,102,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <MessageCircle size={26} style={{ color: '#25D366' }} />
+                  </div>
+                  <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', color: 'var(--text-dark)' }}>WhatsApp</span>
+                  <span style={{ fontSize: '0.95rem', color: 'var(--text-light)' }}>Napisz wiadomość</span>
+                </div>
+              </a>
+
+              {/* Instagram */}
+              <a href="https://www.instagram.com/holaperros_salon" target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
+                <div className="channel-card editorial-card" style={{ padding: '36px 24px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '14px', height: '100%' }}>
+                  <div style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: 'rgba(228,159,179,0.18)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <InstagramIcon size={26} color="var(--pink)" />
+                  </div>
+                  <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', color: 'var(--text-dark)' }}>Instagram</span>
+                  <span style={{ fontSize: '0.95rem', color: 'var(--text-light)' }}>@holaperros_salon</span>
+                </div>
+              </a>
+            </div>
+          </motion.div>
+
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center', marginBottom: '60px' }}>
             <div>
               <p style={{ fontSize: '0.9rem', color: 'var(--gold)', marginBottom: '16px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '2px' }}>Zapraszam</p>

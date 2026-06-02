@@ -479,6 +479,12 @@ html, body {
     text-align: center;
   }
 
+  /* Kanały kontaktu → kolumna */
+  .contact-channels {
+    grid-template-columns: 1fr !important;
+    max-width: 360px !important;
+  }
+
   /* Location grid (Jak do mnie trafić + mapa) */
   .location-grid {
     grid-template-columns: 1fr !important;
