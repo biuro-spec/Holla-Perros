@@ -57,14 +57,14 @@ export default function Footer() {
       </div>
 
       {/* Dolny pasek */}
-      <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', padding: '24px 40px' }}>
+      <div style={{ backgroundColor: 'var(--gold)', padding: '20px 40px' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
-          <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', margin: 0 }}>
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-dark)', margin: 0, fontWeight: 500 }}>
             © 2026 hOla Perros. Wszelkie prawa zastrzeżone.
           </p>
           <div style={{ display: 'flex', gap: '24px' }}>
-            <Link to="/regulamin" style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>Regulamin</Link>
-            <Link to="/blog" style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', textDecoration: 'none' }}>Blog</Link>
+            <Link to="/regulamin" style={{ fontSize: '0.85rem', color: 'var(--text-dark)', textDecoration: 'none', fontWeight: 500 }}>Regulamin</Link>
+            <Link to="/blog" style={{ fontSize: '0.85rem', color: 'var(--text-dark)', textDecoration: 'none', fontWeight: 500 }}>Blog</Link>
           </div>
         </div>
       </div>
