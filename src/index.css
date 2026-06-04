@@ -487,6 +487,17 @@ html, body {
     text-align: center;
   }
 
+  /* Sklepik → kolumna */
+  .sklepik-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+    text-align: center;
+  }
+  .sklepik-grid .btn-primary {
+    width: 100%;
+    justify-content: center;
+  }
+
   /* Kanały kontaktu → kolumna */
   .contact-channels {
     grid-template-columns: 1fr !important;

@@ -362,6 +362,63 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Sklepik */}
+      <section id="sklepik" style={{ padding: '120px 0', position: 'relative', overflow: 'hidden' }}>
+        <div className="container">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeIn}
+            className="sklepik-grid"
+            style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }}
+          >
+            {/* Zdjęcie */}
+            <div className="editorial-image-frame" style={{ display: 'flex', justifyContent: 'center' }}>
+              <img
+                src="./zdjecia/sklepik/obroza-zawieszka.webp"
+                alt="Ręcznie zdobione obroże i złote zawieszki z grawerem – hOla Perros"
+                style={{ width: '100%', maxWidth: '440px', aspectRatio: '9/11', objectFit: 'cover', borderRadius: '6px', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
+              />
+            </div>
+
+            {/* Treść */}
+            <div>
+              <p style={{ fontSize: '0.9rem', color: 'var(--gold)', marginBottom: '16px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '2px' }}>Butik hOla Perros</p>
+              <h2 style={{ fontSize: '3.8rem', fontWeight: 400, marginBottom: '24px', lineHeight: 1.05 }}>Sklepik dla <i className="text-italic text-pink">Pupili</i></h2>
+              <p style={{ fontSize: '1.15rem', color: 'var(--text-light)', lineHeight: 1.8, marginBottom: '20px' }}>
+                W moim salonie znajdziesz <strong style={{ color: 'var(--text-dark)', fontWeight: 500 }}>ręcznie zdobione obroże</strong> oraz eleganckie, <strong style={{ color: 'var(--text-dark)', fontWeight: 500 }}>złote zawieszki w kształcie kości</strong>. Do każdej zawieszki wykonuję <strong style={{ color: 'var(--text-dark)', fontWeight: 500 }}>grawer z imieniem pieska i numerem telefonu</strong> właściciela — całkowicie gratis.
+              </p>
+
+              {/* Cennik sklepiku */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', margin: '32px 0' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '16px 0', borderBottom: '1px solid var(--border-color)' }}>
+                  <span style={{ fontSize: '1.2rem', fontFamily: 'var(--font-heading)' }}>Obroża zdobiona ręcznie</span>
+                  <span style={{ fontSize: '1.3rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>119 zł</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '16px 0', borderBottom: '1px solid var(--border-color)' }}>
+                  <span style={{ fontSize: '1.2rem', fontFamily: 'var(--font-heading)' }}>Zawieszka z grawerem</span>
+                  <span style={{ fontSize: '1.3rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>39 zł</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', padding: '16px 0', borderBottom: '2px solid var(--gold)' }}>
+                  <span style={{ fontSize: '1.2rem', fontFamily: 'var(--font-heading)' }}>Komplet <span style={{ color: 'var(--pink)', fontStyle: 'italic' }}>(obroża + zawieszka)</span></span>
+                  <span style={{ fontSize: '1.3rem', color: 'var(--gold)', whiteSpace: 'nowrap', fontWeight: 600 }}>139 zł</span>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--pink)', fontWeight: 500, marginBottom: '28px' }}>
+                <Sparkles size={18} className="text-gold" />
+                <span style={{ color: 'var(--text-dark)', fontSize: '0.98rem' }}>Grawer z imieniem i numerem telefonu — <i className="text-italic text-gold">gratis</i></span>
+              </div>
+
+              <a href="#kontakt" style={{ textDecoration: 'none' }}>
+                <button className="btn-primary">Zapytaj o dostępne wzory</button>
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Kontakt */}
       <section id="kontakt" style={{ padding: '120px 0', borderTop: '1px solid var(--border-color)' }}>
         <div className="container">
@@ -443,6 +500,14 @@ export default function Home() {
                   <div style={{ textAlign: 'left' }}>
                     <p style={{ fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px', color: 'var(--text-dark)' }}>WhatsApp</p>
                     <a href="https://wa.me/48512501558" target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: 'var(--text-light)', fontSize: '1.05rem' }}>+48 512 501 558</a>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+                  <MapPin size={22} className="text-gold" style={{ flexShrink: 0, marginTop: '3px' }}/>
+                  <div style={{ textAlign: 'left' }}>
+                    <p style={{ fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px', color: 'var(--text-dark)' }}>Google</p>
+                    <a href="https://share.google/lOQLEq6X5CbfFVTMX" target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: 'var(--text-light)', fontSize: '1.05rem' }}>Zobacz wizytówkę i opinie</a>
                   </div>
                 </div>
               </div>
