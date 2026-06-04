@@ -1023,14 +1023,12 @@ function resizeImage(file, maxW, quality) {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-      // Watermark w prawym dolnym rogu
+      // Watermark (logo + podkładka) w prawym dolnym rogu
       if (wm) {
         const wmW = canvas.width * 0.34;
         const wmH = wmW * (wm.height / wm.width);
-        const margin = canvas.width * 0.025;
-        ctx.globalAlpha = 0.85;
+        const margin = canvas.width * 0.028;
         ctx.drawImage(wm, canvas.width - wmW - margin, canvas.height - wmH - margin, wmW, wmH);
-        ctx.globalAlpha = 1;
       }
 
       resolve(canvas.toDataURL('image/jpeg', quality));
