@@ -28,7 +28,7 @@ export default function Navbar() {
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Link to="/" style={{ textDecoration: 'none' }} onClick={() => setIsOpen(false)}>
           <img
-            src="./zdjecia/logo.png"
+            src="./zdjecia/logo.webp"
             alt="hOla Perros"
             className="nav-logo-img"
             style={{

@@ -6,7 +6,7 @@ const API_URL = 'https://script.google.com/macros/s/AKfycbwLo4yzCpgDPYx_d9Pxy3Pm
 
 // Wbudowane przykłady (zawsze widoczne)
 const SEED = [
-  { ID: 'seed-1', Url: './zdjecia/metamorfozy/meta-golden.webp',  Tytul: 'Kąpiel i pielęgnacja', Rasa: 'Golden Retriever', Opis: 'Pełna pielęgnacja SPA z modelowaniem szaty.' },
+  { ID: 'seed-1', Url: './zdjecia/metamorfozy/meta-golden.webp',  Tytul: 'Kąpiel i pielęgnacja', Rasa: 'Owczarek Podhalański', Opis: 'Pełna pielęgnacja SPA z modelowaniem szaty.' },
   { ID: 'seed-2', Url: './zdjecia/metamorfozy/meta-shihtzu.webp', Tytul: 'Autorskie strzyżenie',  Rasa: 'Shih-tzu',         Opis: 'Strzyżenie z wymodelowaną główką i uszami.' },
   { ID: 'seed-3', Url: './zdjecia/metamorfozy/meta-sheltie.webp', Tytul: 'Stylizacja szaty',     Rasa: 'Owczarek Szetlandzki', Opis: 'Trymowanie i pielęgnacja długiej szaty.' },
 ];

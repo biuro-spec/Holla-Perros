@@ -17,7 +17,7 @@ export default function Footer() {
 
         {/* Logo */}
         <img
-          src="./zdjecia/logo-stopka.png"
+          src="./zdjecia/logo-stopka.webp"
           alt="hOla Perros"
           style={{ height: '76px', width: 'auto', objectFit: 'contain', marginBottom: '24px' }}
         />

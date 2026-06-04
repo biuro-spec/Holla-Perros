@@ -5,7 +5,7 @@ export const blogPosts = [
     excerpt: 'Wizyta w salonie to dla malucha ogromne przeżycie. Dowiedz się, jak krok po kroku przygotować szczeniaka na pierwsze spotkanie z nożyczkami.',
     date: '10 Maj 2026',
     category: 'Edukacja i Wychowanie',
-    imageUrl: './zdjecia/blog/post1.png?v=2',
+    imageUrl: './zdjecia/blog/post1.webp?v=2',
     content: `
       <h2>Dlaczego pierwsza wizyta u groomera jest tak ważna?</h2>
       <p>Pierwsze doświadczenia szczeniaka kształtują jego nastawienie do zabiegów pielęgnacyjnych na całe życie. W <strong>hOla Perros – salonie fryzjerskim dla psów w Raciborzu</strong> stawiamy na tzw. "wizyty adaptacyjne". Nie wymagamy od psa stania w idealnym bezruchu przez dwie godziny. Naszym celem jest pokazanie maluchowi, że wanna, suszarka i obcinaczki to nic strasznego.</p>
@@ -33,7 +33,7 @@ export const blogPosts = [
     excerpt: 'Czy wiesz, że "ludzki" szampon niszczy florę bakteryjną psa? Zobacz, jak bezpiecznie kąpać pupila w domowych warunkach.',
     date: '15 Maj 2026',
     category: 'Pielęgnacja domowa',
-    imageUrl: './zdjecia/blog/post2.png?v=2',
+    imageUrl: './zdjecia/blog/post2.webp?v=2',
     content: `
       <h2>Błąd 1: Używanie kosmetyków dla ludzi</h2>
       <p>Skóra psa ma zupełnie inne pH (ok. 7.0-7.5) niż skóra człowieka (ok. 5.5). Użycie nawet najdelikatniejszego szamponu dla dzieci może doprowadzić do poważnych przesuszeń, łupieżu, a nawet stanów zapalnych. Zawsze wybieraj dedykowane, profesjonalne kosmetyki dla zwierząt. W <strong>salonie groomerskim hOla Perros w Raciborzu</strong> pracujemy wyłącznie na sprawdzonych, wegańskich szamponach i odżywkach.</p>
@@ -60,7 +60,7 @@ export const blogPosts = [
     excerpt: 'Nie każdego psa można ogolić maszynką! Poznaj sekrety trymowania i dowiedz się, które rasy tego wymagają.',
     date: '18 Maj 2026',
     category: 'Wiedza Groomerska',
-    imageUrl: './zdjecia/blog/post3.png?v=2',
+    imageUrl: './zdjecia/blog/post3.webp?v=2',
     content: `
       <h2>Co to jest trymowanie?</h2>
       <p>Trymowanie to profesjonalny zabieg polegający na usunięciu (wyskubaniu) martwego włosa okrywowego. Choć brzmi inwazyjnie, dla prawidłowo zakwalifikowanych ras jest to zabieg <strong>całkowicie bezbolesny</strong> (martwy włos luźno tkwi w mieszku włosowym). To jedna ze specjalizacji <strong>groomera w hOla Perros w Raciborzu</strong>.</p>
@@ -89,7 +89,7 @@ export const blogPosts = [
     excerpt: 'Luksusowe maseczki, odżywki regenerujące i ochronne balsamy na łapki to coś więcej niż chwilowa moda.',
     date: '22 Maj 2026',
     category: 'Zdrowie i Uroda',
-    imageUrl: './zdjecia/blog/post4.png?v=2',
+    imageUrl: './zdjecia/blog/post4.webp?v=2',
     content: `
       <h2>Mity wokół "Psiego Luksusu"</h2>
       <p>Często słyszymy pytania od właścicieli psów z Raciborza i okolic: <em>"Czy mojemu psu naprawdę potrzebna jest maska z keratyną?"</em>. Odpowiedź brzmi: absolutnie tak! Skóra i sierść psa, zwłaszcza żyjącego w mieście na Śląsku, jest narażona na ekstremalne czynniki: spaliny, suche powietrze z kaloryferów, ostre słońce, sól drogową.</p>
@@ -112,7 +112,7 @@ export const blogPosts = [
     excerpt: 'Dowiedz się, na czym polega rewolucyjna metoda kosmetycznego czyszczenia psiego uśmiechu.',
     date: '25 Maj 2026',
     category: 'Zdrowie',
-    imageUrl: './zdjecia/blog/post5.png?v=2',
+    imageUrl: './zdjecia/blog/post5.webp?v=2',
     content: `
       <h2>Problem kamienia nazębnego u psów</h2>
       <p>Szacuje się, że ponad 80% psów powyżej 3. roku życia cierpi na choroby przyzębia. Kamień nazębny to nie tylko kwestia nieprzyjemnego zapachu z pyska, ale przede wszystkim ognisko bakterii, które mogą uszkadzać serce i nerki. W <strong>hOla Perros – salonie dla psów w Raciborzu</strong> oferujemy skuteczną profilaktykę stomatologiczną.</p>
@@ -136,7 +136,7 @@ export const blogPosts = [
     excerpt: 'Filce i splątania to zmora wielu opiekunów. Czy istnieje ratunek przed maszynką?',
     date: '28 Maj 2026',
     category: 'Wiedza Groomerska',
-    imageUrl: './zdjecia/blog/post6.png?v=2',
+    imageUrl: './zdjecia/blog/post6.webp?v=2',
     content: `
       <h2>Czym właściwie jest kołtun?</h2>
       <p>Zaniedbana, martwa sierść łącząca się z rosnącym włosem, łojem i brudem tworzy zbitą warstwę – tzw. filc. Kołtuny tworzą się najczęściej pod pachami, w pachwinach, za uszami i tam, gdzie noszone są szelki. To jeden z najczęstszych problemów, z którymi trafiają do nas psy w <strong>salonie hOla Perros w Raciborzu</strong>.</p>
@@ -165,7 +165,7 @@ export const blogPosts = [
     excerpt: 'Psy typu "doodle" opanowały świat. Ich uroczy wygląd wymaga jednak ogromnego nakładu pracy.',
     date: '02 Czerwiec 2026',
     category: 'Radykalne Cięcia',
-    imageUrl: './zdjecia/blog/post7.png?v=2',
+    imageUrl: './zdjecia/blog/post7.webp?v=2',
     content: `
       <h2>Fenomen popularności i... kłopotów</h2>
       <p>Mieszańce pudli (Cavapoo, Maltipoo, Goldendoodle) to niezwykle inteligentne i urocze psy, które zyskały miano "hipoalergicznych". Wiele osób z Raciborza i Śląska decyduje się na nie wierząc, że nie linieją, więc są "bezobsługowe". Niestety, ich włos jest jednym z najtrudniejszych do utrzymania w idealnej kondycji.</p>
@@ -189,7 +189,7 @@ export const blogPosts = [
     excerpt: 'Pies nie zawsze musi uciekać, by okazać strach. Odkrywamy mowę ciała psów w salonie.',
     date: '05 Czerwiec 2026',
     category: 'Edukacja i Wychowanie',
-    imageUrl: './zdjecia/blog/post8.png?v=2',
+    imageUrl: './zdjecia/blog/post8.webp?v=2',
     content: `
       <h2>Subtelna komunikacja psów</h2>
       <p>Jako <strong>groomerzy w hOla Perros w Raciborzu</strong> jesteśmy uczeni czytania psiej mowy ciała. Często właściciel uważa, że "piesek jest super grzeczny", gdy w rzeczywistości pies jest zamrożony ze strachu. Jakie są wczesne sygnały stresu (tzw. Calming Signals)?</p>
@@ -220,7 +220,7 @@ export const blogPosts = [
     excerpt: 'Ekstremalne warunki pogodowe mogą zniszczyć opuszki Twojego psa. Oto porady od groomera.',
     date: '08 Czerwiec 2026',
     category: 'Zdrowie i Uroda',
-    imageUrl: './zdjecia/blog/post9.png?v=2',
+    imageUrl: './zdjecia/blog/post9.webp?v=2',
     content: `
       <h2>Niebezpieczeństwa sezonu zimowego</h2>
       <p>Zimą ulice Raciborza i całego Górnego Śląska sypane są żrącą solą i chemią, co doprowadza do podrażnień przestrzeni międzypalcowych. Śnieg potrafi także przyklejać się do sierści na łapach, tworząc twarde i bolesne lodowe kule.</p>
@@ -240,7 +240,7 @@ export const blogPosts = [
     excerpt: 'Zapuszczasz włos swojemu małemu pupilowi? Zobacz, jak pielęgnować lejący się włos typu jedwabistego.',
     date: '10 Czerwiec 2026',
     category: 'Pielęgnacja domowa',
-    imageUrl: './zdjecia/blog/post10.png?v=2',
+    imageUrl: './zdjecia/blog/post10.webp?v=2',
     content: `
       <h2>Struktura włosa jedwabistego</h2>
       <p>Rasy takie jak <strong>Yorkshire Terrier czy Maltańczyk</strong> nie posiadają grubego podszerstka, lecz lejący się włos, przypominający strukturą ludzkie włosy. Ich urok zależy bezpośrednio od nawilżenia i ciężkości włosa. To jedne z najczęściej strzyżonych ras w naszym <strong>salonie groomerskim hOla Perros w Raciborzu</strong>.</p>

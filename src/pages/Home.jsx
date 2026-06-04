@@ -72,7 +72,7 @@ export default function Home() {
           >
             <div className="editorial-image-frame" style={{ display: 'flex', justifyContent: 'center' }}>
               <img 
-                src="./zdjecia/hero.jpg"
+                src="./zdjecia/hero.webp"
                 alt="Ekskluzywna pielęgnacja"
                 className="hero-img"
                 style={{ width: '100%', maxWidth: '420px', aspectRatio: '3/4', objectFit: 'cover', objectPosition: 'center', display: 'block', borderRadius: '4px', boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}
@@ -161,7 +161,7 @@ export default function Home() {
       {/* Cennik & Pakiety */}
       <section id="cennik" style={{ padding: '120px 0', backgroundColor: 'var(--bg-color-alt)', position: 'relative', overflow: 'hidden' }}>
         <div className="cennik-paw" style={{ position: 'absolute', top: '25%', right: '18%', width: '46%', maxWidth: '500px', opacity: 0.1, pointerEvents: 'none', zIndex: 0 }}>
-          <img src="./zdjecia/lapka.png" alt="" style={{ width: '100%', height: 'auto', filter: 'hue-rotate(-55deg) saturate(0.7) brightness(1.3)' }} />
+          <img src="./zdjecia/lapka.webp" alt="" style={{ width: '100%', height: 'auto', filter: 'hue-rotate(-55deg) saturate(0.7) brightness(1.3)' }} />
         </div>
         <div className="container" style={{ maxWidth: '900px', position: 'relative', zIndex: 1 }}>
           <div style={{ textAlign: 'center', marginBottom: '30px' }}>
