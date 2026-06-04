@@ -19,8 +19,10 @@ const CONFIG = {
     REZERWACJE: 'Rezerwacje',
     PIESKI:     'Pieski',
     BLOKADY:    'Blokady',
-    FINANSE:    'Finanse'
+    FINANSE:    'Finanse',
+    METAMORFOZY:'Metamorfozy'
   },
+  DRIVE_FOLDER_NAME: 'hOla Perros - Metamorfozy',
   SLOTS: ['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00'],
   MAX_DZIENNIE: 8,
   EMAIL_OLA: 'cichonmariusz06@gmail.com',
@@ -92,7 +94,8 @@ function initSheets() {
     Rezerwacje: ['ID','Data','Godzina','Usługa','Cena','Imie_klienta','Telefon','Email','Imie_psa','Rasa','Uwagi','Status','Notatki_Ola','Co_robiono','Zaplacono','Metoda_platnosci','DataUtworzenia'],
     Pieski:     ['Email_klienta','Imie_psa','Rasa','Uwagi_behawioralne','Alergie','Notatki','Data_aktualizacji'],
     Blokady:    ['Data','Godzina','Powod'],
-    Finanse:    ['ID','Data','ID_rezerwacji','Kwota','Typ','Opis','Metoda']
+    Finanse:    ['ID','Data','ID_rezerwacji','Kwota','Typ','Opis','Metoda'],
+    Metamorfozy:['ID','FileId','Url','Tytul','Rasa','Opis','Data']
   };
 
   for (const [name, headers] of Object.entries(sheetDefs)) {
@@ -123,6 +126,7 @@ function doGet(e) {
       case 'getFinances':      return getFinancesData(e.parameter);
       case 'getStats':         return getStats();
       case 'getServices':      return jsonOK(USLUGI);
+      case 'getMetamorfozy':   return getMetamorfozy();
       case 'init':             return initSheets();
       case 'test':             return jsonOK({ msg: 'hOla Perros API działa!' });
       default:                 return jsonErr('Nieznana akcja: ' + action);
@@ -146,6 +150,8 @@ function doPost(e) {
       case 'unblockDate':         return unblockDate(data);
       case 'saveDog':             return saveDog(data);
       case 'addFinance':          return addFinance(data);
+      case 'uploadMetamorfoza':   return uploadMetamorfoza(data);
+      case 'deleteMetamorfoza':   return deleteMetamorfoza(data);
       default:                    return jsonErr('Nieznana akcja: ' + data.action);
     }
   } catch(err) {
@@ -561,4 +567,74 @@ function getStats() {
   }
 
   return jsonOK({ dzisiaj, miesiac, przychod, oczekuje });
+}
+
+// =====================================================
+// METAMORFOZY (Google Drive + arkusz)
+// =====================================================
+
+function getMetamorfozyFolder() {
+  const folders = DriveApp.getFoldersByName(CONFIG.DRIVE_FOLDER_NAME);
+  if (folders.hasNext()) return folders.next();
+  const folder = DriveApp.createFolder(CONFIG.DRIVE_FOLDER_NAME);
+  folder.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+  return folder;
+}
+
+function uploadMetamorfoza(data) {
+  if (!data.imageBase64) return jsonErr('Brak zdjęcia');
+
+  // Dekoduj base64 (usuń prefix data:image/...;base64, jeśli jest)
+  const base64 = data.imageBase64.replace(/^data:image\/\w+;base64,/, '');
+  const contentType = data.contentType || 'image/jpeg';
+  const ext = contentType.indexOf('png') > -1 ? 'png' : (contentType.indexOf('webp') > -1 ? 'webp' : 'jpg');
+  const decoded = Utilities.base64Decode(base64);
+  const blob = Utilities.newBlob(decoded, contentType, 'metamorfoza-' + Date.now() + '.' + ext);
+
+  // Zapisz do Drive
+  const folder = getMetamorfozyFolder();
+  const file = folder.createFile(blob);
+  file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+  const fileId = file.getId();
+
+  // Niezawodny URL do hotlinkingu
+  const url = 'https://drive.google.com/thumbnail?id=' + fileId + '&sz=w1200';
+
+  // Zapis do arkusza
+  const sheet = getSheet(CONFIG.SHEETS.METAMORFOZY);
+  const id = 'M-' + Date.now();
+  const dataStr = Utilities.formatDate(new Date(), 'Europe/Warsaw', 'yyyy-MM-dd');
+  sheet.appendRow([id, fileId, url, data.tytul || '', data.rasa || '', data.opis || '', dataStr]);
+
+  return jsonOK({ id, url });
+}
+
+function getMetamorfozy() {
+  const sheet = getSheet(CONFIG.SHEETS.METAMORFOZY);
+  const rows = sheet.getDataRange().getValues();
+  const headers = rows[0];
+  const result = [];
+  for (let i = 1; i < rows.length; i++) {
+    if (!rows[i][0]) continue;
+    const obj = {};
+    headers.forEach((h, idx) => { obj[h] = rows[i][idx]; });
+    result.push(obj);
+  }
+  // Najnowsze pierwsze
+  result.reverse();
+  return jsonOK(result);
+}
+
+function deleteMetamorfoza(data) {
+  const sheet = getSheet(CONFIG.SHEETS.METAMORFOZY);
+  const rows = sheet.getDataRange().getValues();
+  for (let i = rows.length - 1; i >= 1; i--) {
+    if (rows[i][0] === data.id) {
+      // Usuń plik z Drive
+      try { DriveApp.getFileById(rows[i][1]).setTrashed(true); } catch(e) {}
+      sheet.deleteRow(i + 1);
+      return jsonOK('Usunięto');
+    }
+  }
+  return jsonErr('Nie znaleziono: ' + data.id);
 }

@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import Regulamin from './pages/Regulamin';
+import Metamorfozy from './pages/Metamorfozy';
 import './index.css';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:id" element={<BlogPost />} />
+            <Route path="/metamorfozy" element={<Metamorfozy />} />
             <Route path="/regulamin" element={<Regulamin />} />
             <Route path="*" element={<Home />} />
           </Routes>

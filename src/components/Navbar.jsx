@@ -48,9 +48,9 @@ export default function Navbar() {
         <a href="#omnie" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>O mnie</a>
         <a href="#uslugi" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Usługi</a>
         <a href="#cennik" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Cennik</a>
-        <Link to="/blog" className="nav-link" style={{ textDecoration: 'none', color: 'var(--pink)', fontWeight: 500, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Blog</Link>
+        <Link to="/metamorfozy" className="nav-link" style={{ textDecoration: 'none', color: 'var(--pink)', fontWeight: 500, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Metamorfozy</Link>
+        <Link to="/blog" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Blog</Link>
         <a href="#kontakt" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Kontakt</a>
-        <Link to="/regulamin" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Regulamin</Link>
         <a href="tel:+48512501558" style={{ textDecoration: 'none' }}>
           <button className="btn-primary" style={{ padding: '12px 24px', fontSize: '0.85rem' }}>
             <Phone size={16} /> 512 501 558
@@ -69,7 +69,8 @@ export default function Navbar() {
           <a href="#omnie" onClick={() => setIsOpen(false)} style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '1.2rem', letterSpacing: '1px', textTransform: 'uppercase', textAlign: 'center' }}>O mnie</a>
           <a href="#uslugi" onClick={() => setIsOpen(false)} style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '1.2rem', letterSpacing: '1px', textTransform: 'uppercase', textAlign: 'center' }}>Usługi</a>
           <a href="#cennik" onClick={() => setIsOpen(false)} style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '1.2rem', letterSpacing: '1px', textTransform: 'uppercase', textAlign: 'center' }}>Cennik</a>
-          <Link to="/blog" onClick={() => setIsOpen(false)} style={{ textDecoration: 'none', color: 'var(--pink)', fontWeight: 500, fontSize: '1.2rem', letterSpacing: '1px', textTransform: 'uppercase', textAlign: 'center' }}>Blog</Link>
+          <Link to="/metamorfozy" onClick={() => setIsOpen(false)} style={{ textDecoration: 'none', color: 'var(--pink)', fontWeight: 500, fontSize: '1.2rem', letterSpacing: '1px', textTransform: 'uppercase', textAlign: 'center' }}>Metamorfozy</Link>
+          <Link to="/blog" onClick={() => setIsOpen(false)} style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '1.2rem', letterSpacing: '1px', textTransform: 'uppercase', textAlign: 'center' }}>Blog</Link>
           <a href="#kontakt" onClick={() => setIsOpen(false)} style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '1.2rem', letterSpacing: '1px', textTransform: 'uppercase', textAlign: 'center' }}>Kontakt</a>
           <Link to="/regulamin" onClick={() => setIsOpen(false)} style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '1.2rem', letterSpacing: '1px', textTransform: 'uppercase', textAlign: 'center' }}>Regulamin</Link>
           <a href="tel:+48512501558" style={{ textDecoration: 'none', width: '100%' }} onClick={() => setIsOpen(false)}>
