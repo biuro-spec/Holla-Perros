@@ -72,7 +72,7 @@ export default function Home() {
           >
             <div className="editorial-image-frame" style={{ display: 'flex', justifyContent: 'center' }}>
               <img 
-                src="./zdjecia/hero.webp"
+                src="./zdjecia/groomer-raciborz-salon-hola-perros.webp"
                 alt="Ekskluzywna pielęgnacja"
                 className="hero-img"
                 style={{ width: '100%', maxWidth: '420px', aspectRatio: '3/4', objectFit: 'cover', objectPosition: 'center', display: 'block', borderRadius: '4px', boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}
@@ -377,7 +377,7 @@ export default function Home() {
             {/* Zdjęcie */}
             <div className="editorial-image-frame" style={{ display: 'flex', justifyContent: 'center' }}>
               <img
-                src="./zdjecia/sklepik/obroza-zawieszka.webp"
+                src="./zdjecia/sklepik/obroza-zawieszka-z-grawerem-dla-psa.webp"
                 alt="Ręcznie zdobione obroże i złote zawieszki z grawerem – hOla Perros"
                 style={{ width: '100%', maxWidth: '440px', aspectRatio: '9/11', objectFit: 'cover', borderRadius: '6px', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
               />
