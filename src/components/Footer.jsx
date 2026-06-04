@@ -57,7 +57,7 @@ export default function Footer() {
       </div>
 
       {/* Dolny pasek */}
-      <div style={{ backgroundColor: 'var(--gold)', padding: '20px 40px' }}>
+      <div style={{ backgroundColor: 'var(--pink)', padding: '20px 40px' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-dark)', margin: 0, fontWeight: 500 }}>
             © 2026 hOla Perros. Wszelkie prawa zastrzeżone.
