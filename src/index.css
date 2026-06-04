@@ -402,6 +402,11 @@ html, body {
   /* Hero title: 2 lines on mobile */
   .hero-br-desktop { display: none; }
 
+  /* Zdjęcie Oli +10% na mobile */
+  .hero-img {
+    max-width: 462px !important;
+  }
+
   /* Cennik paw bigger on mobile */
   .cennik-paw {
     width: 80% !important;

@@ -73,8 +73,9 @@ export default function Home() {
             <div className="editorial-image-frame" style={{ display: 'flex', justifyContent: 'center' }}>
               <img 
                 src="./zdjecia/hero.jpg"
-                alt="Ekskluzywna pielęgnacja" 
-                style={{ width: '100%', maxWidth: '420px', aspectRatio: '3/4', objectFit: 'cover', objectPosition: 'center', display: 'block', borderRadius: '4px', boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }} 
+                alt="Ekskluzywna pielęgnacja"
+                className="hero-img"
+                style={{ width: '100%', maxWidth: '420px', aspectRatio: '3/4', objectFit: 'cover', objectPosition: 'center', display: 'block', borderRadius: '4px', boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}
                 onError={(e) => { e.target.style.display = 'none'; }}
               />
             </div>
