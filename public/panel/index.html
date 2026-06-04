@@ -214,6 +214,7 @@ tr:last-child td{border:none}
       <div class="nav-item" onclick="showPage('calendar')">Kalendarz</div>
       <div class="nav-item" onclick="showPage('reservations')">Rezerwacje</div>
       <div class="nav-item" onclick="showPage('dogs')">Pieski</div>
+      <div class="nav-item" onclick="showPage('metamorfozy')">Metamorfozy</div>
       <div class="nav-item" onclick="showPage('finances')">Finanse</div>
       <div class="nav-item" onclick="showPage('settings')">Ustawienia</div>
     </div>
@@ -312,6 +313,41 @@ tr:last-child td{border:none}
         <input type="text" id="dogSearch" placeholder="🔍 Szukaj psa lub właściciela..." oninput="filterDogs()" style="width:100%;padding:11px 14px;border:2px solid var(--border);border-radius:6px;font-family:var(--font-b);font-size:0.95rem;outline:none">
       </div>
       <div class="dogs-grid" id="dogsGrid"><div class="empty">Ładowanie...</div></div>
+    </div>
+
+    <!-- METAMORFOZY -->
+    <div class="page" id="page-metamorfozy">
+      <div class="page-title">Metamorfozy</div>
+      <div class="page-sub">Dodawaj zdjęcia swoich prac — pojawią się w galerii na stronie.</div>
+
+      <div class="card" style="margin-bottom:20px;max-width:560px">
+        <div class="card-title">Dodaj nowe zdjęcie</div>
+
+        <div id="metaDropzone" onclick="document.getElementById('metaFile').click()"
+          style="border:2px dashed var(--border);border-radius:8px;padding:32px;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg)">
+          <div id="metaDropText">
+            <div style="font-size:2.5rem;margin-bottom:8px">📸</div>
+            <p style="color:var(--dark);font-weight:600;margin-bottom:4px">Kliknij, aby wybrać zdjęcie</p>
+            <p style="color:var(--light);font-size:0.85rem">lub zrób zdjęcie telefonem</p>
+          </div>
+          <img id="metaPreview" style="display:none;max-width:100%;max-height:280px;border-radius:6px;margin:0 auto" />
+        </div>
+        <input type="file" id="metaFile" accept="image/*" style="display:none" onchange="handleMetaFile(this)" />
+
+        <div class="form-row" style="margin-top:16px">
+          <div class="form-group"><label>Rasa (opcjonalnie)</label><input type="text" id="meta_rasa" placeholder="np. Yorkshire terrier"></div>
+          <div class="form-group"><label>Tytuł (opcjonalnie)</label><input type="text" id="meta_tytul" placeholder="np. Autorskie strzyżenie"></div>
+        </div>
+        <div class="form-group"><label>Opis (opcjonalnie)</label><textarea id="meta_opis" placeholder="Kilka słów o pracy..."></textarea></div>
+
+        <button class="btn btn-gold" style="width:100%" id="metaSubmitBtn" onclick="submitMetamorfoza()" disabled>Opublikuj zdjęcie</button>
+        <div id="metaUploadMsg" style="margin-top:10px;font-size:0.85rem;color:var(--light)"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Opublikowane prace</div>
+        <div class="dogs-grid" id="metaGrid"><div class="empty">Ładowanie...</div></div>
+      </div>
     </div>
 
     <!-- FINANSE -->
@@ -527,6 +563,7 @@ function showPage(id) {
   if (id==='reservations') loadReservations();
   if (id==='dogs') loadDogs();
   if (id==='finances') loadFinances();
+  if (id==='metamorfozy') loadPanelMetamorfozy();
   if (id==='calendar') { loadBlockedDates(); renderPanelCalendar(); }
 
   // Mobile: zamknij sidebar
@@ -952,6 +989,111 @@ async function saveApiUrl() {
   if(r.ok) res.textContent='✅ Połączenie działa: '+r.data.msg;
   else res.textContent='❌ Błąd: '+r.error;
   toast('URL zapisany');
+}
+
+// =====================================================
+// METAMORFOZY
+// =====================================================
+let metaImageData = null;
+
+// Zmniejsza zdjęcie w przeglądarce (mniejszy upload)
+function resizeImage(file, maxW, quality) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.min(1, maxW / img.width);
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      resolve(canvas.toDataURL('image/jpeg', quality));
+      URL.revokeObjectURL(img.src);
+    };
+    img.onerror = () => reject(new Error('Nie udało się wczytać zdjęcia. Spróbuj inne (JPG/PNG).'));
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+async function handleMetaFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const msg = document.getElementById('metaUploadMsg');
+  msg.textContent = 'Przetwarzanie zdjęcia...';
+  try {
+    metaImageData = await resizeImage(file, 1200, 0.82);
+    const prev = document.getElementById('metaPreview');
+    prev.src = metaImageData;
+    prev.style.display = 'block';
+    document.getElementById('metaDropText').style.display = 'none';
+    document.getElementById('metaSubmitBtn').disabled = false;
+    msg.textContent = '';
+  } catch(e) {
+    msg.textContent = '❌ ' + e.message;
+    metaImageData = null;
+  }
+}
+
+async function submitMetamorfoza() {
+  if (!metaImageData) { toast('Najpierw wybierz zdjęcie','err'); return; }
+  const btn = document.getElementById('metaSubmitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Wysyłanie...';
+
+  const r = await apiPost({
+    action: 'uploadMetamorfoza',
+    imageBase64: metaImageData,
+    contentType: 'image/jpeg',
+    rasa: document.getElementById('meta_rasa').value,
+    tytul: document.getElementById('meta_tytul').value,
+    opis: document.getElementById('meta_opis').value
+  });
+
+  btn.innerHTML = 'Opublikuj zdjęcie';
+  if (r.ok) {
+    toast('Zdjęcie opublikowane! 🐾');
+    // reset
+    metaImageData = null;
+    document.getElementById('metaPreview').style.display = 'none';
+    document.getElementById('metaDropText').style.display = 'block';
+    document.getElementById('meta_rasa').value = '';
+    document.getElementById('meta_tytul').value = '';
+    document.getElementById('meta_opis').value = '';
+    document.getElementById('metaFile').value = '';
+    btn.disabled = true;
+    loadPanelMetamorfozy();
+  } else {
+    btn.disabled = false;
+    toast('Błąd: ' + r.error, 'err');
+  }
+}
+
+async function loadPanelMetamorfozy() {
+  const grid = document.getElementById('metaGrid');
+  grid.innerHTML = '<div class="empty">Ładowanie...</div>';
+  const r = await api({ action: 'getMetamorfozy' });
+  if (!r.ok || !r.data.length) {
+    grid.innerHTML = '<div class="empty">Brak opublikowanych prac. Dodaj pierwsze zdjęcie powyżej!</div>';
+    return;
+  }
+  grid.innerHTML = r.data.map(m => `
+    <div class="dog-card" style="cursor:default;padding:0;overflow:hidden">
+      <img src="${m.Url}" alt="${m.Tytul||''}" style="width:100%;height:180px;object-fit:cover;display:block" onerror="this.style.opacity=0.3" />
+      <div style="padding:16px">
+        ${m.Rasa ? `<div class="dog-race" style="margin-bottom:4px">${m.Rasa}</div>` : ''}
+        ${m.Tytul ? `<div class="dog-name" style="font-size:1.1rem">${m.Tytul}</div>` : ''}
+        <button class="btn btn-danger btn-sm" style="width:100%;margin-top:12px" onclick="deletePanelMetamorfoza('${m.ID}')">Usuń</button>
+      </div>
+    </div>`).join('');
+}
+
+async function deletePanelMetamorfoza(id) {
+  if (!confirm('Na pewno usunąć to zdjęcie z galerii?')) return;
+  const r = await apiPost({ action: 'deleteMetamorfoza', id });
+  if (r.ok) { toast('Usunięto'); loadPanelMetamorfozy(); }
+  else toast('Błąd: ' + r.error, 'err');
 }
 
 // =====================================================
