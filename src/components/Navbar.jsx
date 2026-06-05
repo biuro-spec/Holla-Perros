@@ -18,10 +18,10 @@ export default function Navbar() {
     };
   }, []);
 
-  const navBg    = scrolled ? 'rgba(228, 159, 179, 0.95)' : 'transparent';
-  const navBlur  = scrolled ? 'blur(14px) saturate(160%)' : 'none';
-  const navBorder= scrolled ? '1px solid var(--gold)' : '1px solid transparent';
-  const navShadow= scrolled ? '0 2px 24px rgba(228,159,179,0.25)' : 'none';
+  const navBg    = scrolled ? 'rgba(252, 251, 248, 0.82)' : 'transparent';
+  const navBlur  = scrolled ? 'blur(18px) saturate(180%)' : 'none';
+  const navBorder= scrolled ? '2px solid var(--pink)' : '2px solid transparent';
+  const navShadow= scrolled ? '0 2px 24px rgba(228,159,179,0.18)' : 'none';
 
   return (
     <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, backgroundColor: navBg, borderBottom: navBorder, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 60px', backdropFilter: navBlur, WebkitBackdropFilter: navBlur, boxShadow: navShadow, transition: 'all 0.4s ease', overflow: 'visible' }}>
@@ -48,7 +48,7 @@ export default function Navbar() {
         <a href="#omnie" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>O mnie</a>
         <a href="#uslugi" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Usługi</a>
         <a href="#cennik" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Cennik</a>
-        <Link to="/metamorfozy" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 600, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Metamorfozy</Link>
+        <Link to="/metamorfozy" className="nav-link" style={{ textDecoration: 'none', color: 'var(--pink)', fontWeight: 500, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Metamorfozy</Link>
         <Link to="/blog" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Blog</Link>
         <a href="#kontakt" className="nav-link" style={{ textDecoration: 'none', color: 'var(--text-dark)', fontWeight: 400, fontSize: '0.9rem', letterSpacing: '1px', textTransform: 'uppercase' }}>Kontakt</a>
         <a href="tel:+48512501558" style={{ textDecoration: 'none' }}>
