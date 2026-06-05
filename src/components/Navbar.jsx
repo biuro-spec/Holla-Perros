@@ -20,8 +20,8 @@ export default function Navbar() {
 
   const navBg    = scrolled ? 'rgba(252, 251, 248, 0.82)' : 'transparent';
   const navBlur  = scrolled ? 'blur(18px) saturate(180%)' : 'none';
-  const navBorder= scrolled ? '2px solid var(--pink)' : '2px solid transparent';
-  const navShadow= scrolled ? '0 2px 24px rgba(228,159,179,0.18)' : 'none';
+  const navBorder= scrolled ? '1px solid var(--gold)' : '1px solid transparent';
+  const navShadow= scrolled ? '0 2px 24px rgba(184,146,42,0.08)' : 'none';
 
   return (
     <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, backgroundColor: navBg, borderBottom: navBorder, display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 60px', backdropFilter: navBlur, WebkitBackdropFilter: navBlur, boxShadow: navShadow, transition: 'all 0.4s ease', overflow: 'visible' }}>
