@@ -72,7 +72,8 @@ body{font-family:var(--font-b);background:var(--bg);color:var(--dark);min-height
 /* STATS */
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
 @media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
-.stat-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow)}
+.stat-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;box-shadow:var(--shadow);cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(184,146,42,0.15);border-color:var(--gold)}
 .stat-val{font-family:var(--font-h);font-size:2.4rem;font-weight:400;color:var(--dark);line-height:1}
 .stat-label{font-size:0.78rem;color:var(--light);text-transform:uppercase;letter-spacing:1px;margin-top:8px}
 .stat-card.gold .stat-val{color:var(--gold)}
@@ -247,10 +248,10 @@ body.menu-open .sidebar-overlay{display:block;opacity:1}
       <div class="page-title">Dzień dobry, Olu! 🐾</div>
       <div class="page-sub" id="dashDate"></div>
       <div class="stats-grid" id="statsGrid">
-        <div class="stat-card"><div class="stat-val" id="stat-dzisiaj">—</div><div class="stat-label">Dziś wizyty</div></div>
-        <div class="stat-card pink"><div class="stat-val" id="stat-oczekuje">—</div><div class="stat-label">Oczekuje</div></div>
-        <div class="stat-card"><div class="stat-val" id="stat-miesiac">—</div><div class="stat-label">W tym miesiącu</div></div>
-        <div class="stat-card gold"><div class="stat-val" id="stat-przychod">—</div><div class="stat-label">Przychód (mies.)</div></div>
+        <div class="stat-card" onclick="statClick('calendar')" title="Zobacz kalendarz"><div class="stat-val" id="stat-dzisiaj">—</div><div class="stat-label">Dziś wizyty</div></div>
+        <div class="stat-card pink" onclick="statClick('reservations','oczekuje')" title="Zobacz oczekujące rezerwacje"><div class="stat-val" id="stat-oczekuje">—</div><div class="stat-label">Oczekuje</div></div>
+        <div class="stat-card" onclick="statClick('reservations','')" title="Zobacz wszystkie rezerwacje miesiąca"><div class="stat-val" id="stat-miesiac">—</div><div class="stat-label">W tym miesiącu</div></div>
+        <div class="stat-card gold" onclick="statClick('finances')" title="Zobacz finanse"><div class="stat-val" id="stat-przychod">—</div><div class="stat-label">Przychód (mies.)</div></div>
       </div>
       <div class="card">
         <div class="card-title">Dzisiejsze wizyty</div>
@@ -662,6 +663,23 @@ function showPage(id) {
   if (id==='calendar') { loadBlockedDates(); renderPanelCalendar(); }
 
   // Mobile: zamknij sidebar
+  closeSidebar();
+}
+
+// Klik w kafelek statystyk → przejdź do sekcji (z opcjonalnym filtrem statusu rezerwacji)
+function statClick(pageId, statusFilter) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + pageId).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if ((n.getAttribute('onclick') || '').indexOf("'" + pageId + "'") > -1) n.classList.add('active');
+  });
+  if (pageId === 'reservations') {
+    if (statusFilter !== undefined) { const f = document.getElementById('resFilterStatus'); if (f) f.value = statusFilter; }
+    loadReservations();
+  }
+  if (pageId === 'finances') loadFinances();
+  if (pageId === 'calendar') { loadBlockedDates(); renderPanelCalendar(); }
   closeSidebar();
 }
 
