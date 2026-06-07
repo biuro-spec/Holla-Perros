@@ -4,11 +4,13 @@ import { Phone, MapPin, Camera, Sparkles, MessageCircle, Plus, Star } from 'luci
 
 const GOOGLE_REVIEWS_URL = 'https://share.google/lOQLEq6X5CbfFVTMX';
 
-// Opinie klientów (z wizytówki Google). Podmień na prawdziwe lub dodaj kolejne.
+// Opinie klientów (z wizytówki Google).
 const OPINIE_DATA = [
-  { tekst: 'Pani Ola to absolutna profesjonalistka! Mój york wyszedł przepiękny, a co najważniejsze — bez stresu. Widać ogromną miłość do zwierząt. Polecam z całego serca!', autor: 'Katarzyna M.' },
-  { tekst: 'Najlepszy groomer w Raciborzu. Spokojne podejście do psa, świetny kontakt i efekt, który przeszedł moje oczekiwania. Mój shih-tzu uwielbia tu przychodzić.', autor: 'Tomasz W.' },
-  { tekst: 'Cudowne miejsce i jeszcze cudowniejsza właścicielka. Bardzo dokładna, cierpliwa i z ogromnym wyczuciem. Pies zadbany od noska po ogonek. Gorąco polecam!', autor: 'Anna K.' },
+  { tekst: 'Nie zastanawiaj się dłużej, czy to odpowiedni salon dla Twojego psa – zdecydowanie tak! Ola podchodzi do każdego pupila z ogromną miłością i cierpliwością.', autor: 'Magdalena Szczygieł' },
+  { tekst: 'Pięknie urządzony salon z wyjątkowym wystrojem i świetną atmosferą. Widać ogromne serce do zwierząt i dbałość o każdy detal. Super lokalizacja. Polecam!', autor: 'Klientka Google' },
+  { tekst: 'Z całego serca polecam! Ola ma super podejście do piesków, salon jest uroczy. To idealny salon pielęgnacyjny dla piesków.', autor: 'Jessica Gatnar' },
+  { tekst: 'Cudowne miejsce z genialnym podejściem do zwierząt. Pełen profesjonalizm. Serdecznie polecam ten salon!', autor: 'Karolina Chryczyk' },
+  { tekst: 'Serdecznie polecam salon groomerski! Piesek wyszedł piękny i zadbany, a pani Ola bardzo przyjazna i profesjonalna.', autor: 'Julka Lasyk' },
 ];
 
 function OpinieSection() {
@@ -27,7 +29,7 @@ function OpinieSection() {
           </div>
         </div>
 
-        <div className="opinie-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', marginBottom: '50px' }}>
+        <div className="opinie-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))', gap: '24px', marginBottom: '50px' }}>
           {OPINIE_DATA.map((o, i) => (
             <motion.div
               key={i}
