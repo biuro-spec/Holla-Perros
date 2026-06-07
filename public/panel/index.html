@@ -1023,6 +1023,22 @@ async function submitAddRes() {
 // =====================================================
 let _pieskiData = [];
 let _piesekImageData = null;
+let _piesekCardImg = null;   // bufor nowego zdjęcia wybranego w karcie psa
+
+async function handlePiesekCardFile(input) {
+  let file = input.files[0];
+  if (!file) return;
+  const msg = document.getElementById('pcPhotoMsg');
+  msg.textContent = 'Przetwarzanie...';
+  try {
+    if (/image\/(heic|heif)/i.test(file.type||'') || /\.(heic|heif)$/i.test(file.name||'')) msg.textContent = 'Konwertuję HEIC...';
+    file = await convertIfHeic(file);
+    _piesekCardImg = await resizeImagePlain(file, 800, 0.82);
+    const box = document.getElementById('pcPhoto');
+    box.innerHTML = `<img src="${_piesekCardImg}" style="width:100%;height:100%;object-fit:cover" />`;
+    msg.textContent = 'Kliknij „Zapisz dane", aby zapisać zdjęcie.';
+  } catch(e) { msg.textContent = 'Błąd: ' + e.message; }
+}
 
 async function loadDogs() {
   const grid = document.getElementById('dogsGrid');
@@ -1154,12 +1170,20 @@ async function otworzPieskaZRezerwacji(imiePsa, telefon) {
 function openPiesekCard(id) {
   const p = _pieskiData.find(x => x.ID === id);
   if (!p) return;
+  _piesekCardImg = null;   // reset bufora nowego zdjęcia
   const thumb = piesekThumb(p, 600);
   const wizyty = p.WizytyArr || [];
   document.getElementById('piesekCardTitle').textContent = '🐶 ' + (p.Imie || 'Karta psa');
   document.getElementById('piesekCardBody').innerHTML = `
-    <div style="display:grid;grid-template-columns:${thumb?'180px 1fr':'1fr'};gap:20px;margin-bottom:20px">
-      ${thumb ? `<img src="${thumb}" referrerpolicy="no-referrer" style="width:100%;border-radius:8px;object-fit:cover" />` : ''}
+    <div style="display:grid;grid-template-columns:180px 1fr;gap:20px;margin-bottom:20px">
+      <div>
+        <div id="pcPhoto" onclick="document.getElementById('pcFile').click()" style="cursor:pointer;border-radius:8px;overflow:hidden;border:2px dashed var(--border);aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:var(--bg);position:relative">
+          ${thumb ? `<img id="pcPhotoImg" src="${thumb}" referrerpolicy="no-referrer" style="width:100%;height:100%;object-fit:cover" />`
+                  : `<div id="pcPhotoPlaceholder" style="text-align:center;color:var(--light);padding:10px"><div style="font-size:1.8rem">📷</div><div style="font-size:0.78rem;margin-top:4px">Dodaj zdjęcie</div></div>`}
+        </div>
+        <input type="file" id="pcFile" accept="image/*" style="display:none" onchange="handlePiesekCardFile(this)" />
+        <div id="pcPhotoMsg" style="font-size:0.75rem;color:var(--light);text-align:center;margin-top:6px"></div>
+      </div>
       <div>
         <div class="form-row">
           <div class="form-group" style="margin-bottom:10px"><label>Imię</label><input type="text" id="pc_imie" value="${String(p.Imie||'').replace(/"/g,'&quot;')}"></div>
@@ -1199,15 +1223,20 @@ function renderWizyty(id, wizyty) {
 }
 
 async function savePiesek(id) {
-  const r = await apiPost({ action:'updatePiesek', id,
+  const payload = { action:'updatePiesek', id,
     imie: document.getElementById('pc_imie').value,
     rasa: document.getElementById('pc_rasa').value,
     wlasciciel: document.getElementById('pc_wlasciciel').value,
     telefon: document.getElementById('pc_telefon').value,
     email: document.getElementById('pc_email').value,
     opis: document.getElementById('pc_opis').value
-  });
-  if (r.ok) { toast('Zapisano'); loadDogs(); }
+  };
+  if (_piesekCardImg) {
+    payload.imageBase64 = _piesekCardImg;
+    payload.contentType = _piesekCardImg.indexOf('data:image/webp') === 0 ? 'image/webp' : 'image/jpeg';
+  }
+  const r = await apiPost(payload);
+  if (r.ok) { toast('Zapisano'); _piesekCardImg = null; loadDogs(); }
   else toast('Błąd: ' + r.error, 'err');
 }
 

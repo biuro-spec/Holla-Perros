@@ -859,6 +859,15 @@ function updatePiesek(data) {
       if (data.telefon    !== undefined) sheet.getRange(i+1, 6).setValue(data.telefon);
       if (data.opis       !== undefined) sheet.getRange(i+1, 7).setValue(data.opis);
       if (data.email      !== undefined) { ensureEmailHeader(sheet); sheet.getRange(i+1, 10).setValue(data.email); }
+      if (data.imageBase64) {
+        const base64 = data.imageBase64.replace(/^data:image\/\w+;base64,/, '');
+        const ct = data.contentType || 'image/jpeg';
+        const ext = ct.indexOf('png') > -1 ? 'png' : (ct.indexOf('webp') > -1 ? 'webp' : 'jpg');
+        const blob = Utilities.newBlob(Utilities.base64Decode(base64), ct, 'pies-' + Date.now() + '.' + ext);
+        const file = getPieskiFolder().createFile(blob);
+        file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+        sheet.getRange(i+1, 2).setValue(file.getId());   // FileId
+      }
       return jsonOK('Zaktualizowano');
     }
   }
