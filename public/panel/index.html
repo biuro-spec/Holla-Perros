@@ -1052,12 +1052,12 @@ function openPiesekCard(id) {
       ${thumb ? `<img src="${thumb}" referrerpolicy="no-referrer" style="width:100%;border-radius:8px;object-fit:cover" />` : ''}
       <div>
         <div class="form-row">
-          <div class="form-group" style="margin-bottom:10px"><label>Imię</label><input type="text" id="pc_imie" value="${(p.Imie||'').replace(/"/g,'&quot;')}"></div>
-          <div class="form-group" style="margin-bottom:10px"><label>Rasa</label><input type="text" id="pc_rasa" value="${(p.Rasa||'').replace(/"/g,'&quot;')}"></div>
+          <div class="form-group" style="margin-bottom:10px"><label>Imię</label><input type="text" id="pc_imie" value="${String(p.Imie||'').replace(/"/g,'&quot;')}"></div>
+          <div class="form-group" style="margin-bottom:10px"><label>Rasa</label><input type="text" id="pc_rasa" value="${String(p.Rasa||'').replace(/"/g,'&quot;')}"></div>
         </div>
         <div class="form-row">
-          <div class="form-group" style="margin-bottom:10px"><label>Właściciel</label><input type="text" id="pc_wlasciciel" value="${(p.Wlasciciel||'').replace(/"/g,'&quot;')}"></div>
-          <div class="form-group" style="margin-bottom:10px"><label>Telefon</label><input type="tel" id="pc_telefon" value="${(p.Telefon||'').replace(/"/g,'&quot;')}"></div>
+          <div class="form-group" style="margin-bottom:10px"><label>Właściciel</label><input type="text" id="pc_wlasciciel" value="${String(p.Wlasciciel||'').replace(/"/g,'&quot;')}"></div>
+          <div class="form-group" style="margin-bottom:10px"><label>Telefon</label><input type="tel" id="pc_telefon" value="${String(p.Telefon||'').replace(/"/g,'&quot;')}"></div>
         </div>
       </div>
     </div>
