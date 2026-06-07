@@ -509,6 +509,7 @@ body.menu-open .sidebar-overlay{display:block;opacity:1}
       <div class="form-group"><label>Właściciel</label><input type="text" id="p_wlasciciel" placeholder="Imię i nazwisko"></div>
       <div class="form-group"><label>Telefon</label><input type="tel" id="p_telefon" placeholder="+48 ..."></div>
     </div>
+    <div class="form-group"><label>E-mail</label><input type="email" id="p_email" placeholder="np. klient@email.pl"></div>
     <div class="form-group"><label>Opis (charakter, alergie, uwagi)</label><textarea id="p_opis" placeholder="np. nerwowy przy suszeniu, alergia na kukurydzę..."></textarea></div>
     <button class="btn btn-primary" style="width:100%" id="piesekSubmitBtn" onclick="submitPiesek()">Dodaj do bazy</button>
     <div id="piesekMsg" style="margin-top:10px;font-size:0.85rem;color:var(--light)"></div>
@@ -1009,7 +1010,7 @@ async function submitAddRes() {
   if(r.ok){
     // utwórz psa w bazie jeśli nowy + zaznaczony checkbox
     if (!piesekId && imie_psa && document.getElementById('add_zapiszPsa').checked) {
-      await apiPost({ action:'addPiesek', imie:imie_psa, rasa, wlasciciel:imie_klienta, telefon });
+      await apiPost({ action:'addPiesek', imie:imie_psa, rasa, wlasciciel:imie_klienta, telefon, email:document.getElementById('add_email').value });
       _pieskiData = []; // wymuś przeładowanie bazy przy następnym otwarciu
     }
     closeModal('resModal');loadReservations();toast('Rezerwacja dodana: '+r.data.id);
@@ -1122,6 +1123,7 @@ async function submitPiesek() {
     rasa: document.getElementById('p_rasa').value.trim(),
     wlasciciel: document.getElementById('p_wlasciciel').value.trim(),
     telefon: document.getElementById('p_telefon').value.trim(),
+    email: document.getElementById('p_email').value.trim(),
     opis: document.getElementById('p_opis').value.trim()
   };
   if (_piesekImageData) {
@@ -1167,6 +1169,7 @@ function openPiesekCard(id) {
           <div class="form-group" style="margin-bottom:10px"><label>Właściciel</label><input type="text" id="pc_wlasciciel" value="${String(p.Wlasciciel||'').replace(/"/g,'&quot;')}"></div>
           <div class="form-group" style="margin-bottom:10px"><label>Telefon</label><input type="tel" id="pc_telefon" value="${String(p.Telefon||'').replace(/"/g,'&quot;')}"></div>
         </div>
+        <div class="form-group" style="margin-bottom:10px"><label>E-mail</label><input type="email" id="pc_email" value="${String(p.Email||'').replace(/"/g,'&quot;')}"></div>
       </div>
     </div>
     <div class="form-group"><label>Opis (charakter, alergie, uwagi)</label><textarea id="pc_opis">${p.Opis||''}</textarea></div>
@@ -1201,6 +1204,7 @@ async function savePiesek(id) {
     rasa: document.getElementById('pc_rasa').value,
     wlasciciel: document.getElementById('pc_wlasciciel').value,
     telefon: document.getElementById('pc_telefon').value,
+    email: document.getElementById('pc_email').value,
     opis: document.getElementById('pc_opis').value
   });
   if (r.ok) { toast('Zapisano'); loadDogs(); }

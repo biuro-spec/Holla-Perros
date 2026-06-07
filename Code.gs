@@ -426,6 +426,7 @@ function syncWizytaZRezerwacji(rezRow) {
   const cena     = rezRow[4];
   const klient   = rezRow[5];
   const telefon  = String(rezRow[6] || '').replace(/\s/g, '');
+  const email    = rezRow[7] || '';
   const imiePsa  = String(rezRow[8] || '').trim();
   const rasa     = rezRow[9] || '';
   if (!imiePsa) return;
@@ -458,7 +459,8 @@ function syncWizytaZRezerwacji(rezRow) {
     // Utwórz nowego psa w bazie z pierwszą wizytą
     const id = 'P-' + Date.now();
     const dataStr = Utilities.formatDate(new Date(), 'Europe/Warsaw', 'yyyy-MM-dd');
-    sheet.appendRow([id, '', imiePsa, rasa, klient, telefon, '', JSON.stringify([wpis]), dataStr]);
+    ensureEmailHeader(sheet);
+    sheet.appendRow([id, '', imiePsa, rasa, klient, telefon, '', JSON.stringify([wpis]), dataStr, email]);
   }
 }
 
@@ -818,8 +820,14 @@ function addPiesek(data) {
     fileId = file.getId();
   }
   const dataStr = Utilities.formatDate(new Date(), 'Europe/Warsaw', 'yyyy-MM-dd');
-  sheet.appendRow([id, fileId, data.imie || '', data.rasa || '', data.wlasciciel || '', data.telefon || '', data.opis || '', '[]', dataStr]);
+  ensureEmailHeader(sheet);
+  sheet.appendRow([id, fileId, data.imie || '', data.rasa || '', data.wlasciciel || '', data.telefon || '', data.opis || '', '[]', dataStr, data.email || '']);
   return jsonOK({ id });
+}
+
+// Zapewnia nagłówek "Email" w kolumnie 10 arkusza BazaPieski (jednorazowo)
+function ensureEmailHeader(sheet) {
+  if (!sheet.getRange(1, 10).getValue()) sheet.getRange(1, 10).setValue('Email');
 }
 
 function getPieskiBaza() {
@@ -831,6 +839,7 @@ function getPieskiBaza() {
     if (!rows[i][0]) continue;
     const obj = {};
     headers.forEach((h, idx) => { obj[h] = rows[i][idx]; });
+    obj.Email = rows[i][9] || '';   // kolumna 10 (Email) — czytamy po indeksie na wypadek braku nagłówka
     // Parsuj wizyty
     try { obj.WizytyArr = JSON.parse(rows[i][7] || '[]'); } catch(e) { obj.WizytyArr = []; }
     result.push(obj);
@@ -849,6 +858,7 @@ function updatePiesek(data) {
       if (data.wlasciciel !== undefined) sheet.getRange(i+1, 5).setValue(data.wlasciciel);
       if (data.telefon    !== undefined) sheet.getRange(i+1, 6).setValue(data.telefon);
       if (data.opis       !== undefined) sheet.getRange(i+1, 7).setValue(data.opis);
+      if (data.email      !== undefined) { ensureEmailHeader(sheet); sheet.getRange(i+1, 10).setValue(data.email); }
       return jsonOK('Zaktualizowano');
     }
   }
