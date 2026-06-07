@@ -619,6 +619,11 @@ window.addEventListener('DOMContentLoaded', () => {
 // =====================================================
 function getKey() { return localStorage.getItem('hp_key') || ''; }
 
+// Sheets zwraca daty/czas jako ISO (np. 2026-06-20T00:00:00.000Z, godzina jako 1899-12-30T10:00:00.000Z).
+// Formatujemy ze stringa (bez parsowania Date) — bezpieczne dla stref czasowych.
+function fmtData(v){ if(v==null||v==='') return ''; const s=String(v); return s.includes('T') ? s.split('T')[0] : s; }
+function fmtGodz(v){ if(v==null||v==='') return ''; const s=String(v); if(s.includes('T')){ return (s.split('T')[1]||'').slice(0,5); } return s; }
+
 function api(params) {
   params = Object.assign({}, params, { key: getKey() });
   return fetch(API_URL+'?'+new URLSearchParams(params)).then(r=>r.json()).catch(()=>({ok:false,error:'Brak połączenia'}));
@@ -690,7 +695,7 @@ async function loadTodayReservations() {
 
 function resRowHtml(res) {
   return `<div class="day-res-item" onclick='openResModal(${JSON.stringify(res)})'>
-    <div class="day-res-time">${res['Godzina']} <span class="badge badge-${res['Status']||'oczekuje'}">${res['Status']||'oczekuje'}</span></div>
+    <div class="day-res-time">${fmtGodz(res['Godzina'])} <span class="badge badge-${res['Status']||'oczekuje'}">${res['Status']||'oczekuje'}</span></div>
     <div class="day-res-name">🐶 ${res['Imie_psa']} · ${res['Imie_klienta']}</div>
     <div class="day-res-service">${res['Usługa']} · ${res['Cena']} zł</div>
   </div>`;
@@ -818,8 +823,8 @@ async function loadReservations() {
   tbody.innerHTML=r.data.map(res=>`
     <tr>
       <td><small style="font-size:0.78rem;color:var(--light)">${res['ID']}</small></td>
-      <td>${res['Data']}</td>
-      <td><strong>${res['Godzina']}</strong></td>
+      <td>${fmtData(res['Data'])}</td>
+      <td><strong>${fmtGodz(res['Godzina'])}</strong></td>
       <td>${res['Imie_klienta']}<br><small style="color:var(--light)">${res['Email']}</small></td>
       <td>🐶 ${res['Imie_psa']}<br><small style="color:var(--light)">${res['Rasa']||''}</small></td>
       <td style="max-width:160px">${res['Usługa']}</td>
@@ -834,7 +839,7 @@ function openResModal(res) {
   document.getElementById('resModalTitle').textContent = res['ID'];
   document.getElementById('resModalBody').innerHTML = `
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">
-      <div><small style="color:var(--light);font-size:0.75rem;text-transform:uppercase;letter-spacing:1px">Data i godzina</small><div style="font-size:1.1rem;font-weight:600">${res['Data']} ${res['Godzina']}</div></div>
+      <div><small style="color:var(--light);font-size:0.75rem;text-transform:uppercase;letter-spacing:1px">Data i godzina</small><div style="font-size:1.1rem;font-weight:600">${fmtData(res['Data'])} ${fmtGodz(res['Godzina'])}</div></div>
       <div><small style="color:var(--light);font-size:0.75rem;text-transform:uppercase;letter-spacing:1px">Usługa</small><div>${res['Usługa']}</div></div>
       <div><small style="color:var(--light);font-size:0.75rem;text-transform:uppercase;letter-spacing:1px">Klient</small><div>${res['Imie_klienta']}<br><a href="tel:${res['Telefon']}" style="color:var(--gold)">${res['Telefon']}</a></div></div>
       <div><small style="color:var(--light);font-size:0.75rem;text-transform:uppercase;letter-spacing:1px">Piesek</small><div>🐶 ${res['Imie_psa']} (${res['Rasa']||'?'})</div></div>
