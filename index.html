@@ -38,9 +38,97 @@
     <meta name="geo.placename" content="Racibórz" />
     <meta name="geo.position" content="50.0946;18.2046" />
     <meta name="ICBM" content="50.0946, 18.2046" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/Hola-Perros/manifest.json" />
+
+    <!-- Dane firmy dla Google (LocalBusiness) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "PetGroomer",
+      "name": "hOla Perros",
+      "description": "Profesjonalny salon groomerski w Raciborzu — strzyżenie, kąpiel, pielęgnacja i SPA dla psów. Bezstresowe wizyty.",
+      "image": "https://biuro-spec.github.io/Hola-Perros/og-image.jpg",
+      "logo": "https://biuro-spec.github.io/Hola-Perros/favicon-192.png",
+      "url": "https://biuro-spec.github.io/Hola-Perros/",
+      "telephone": "+48512501558",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ul. Opawska 67",
+        "addressLocality": "Racibórz",
+        "postalCode": "47-400",
+        "addressCountry": "PL"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 50.0945533,
+        "longitude": 18.2045542
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "17:00"
+        }
+      ],
+      "sameAs": [
+        "https://www.instagram.com/holaperros_salon"
+      ]
+    }
+    </script>
+
+    <!-- Najczęstsze pytania dla Google (FAQ rich snippet) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Jak długo trwa strzyżenie psa?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Zależnie od rasy, wielkości i stanu szaty wizyta trwa zwykle od 1 do 3 godzin. Pracuję spokojnie i bez pośpiechu, by pupil czuł się komfortowo." }
+        },
+        {
+          "@type": "Question",
+          "name": "Czy psy są strzyżone pod środkami uspokajającymi?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Nie. Nigdy nie stosuję środków uspokajających. Stawiam na cierpliwość, łagodne podejście i budowanie zaufania — wizyty są w pełni bezstresowe." }
+        },
+        {
+          "@type": "Question",
+          "name": "Jak przygotować psa na pierwszą wizytę?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Wystarczy, że przyprowadzisz pupila na lekko wygłodzony żołądek i po spacerze. Resztą zajmę się ja. Przy pierwszej wizycie chętnie poznam jego charakter i potrzeby." }
+        },
+        {
+          "@type": "Question",
+          "name": "Od jakiego wieku można strzyc szczeniaka?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Pierwszą pielęgnację warto wykonać już po zakończeniu szczepień, około 3–4 miesiąca życia. Wczesne, delikatne wizyty pomagają psu oswoić się z groomingiem." }
+        },
+        {
+          "@type": "Question",
+          "name": "Jak często należy strzyc psa?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Rasy z szybko rosnącą szatą (np. shih-tzu, pudel, york) zalecam strzyc co 6–8 tygodni. Dla pozostałych ras dobieram indywidualny harmonogram pielęgnacji." }
+        },
+        {
+          "@type": "Question",
+          "name": "Czy trzeba umawiać się wcześniej?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Tak, pracuję na umówione terminy, by każdy pies miał pełną uwagę. Wystarczy zadzwonić, napisać na WhatsApp lub Instagramie — dobierzemy dogodny termin." }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/Hola-Perros/sw.js', { scope: '/Hola-Perros/' }).catch(function () {});
+        });
+      }
+    </script>
   </body>
 </html>

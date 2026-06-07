@@ -1,6 +1,62 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Phone, MapPin, Camera, Sparkles, MessageCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Phone, MapPin, Camera, Sparkles, MessageCircle, Plus } from 'lucide-react';
+
+const FAQ_DATA = [
+  { q: 'Jak długo trwa strzyżenie psa?', a: 'Zależnie od rasy, wielkości i stanu szaty wizyta trwa zwykle od 1 do 3 godzin. Pracuję spokojnie i bez pośpiechu, by pupil czuł się komfortowo.' },
+  { q: 'Czy psy są strzyżone pod środkami uspokajającymi?', a: 'Nie. Nigdy nie stosuję środków uspokajających. Stawiam na cierpliwość, łagodne podejście i budowanie zaufania — wizyty są w pełni bezstresowe.' },
+  { q: 'Jak przygotować psa na pierwszą wizytę?', a: 'Wystarczy, że przyprowadzisz pupila na lekko wygłodzony żołądek i po spacerze. Resztą zajmę się ja. Przy pierwszej wizycie chętnie poznam jego charakter i potrzeby.' },
+  { q: 'Od jakiego wieku można strzyc szczeniaka?', a: 'Pierwszą pielęgnację warto wykonać już po zakończeniu szczepień, około 3–4 miesiąca życia. Wczesne, delikatne wizyty pomagają psu oswoić się z groomingiem.' },
+  { q: 'Jak często należy strzyc psa?', a: 'Rasy z szybko rosnącą szatą (np. shih-tzu, pudel, york) zalecam strzyc co 6–8 tygodni. Dla pozostałych ras dobieram indywidualny harmonogram pielęgnacji.' },
+  { q: 'Czy trzeba umawiać się wcześniej?', a: 'Tak, pracuję na umówione terminy, by każdy pies miał pełną uwagę. Wystarczy zadzwonić, napisać na WhatsApp lub Instagramie — dobierzemy dogodny termin.' },
+];
+
+function FaqSection() {
+  const [open, setOpen] = useState(0);
+  return (
+    <section id="faq" style={{ padding: '120px 0', backgroundColor: 'var(--bg-color-alt)', borderTop: '1px solid var(--border-color)' }}>
+      <div className="container" style={{ maxWidth: '820px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+          <p style={{ fontSize: '0.9rem', color: 'var(--gold)', marginBottom: '16px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '2px' }}>Masz pytania?</p>
+          <h2 style={{ fontSize: '3.5rem', fontWeight: 400, marginBottom: '20px' }}>Najczęstsze <i className="text-italic text-pink">pytania</i></h2>
+          <p style={{ color: 'var(--text-light)', fontSize: '1.15rem', maxWidth: '520px', margin: '0 auto', lineHeight: 1.7 }}>
+            Wszystko, co warto wiedzieć przed wizytą. Nie znalazłeś odpowiedzi? Napisz lub zadzwoń!
+          </p>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          {FAQ_DATA.map((item, i) => {
+            const isOpen = open === i;
+            return (
+              <div key={i} className="editorial-card" style={{ padding: 0, overflow: 'hidden', border: isOpen ? '1px solid var(--gold)' : '1px solid var(--border-color)', transition: 'border-color 0.3s ease' }}>
+                <button
+                  onClick={() => setOpen(isOpen ? -1 : i)}
+                  style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px', padding: '24px 28px', background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left' }}
+                >
+                  <span style={{ fontFamily: 'var(--font-heading)', fontSize: '1.35rem', color: 'var(--text-dark)', fontWeight: 500 }}>{item.q}</span>
+                  <Plus size={22} className="text-gold" style={{ flexShrink: 0, transform: isOpen ? 'rotate(45deg)' : 'rotate(0)', transition: 'transform 0.3s ease' }} />
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      style={{ overflow: 'hidden' }}
+                    >
+                      <p style={{ padding: '0 28px 26px', color: 'var(--text-light)', fontSize: '1.05rem', lineHeight: 1.75, margin: 0 }}>{item.a}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 const InstagramIcon = ({ size = 26, color = 'currentColor' }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -419,6 +475,9 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* FAQ */}
+      <FaqSection />
 
       {/* Kontakt */}
       <section id="kontakt" style={{ padding: '120px 0', borderTop: '1px solid var(--border-color)' }}>
