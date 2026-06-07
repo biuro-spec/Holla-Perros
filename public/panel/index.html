@@ -1052,11 +1052,13 @@ function openAddPiesek() {
 }
 
 async function handlePiesekFile(input) {
-  const file = input.files[0];
+  let file = input.files[0];
   if (!file) return;
   const msg = document.getElementById('piesekMsg');
   msg.textContent = 'Przetwarzanie zdjęcia...';
   try {
+    if (/image\/(heic|heif)/i.test(file.type||'') || /\.(heic|heif)$/i.test(file.name||'')) msg.textContent = 'Konwertuję zdjęcie z iPhone (HEIC)...';
+    file = await convertIfHeic(file);
     _piesekImageData = await resizeImagePlain(file, 800, 0.82);
     const prev = document.getElementById('piesekPreview');
     prev.src = _piesekImageData;
@@ -1324,6 +1326,23 @@ function loadWatermark() {
   });
 }
 
+// Konwersja HEIC (iPhone) → JPEG, zanim trafi do konwertera WebP
+let _heicTo = null;
+async function convertIfHeic(file) {
+  const isHeic = /image\/(heic|heif)/i.test(file.type || '') || /\.(heic|heif)$/i.test(file.name || '');
+  if (!isHeic) return file;
+  try {
+    if (!_heicTo) {
+      const mod = await import('https://esm.sh/heic-to@1.1.14');
+      _heicTo = mod.heicTo;
+    }
+    const jpeg = await _heicTo({ blob: file, type: 'image/jpeg', quality: 0.92 });
+    return jpeg;
+  } catch(e) {
+    throw new Error('Nie udało się przetworzyć zdjęcia HEIC. Spróbuj ponownie lub użyj zdjęcia JPG.');
+  }
+}
+
 // Zmniejsza zdjęcie + nakłada watermark w rogu (mniejszy upload, sygnowane logo)
 function resizeImage(file, maxW, quality) {
   return new Promise(async (resolve, reject) => {
@@ -1361,11 +1380,13 @@ function resizeImage(file, maxW, quality) {
 }
 
 async function handleMetaFile(input) {
-  const file = input.files[0];
+  let file = input.files[0];
   if (!file) return;
   const msg = document.getElementById('metaUploadMsg');
   msg.textContent = 'Przetwarzanie zdjęcia...';
   try {
+    if (/image\/(heic|heif)/i.test(file.type||'') || /\.(heic|heif)$/i.test(file.name||'')) msg.textContent = 'Konwertuję zdjęcie z iPhone (HEIC)...';
+    file = await convertIfHeic(file);
     metaImageData = await resizeImage(file, 1200, 0.82);
     const prev = document.getElementById('metaPreview');
     prev.src = metaImageData;
