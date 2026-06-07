@@ -14,8 +14,9 @@ const FAQ_DATA = [
 function FaqSection() {
   const [open, setOpen] = useState(0);
   return (
-    <section id="faq" style={{ padding: '120px 0', backgroundColor: 'var(--bg-color-alt)', borderTop: '1px solid var(--border-color)' }}>
-      <div className="container" style={{ maxWidth: '820px' }}>
+    <section id="faq" style={{ padding: '120px 0', background: 'linear-gradient(160deg, rgba(184,146,42,0.16) 0%, var(--bg-color-alt) 42%, rgba(228,159,179,0.18) 100%)', borderTop: '1px solid var(--gold)', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', top: '-120px', right: '-80px', width: '420px', height: '420px', background: 'radial-gradient(circle, rgba(184,146,42,0.18) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 0 }}></div>
+      <div className="container" style={{ maxWidth: '820px', position: 'relative', zIndex: 1 }}>
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
           <p style={{ fontSize: '0.9rem', color: 'var(--gold)', marginBottom: '16px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '2px' }}>Masz pytania?</p>
           <h2 style={{ fontSize: '3.5rem', fontWeight: 400, marginBottom: '20px' }}>Najczęstsze <i className="text-italic text-pink">pytania</i></h2>
