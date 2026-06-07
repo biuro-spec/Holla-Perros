@@ -60,7 +60,7 @@ export default function Footer() {
       <div style={{ backgroundColor: 'var(--pink)', padding: '20px 40px' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-dark)', margin: 0, fontWeight: 500 }}>
-            © 2026 hOla Perros. Wszelkie prawa zastrzeżone.
+            © <a href={`${import.meta.env.BASE_URL}panel/`} title="" aria-label="Panel" style={{ color: 'inherit', textDecoration: 'none', cursor: 'default' }}>2026</a> hOla Perros. Wszelkie prawa zastrzeżone.
           </p>
           <div style={{ display: 'flex', gap: '24px' }}>
             <Link to="/regulamin" style={{ fontSize: '0.85rem', color: 'var(--text-dark)', textDecoration: 'none', fontWeight: 500 }}>Regulamin</Link>
