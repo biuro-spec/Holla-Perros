@@ -57,11 +57,15 @@ export default function Metamorfozy() {
               onClick={() => setActive(item)}
             >
               <img
-                src={item.Url}
+                src={item.FileId ? `https://lh3.googleusercontent.com/d/${item.FileId}=w1000` : item.Url}
                 alt={item.Tytul || 'Metamorfoza psa'}
                 loading="lazy"
+                referrerPolicy="no-referrer"
                 style={{ width: '100%', display: 'block', borderRadius: '8px' }}
-                onError={(e) => { e.target.parentElement.style.display = 'none'; }}
+                onError={(e) => {
+                  if (!e.target.dataset.retry) { e.target.dataset.retry = 1; const s = e.target.src; e.target.src = ''; setTimeout(() => { e.target.src = s; }, 2500); }
+                  else { e.target.parentElement.style.display = 'none'; }
+                }}
               />
               <div className="meta-overlay" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(45,40,37,0.78) 0%, transparent 55%)', opacity: 0, transition: 'opacity 0.35s ease', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '24px' }}>
                 {item.Rasa && <span style={{ color: 'var(--gold)', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px' }}>{item.Rasa}</span>}
@@ -98,7 +102,7 @@ export default function Metamorfozy() {
               onClick={(e) => e.stopPropagation()}
               style={{ maxWidth: '700px', width: '100%', textAlign: 'center' }}
             >
-              <img src={active.Url} alt={active.Tytul} style={{ maxWidth: '100%', maxHeight: '75vh', borderRadius: '8px', boxShadow: '0 20px 60px rgba(0,0,0,0.4)' }} />
+              <img src={active.FileId ? `https://lh3.googleusercontent.com/d/${active.FileId}=w1400` : active.Url} alt={active.Tytul} referrerPolicy="no-referrer" style={{ maxWidth: '100%', maxHeight: '75vh', borderRadius: '8px', boxShadow: '0 20px 60px rgba(0,0,0,0.4)' }} />
               {(active.Tytul || active.Opis) && (
                 <div style={{ marginTop: '20px', color: '#fff' }}>
                   {active.Rasa && <p style={{ color: 'var(--gold)', fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '6px' }}>{active.Rasa}</p>}

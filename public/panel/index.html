@@ -1106,15 +1106,20 @@ async function loadPanelMetamorfozy() {
     grid.innerHTML = '<div class="empty">Brak opublikowanych prac. Dodaj pierwsze zdjęcie powyżej!</div>';
     return;
   }
-  grid.innerHTML = r.data.map(m => `
+  grid.innerHTML = r.data.map(m => {
+    const thumb = m.FileId ? `https://lh3.googleusercontent.com/d/${m.FileId}=w500` : m.Url;
+    return `
     <div class="dog-card" style="cursor:default;padding:0;overflow:hidden">
-      <img src="${m.Url}" alt="${m.Tytul||''}" style="width:100%;height:180px;object-fit:cover;display:block" onerror="this.style.opacity=0.3" />
+      <img src="${thumb}" alt="${m.Tytul||''}" loading="lazy" referrerpolicy="no-referrer"
+           style="width:100%;height:180px;object-fit:cover;display:block;background:var(--bg-alt)"
+           onerror="if(!this.dataset.retry){this.dataset.retry=1;const s=this.src;this.src='';setTimeout(()=>this.src=s,2500);}else{this.style.opacity=0.3;}" />
       <div style="padding:16px">
         ${m.Rasa ? `<div class="dog-race" style="margin-bottom:4px">${m.Rasa}</div>` : ''}
         ${m.Tytul ? `<div class="dog-name" style="font-size:1.1rem">${m.Tytul}</div>` : ''}
         <button class="btn btn-danger btn-sm" style="width:100%;margin-top:12px" onclick="deletePanelMetamorfoza('${m.ID}')">Usuń</button>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 
 async function deletePanelMetamorfoza(id) {
