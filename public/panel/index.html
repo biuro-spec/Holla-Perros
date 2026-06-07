@@ -1272,7 +1272,7 @@ function renderWizyty(id, wizyty) {
   return `<div style="display:flex;flex-direction:column;gap:8px">` + wizyty.map((w, i) => `
     <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg);border-left:3px solid var(--gold);border-radius:0 6px 6px 0">
       <div>
-        <span style="font-weight:600;color:var(--gold)">${w.data}</span>
+        <span style="font-weight:600;color:var(--gold)">${fmtData(w.data)}</span>
         ${w.opis ? `<span style="color:var(--dark);margin-left:8px">${w.opis}</span>` : ''}
       </div>
       <button class="btn btn-danger btn-sm" style="padding:4px 10px" onclick="deleteWizyta('${id}',${i})">✕</button>
@@ -1348,7 +1348,7 @@ async function loadFinances() {
   if(!entries.length){tbody.innerHTML='<tr><td colspan="5" class="empty">Brak wpisów.</td></tr>';return;}
   tbody.innerHTML=entries.map(e=>`
     <tr>
-      <td>${e['Data']}</td>
+      <td>${fmtData(e['Data'])}</td>
       <td>${e['Opis']}</td>
       <td><span class="badge" style="background:var(--bg-alt);color:var(--light)">${e['Typ']}</span></td>
       <td>${e['Metoda']}</td>
