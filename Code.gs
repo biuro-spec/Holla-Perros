@@ -660,12 +660,27 @@ function getStats() {
 // METAMORFOZY (Google Drive + arkusz)
 // =====================================================
 
-function getMetamorfozyFolder() {
-  const folders = DriveApp.getFoldersByName(CONFIG.DRIVE_FOLDER_NAME);
+// Główny folder salonu — wszystkie podfoldery (Metamorfozy, Pieski) trzymamy w nim
+function getMainFolder() {
+  const name = CONFIG.SALON_NAZWA; // 'hOla Perros'
+  const folders = DriveApp.getFoldersByName(name);
   if (folders.hasNext()) return folders.next();
-  const folder = DriveApp.createFolder(CONFIG.DRIVE_FOLDER_NAME);
+  const folder = DriveApp.createFolder(name);
   folder.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
   return folder;
+}
+
+// Znajdź/utwórz podfolder wewnątrz danego folderu
+function getSubFolder(parent, name) {
+  const it = parent.getFoldersByName(name);
+  if (it.hasNext()) return it.next();
+  const f = parent.createFolder(name);
+  f.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+  return f;
+}
+
+function getMetamorfozyFolder() {
+  return getSubFolder(getMainFolder(), 'Metamorfozy');
 }
 
 function uploadMetamorfoza(data) {
@@ -747,12 +762,29 @@ function deleteMetamorfoza(data) {
 // =====================================================
 
 function getPieskiFolder() {
-  const name = 'hOla Perros - Pieski';
-  const folders = DriveApp.getFoldersByName(name);
-  if (folders.hasNext()) return folders.next();
-  const folder = DriveApp.createFolder(name);
-  folder.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
-  return folder;
+  return getSubFolder(getMainFolder(), 'Pieski');
+}
+
+// ⬇️ JEDNORAZOWO: porządkuje Dysk — przenosi stare foldery do głównego „hOla Perros".
+// Uruchom tę funkcję raz w edytorze Apps Script (wybierz reorganizujFoldery → ▶ Uruchom).
+function reorganizujFoldery() {
+  const main = getMainFolder();
+  const mapa = [
+    { stary: 'hOla Perros - Metamorfozy', nowy: 'Metamorfozy' },
+    { stary: 'hOla Perros - Pieski',      nowy: 'Pieski' }
+  ];
+  const log = [];
+  mapa.forEach(function(m) {
+    const it = DriveApp.getFoldersByName(m.stary);
+    while (it.hasNext()) {
+      const f = it.next();
+      if (f.getId() === main.getId()) continue;
+      f.moveTo(main);     // przenosi folder (ze zdjęciami) do głównego
+      f.setName(m.nowy);  // zmienia nazwę na krótką
+      log.push(m.stary + ' → hOla Perros/' + m.nowy);
+    }
+  });
+  return log.length ? ('Uporządkowano: ' + log.join(' | ')) : 'Brak starych folderów do przeniesienia (już uporządkowane).';
 }
 
 function addPiesek(data) {
