@@ -156,6 +156,7 @@ function doGet(e) {
       case 'getServices':      return jsonOK(USLUGI);
       case 'getMetamorfozy':   return getMetamorfozy();
       case 'getPieski':        return getPieskiBaza();
+      case 'driveInfo':        return getDriveInfo();
       case 'init':             return initSheets();
       case 'test':             return jsonOK({ msg: 'hOla Perros API działa!' });
       default:                 return jsonErr('Nieznana akcja: ' + action);
@@ -763,6 +764,22 @@ function deleteMetamorfoza(data) {
 
 function getPieskiFolder() {
   return getSubFolder(getMainFolder(), 'Pieski');
+}
+
+// Diagnostyka struktury folderów na Dysku
+function getDriveInfo() {
+  const main = getMainFolder();
+  const info = { glowny: main.getName(), id: main.getId(), podfoldery: [], stareFolderyNaWierzchu: [] };
+  const subs = main.getFolders();
+  while (subs.hasNext()) {
+    const s = subs.next();
+    let count = 0; const files = s.getFiles(); while (files.hasNext()) { files.next(); count++; }
+    info.podfoldery.push({ nazwa: s.getName(), plikow: count });
+  }
+  ['hOla Perros - Metamorfozy', 'hOla Perros - Pieski'].forEach(function(n) {
+    if (DriveApp.getFoldersByName(n).hasNext()) info.stareFolderyNaWierzchu.push(n);
+  });
+  return jsonOK(info);
 }
 
 // ⬇️ JEDNORAZOWO: porządkuje Dysk — przenosi stare foldery do głównego „hOla Perros".
