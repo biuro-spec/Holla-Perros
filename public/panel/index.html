@@ -434,6 +434,9 @@ tr:last-child td{border:none}
       <h2>Dodaj wpis</h2>
       <button class="modal-close" onclick="closeModal('finModal')">×</button>
     </div>
+    <div class="form-group"><label>Piesek z bazy (opcjonalnie)</label>
+      <select id="fin_piesek" onchange="onFinPiesekChange()"><option value="">— wybierz pieska —</option></select>
+    </div>
     <div class="form-group"><label>Data</label><input type="date" id="fin_data"></div>
     <div class="form-group"><label>Kwota (zł)</label><input type="number" id="fin_kwota" placeholder="0"></div>
     <div class="form-group"><label>Typ</label>
@@ -442,6 +445,10 @@ tr:last-child td{border:none}
     <div class="form-group"><label>Opis</label><input type="text" id="fin_opis" placeholder="np. Strzyżenie Burek"></div>
     <div class="form-group"><label>Metoda płatności</label>
       <select id="fin_metoda"><option value="gotówka">Gotówka</option><option value="karta">Karta</option><option value="przelew">Przelew</option></select>
+    </div>
+    <div id="fin_wizytaBox" class="gdpr" style="display:none;margin-bottom:16px;background:var(--gold-l);align-items:center">
+      <input type="checkbox" id="fin_dodajWizyte" checked style="accent-color:var(--gold)">
+      <label for="fin_dodajWizyte" style="font-size:0.85rem">Zapisz też w historii wizyt wybranego pieska</label>
     </div>
     <button class="btn btn-gold" style="width:100%" onclick="submitFinance()">Zapisz</button>
   </div>
@@ -1165,17 +1172,58 @@ async function loadFinances() {
     </tr>`).join('');
 }
 
-function openAddFinanceModal() { openModal('finModal'); }
+async function openAddFinanceModal() {
+  // reset pól
+  document.getElementById('fin_opis').value = '';
+  document.getElementById('fin_kwota').value = '';
+  document.getElementById('fin_wizytaBox').style.display = 'none';
+  // załaduj pieski do dropdownu
+  const sel = document.getElementById('fin_piesek');
+  sel.innerHTML = '<option value="">— wybierz pieska —</option>';
+  if (!_pieskiData.length) {
+    const r = await api({ action: 'getPieski' });
+    if (r.ok) _pieskiData = r.data;
+  }
+  _pieskiData.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p.ID;
+    opt.textContent = p.Imie + (p.Rasa ? ' (' + p.Rasa + ')' : '') + (p.Wlasciciel ? ' · ' + p.Wlasciciel : '');
+    sel.appendChild(opt);
+  });
+  sel.value = '';
+  openModal('finModal');
+}
+
+function onFinPiesekChange() {
+  const sel = document.getElementById('fin_piesek');
+  const box = document.getElementById('fin_wizytaBox');
+  if (sel.value) {
+    const p = _pieskiData.find(x => x.ID === sel.value);
+    // auto-uzupełnij opis imieniem psa (jeśli puste lub było auto)
+    const opisEl = document.getElementById('fin_opis');
+    if (!opisEl.value.trim()) opisEl.value = p ? p.Imie : '';
+    box.style.display = 'flex';
+  } else {
+    box.style.display = 'none';
+  }
+}
 
 async function submitFinance() {
+  const piesekId = document.getElementById('fin_piesek').value;
+  const data = document.getElementById('fin_data').value;
+  const opis = document.getElementById('fin_opis').value;
   const r=await apiPost({action:'addFinance',
-    data:document.getElementById('fin_data').value,
-    kwota:document.getElementById('fin_kwota').value,
+    data, kwota:document.getElementById('fin_kwota').value,
     typ:document.getElementById('fin_typ').value,
-    opis:document.getElementById('fin_opis').value,
-    metoda:document.getElementById('fin_metoda').value
+    opis, metoda:document.getElementById('fin_metoda').value
   });
-  if(r.ok){closeModal('finModal');loadFinances();toast('Wpis dodany');}
+  if(r.ok){
+    // opcjonalnie dodaj wizytę do historii psa
+    if (piesekId && document.getElementById('fin_dodajWizyte').checked) {
+      await apiPost({ action:'addWizyta', id: piesekId, data, opis });
+    }
+    closeModal('finModal'); loadFinances(); toast('Wpis dodany');
+  }
   else toast('Błąd: '+r.error,'err');
 }
 
