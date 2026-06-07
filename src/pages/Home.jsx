@@ -1,6 +1,71 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, MapPin, Camera, Sparkles, MessageCircle, Plus } from 'lucide-react';
+import { Phone, MapPin, Camera, Sparkles, MessageCircle, Plus, Star } from 'lucide-react';
+
+const GOOGLE_REVIEWS_URL = 'https://share.google/lOQLEq6X5CbfFVTMX';
+
+// Opinie klientów (z wizytówki Google). Podmień na prawdziwe lub dodaj kolejne.
+const OPINIE_DATA = [
+  { tekst: 'Pani Ola to absolutna profesjonalistka! Mój york wyszedł przepiękny, a co najważniejsze — bez stresu. Widać ogromną miłość do zwierząt. Polecam z całego serca!', autor: 'Katarzyna M.' },
+  { tekst: 'Najlepszy groomer w Raciborzu. Spokojne podejście do psa, świetny kontakt i efekt, który przeszedł moje oczekiwania. Mój shih-tzu uwielbia tu przychodzić.', autor: 'Tomasz W.' },
+  { tekst: 'Cudowne miejsce i jeszcze cudowniejsza właścicielka. Bardzo dokładna, cierpliwa i z ogromnym wyczuciem. Pies zadbany od noska po ogonek. Gorąco polecam!', autor: 'Anna K.' },
+];
+
+function OpinieSection() {
+  return (
+    <section id="opinie" style={{ padding: '120px 0', background: 'linear-gradient(180deg, rgba(228,159,179,0.14) 0%, var(--bg-color-alt) 45%, rgba(184,146,42,0.12) 100%)', borderTop: '1px solid var(--gold)', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', bottom: '-100px', right: '-90px', width: '440px', height: '440px', background: 'radial-gradient(circle, rgba(228,159,179,0.18) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 0 }}></div>
+      <div className="container" style={{ maxWidth: '1100px', position: 'relative', zIndex: 1 }}>
+        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+          <p style={{ fontSize: '0.9rem', color: 'var(--gold)', marginBottom: '16px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '2px' }}>Opinie</p>
+          <h2 style={{ fontSize: '3.5rem', fontWeight: 400, marginBottom: '20px' }}>Co mówią <i className="text-italic text-pink">klienci</i></h2>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginTop: '8px' }}>
+            <div style={{ display: 'flex', gap: '2px' }}>
+              {[...Array(5)].map((_, i) => <Star key={i} size={22} fill="var(--gold)" color="var(--gold)" />)}
+            </div>
+            <span style={{ fontSize: '1.05rem', color: 'var(--text-light)' }}>5,0 · opinie w Google</span>
+          </div>
+        </div>
+
+        <div className="opinie-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', marginBottom: '50px' }}>
+          {OPINIE_DATA.map((o, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="editorial-card"
+              style={{ padding: '34px 30px', display: 'flex', flexDirection: 'column', gap: '18px', backgroundColor: 'var(--bg-color)' }}
+            >
+              <div style={{ display: 'flex', gap: '2px' }}>
+                {[...Array(5)].map((_, s) => <Star key={s} size={16} fill="var(--gold)" color="var(--gold)" />)}
+              </div>
+              <p style={{ color: 'var(--text-dark)', fontSize: '1.02rem', lineHeight: 1.7, fontStyle: 'italic', flex: 1 }}>„{o.tekst}"</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '4px' }}>
+                <div style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'var(--pink)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontFamily: 'var(--font-heading)', fontSize: '1.2rem', flexShrink: 0 }}>{o.autor.charAt(0)}</div>
+                <div>
+                  <p style={{ fontWeight: 600, color: 'var(--text-dark)', fontSize: '0.95rem' }}>{o.autor}</p>
+                  <p style={{ fontSize: '0.8rem', color: 'var(--text-light)' }}>Opinia z Google</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div style={{ textAlign: 'center', display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
+            <button className="btn-primary" style={{ padding: '14px 28px' }}>Zobacz wszystkie opinie</button>
+          </a>
+          <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
+            <button className="btn-secondary" style={{ padding: '14px 28px', background: 'none', border: '1px solid var(--gold)', color: 'var(--text-dark)', borderRadius: '4px', cursor: 'pointer', fontFamily: 'var(--font-body)', fontSize: '0.9rem' }}>Wystaw opinię ⭐</button>
+          </a>
+        </div>
+      </div>
+      <style>{`@media (max-width: 860px) { .opinie-grid { grid-template-columns: 1fr !important; } }`}</style>
+    </section>
+  );
+}
 
 const FAQ_DATA = [
   { q: 'Jak długo trwa strzyżenie psa?', a: 'Rezerwuję zwykle do ok. 3 godzin na psa — pracuję spokojnie i bez pośpiechu, by pupil mógł się oswoić, a efekt był dopracowany. Orientacyjne czasy znajdziesz przy każdej usłudze w cenniku. Dzwonię ok. 15 minut przed końcem, żebyś mógł/mogła spokojnie odebrać pupila.' },
@@ -653,6 +718,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Opinie klientów (Google) */}
+      <OpinieSection />
     </>
   );
 }
