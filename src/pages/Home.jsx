@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, MapPin, Camera, Sparkles, MessageCircle, Plus } from 'lucide-react';
 
 const FAQ_DATA = [
-  { q: 'Jak długo trwa strzyżenie psa?', a: 'Zależnie od rasy, wielkości i stanu szaty wizyta trwa zwykle od 1 do 3 godzin. Pracuję spokojnie i bez pośpiechu, by pupil czuł się komfortowo.' },
+  { q: 'Jak długo trwa strzyżenie psa?', a: 'Rezerwuję zwykle do ok. 3 godzin na psa — pracuję spokojnie i bez pośpiechu, by pupil mógł się oswoić, a efekt był dopracowany. Orientacyjne czasy znajdziesz przy każdej usłudze w cenniku. Dzwonię ok. 15 minut przed końcem, żebyś mógł/mogła spokojnie odebrać pupila.' },
   { q: 'Czy psy są strzyżone pod środkami uspokajającymi?', a: 'Nie. Nigdy nie stosuję środków uspokajających. Stawiam na cierpliwość, łagodne podejście i budowanie zaufania — wizyty są w pełni bezstresowe.' },
   { q: 'Jak przygotować psa na pierwszą wizytę?', a: 'Wystarczy, że przyprowadzisz pupila na lekko wygłodzony żołądek i po spacerze. Resztą zajmę się ja. Przy pierwszej wizycie chętnie poznam jego charakter i potrzeby.' },
   { q: 'Od jakiego wieku można strzyc szczeniaka?', a: 'Pierwszą pielęgnację warto wykonać już po zakończeniu szczepień, około 3–4 miesiąca życia. Wczesne, delikatne wizyty pomagają psu oswoić się z groomingiem.' },
@@ -232,16 +232,19 @@ export default function Home() {
                 <h3 style={{ fontSize: '2rem', fontWeight: 400, marginBottom: '24px', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px', letterSpacing: '2px', textTransform: 'uppercase' }}>Strzyżenie</h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
                   {[
-                    { rasa: 'Rasy mini', przyklad: 'Yorkshire terrier, Maltańczyk, Bolończyk, Maltipoo, Papillon', cena: '160–200 zł' },
-                    { rasa: 'Rasy małe', przyklad: 'Shih-tzu, West Highland White Terrier, Bichon Frise', cena: '170–220 zł' },
-                    { rasa: 'Rasy średnie', przyklad: 'Pudel, Goldendoodle', cena: '190–250 zł' },
+                    { rasa: 'Rasy mini', przyklad: 'Yorkshire terrier, Maltańczyk, Bolończyk, Maltipoo, Papillon', cena: '160–200 zł', czas: '2–3 h' },
+                    { rasa: 'Rasy małe', przyklad: 'Shih-tzu, West Highland White Terrier, Bichon Frise', cena: '170–220 zł', czas: '2–3 h' },
+                    { rasa: 'Rasy średnie', przyklad: 'Pudel, Goldendoodle', cena: '190–250 zł', czas: '2,5–3,5 h' },
                   ].map(r => (
                     <div key={r.rasa} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                       <div style={{ paddingRight: '16px' }}>
                         <h4 style={{ fontSize: '1.3rem', fontWeight: 500, marginBottom: '6px' }}>{r.rasa}</h4>
                         <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. {r.przyklad})</p>
                       </div>
-                      <div style={{ fontSize: '1.2rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>{r.cena}</div>
+                      <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                        <div style={{ fontSize: '1.2rem', color: 'var(--gold)' }}>{r.cena}</div>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--text-light)', marginTop: '4px' }}>⏱ {r.czas}</div>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -252,16 +255,19 @@ export default function Home() {
                 <h3 style={{ fontSize: '2rem', fontWeight: 400, marginBottom: '24px', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px', letterSpacing: '2px', textTransform: 'uppercase' }}>Trymowanie</h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
                   {[
-                    { rasa: 'Rasy małe', przyklad: 'Jack Russell Terrier, Parson Russell Terrier, Sznaucer miniaturowy, Jamnik szorstkowłosy', cena: '190–290 zł' },
-                    { rasa: 'Rasy średnie', przyklad: 'Cocker Spaniel, Sznaucer średni, West Highland White Terrier', cena: '200–330 zł' },
-                    { rasa: 'Rasy duże', przyklad: 'Sznaucer olbrzym', cena: '230–390 zł' },
+                    { rasa: 'Rasy małe', przyklad: 'Jack Russell Terrier, Parson Russell Terrier, Sznaucer miniaturowy, Jamnik szorstkowłosy', cena: '190–290 zł', czas: '2–3 h' },
+                    { rasa: 'Rasy średnie', przyklad: 'Cocker Spaniel, Sznaucer średni, West Highland White Terrier', cena: '200–330 zł', czas: '2,5–3,5 h' },
+                    { rasa: 'Rasy duże', przyklad: 'Sznaucer olbrzym', cena: '230–390 zł', czas: '3–4 h' },
                   ].map(r => (
                     <div key={r.rasa} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                       <div style={{ paddingRight: '16px' }}>
                         <h4 style={{ fontSize: '1.3rem', fontWeight: 500, marginBottom: '6px' }}>{r.rasa}</h4>
                         <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. {r.przyklad})</p>
                       </div>
-                      <div style={{ fontSize: '1.2rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>{r.cena}</div>
+                      <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                        <div style={{ fontSize: '1.2rem', color: 'var(--gold)' }}>{r.cena}</div>
+                        <div style={{ fontSize: '0.8rem', color: 'var(--text-light)', marginTop: '4px' }}>⏱ {r.czas}</div>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -277,7 +283,10 @@ export default function Home() {
                       <h4 style={{ fontSize: '1.3rem', fontWeight: 500, marginBottom: '6px' }}>Rasy mini</h4>
                       <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Szpic miniaturowy, Chihuahua, Pekińczyk, Chart włoski)</p>
                     </div>
-                    <div style={{ fontSize: '1.2rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>150–200 zł</div>
+                    <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                      <div style={{ fontSize: '1.2rem', color: 'var(--gold)' }}>150–200 zł</div>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--text-light)', marginTop: '4px' }}>⏱ 1,5–2,5 h</div>
+                    </div>
                   </div>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
@@ -285,7 +294,10 @@ export default function Home() {
                       <h4 style={{ fontSize: '1.3rem', fontWeight: 500, marginBottom: '6px' }}>Rasy małe</h4>
                       <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Jamnik, Mops, Boston terrier)</p>
                     </div>
-                    <div style={{ fontSize: '1.2rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>160–220 zł</div>
+                    <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                      <div style={{ fontSize: '1.2rem', color: 'var(--gold)' }}>160–220 zł</div>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--text-light)', marginTop: '4px' }}>⏱ 1,5–2,5 h</div>
+                    </div>
                   </div>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
@@ -293,7 +305,10 @@ export default function Home() {
                       <h4 style={{ fontSize: '1.3rem', fontWeight: 500, marginBottom: '6px' }}>Rasy średnie</h4>
                       <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Beagle, Buldog francuski, Shiba Inu, Cavalier, Owczarek Szetlandzki)</p>
                     </div>
-                    <div style={{ fontSize: '1.2rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>180–280 zł</div>
+                    <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                      <div style={{ fontSize: '1.2rem', color: 'var(--gold)' }}>180–280 zł</div>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--text-light)', marginTop: '4px' }}>⏱ 2–3 h</div>
+                    </div>
                   </div>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
@@ -301,7 +316,10 @@ export default function Home() {
                       <h4 style={{ fontSize: '1.3rem', fontWeight: 500, marginBottom: '6px' }}>Rasy duże</h4>
                       <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Border Collie, Owczarek australijski, Owczarek niemiecki, Golden retriever, Labrador, Husky)</p>
                     </div>
-                    <div style={{ fontSize: '1.2rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>190–390 zł</div>
+                    <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                      <div style={{ fontSize: '1.2rem', color: 'var(--gold)' }}>190–390 zł</div>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--text-light)', marginTop: '4px' }}>⏱ 3–4 h</div>
+                    </div>
                   </div>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
@@ -309,7 +327,10 @@ export default function Home() {
                       <h4 style={{ fontSize: '1.3rem', fontWeight: 500, marginBottom: '6px' }}>Rasy olbrzymie</h4>
                       <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Berneński pies pasterski, Malamut, Akita, Nowofundland)</p>
                     </div>
-                    <div style={{ fontSize: '1.2rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>450–800 zł</div>
+                    <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
+                      <div style={{ fontSize: '1.2rem', color: 'var(--gold)' }}>450–800 zł</div>
+                      <div style={{ fontSize: '0.8rem', color: 'var(--text-light)', marginTop: '4px' }}>⏱ 3–4 h</div>
+                    </div>
                   </div>
                 </div>
               </div>
