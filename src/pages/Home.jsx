@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, MapPin, Camera, Sparkles, MessageCircle, Plus, Star } from 'lucide-react';
+import { Phone, MapPin, Camera, Sparkles, MessageCircle, Plus, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const GOOGLE_REVIEWS_URL = 'https://share.google/lOQLEq6X5CbfFVTMX';
 
@@ -13,12 +13,34 @@ const OPINIE_DATA = [
   { tekst: 'Serdecznie polecam salon groomerski! Piesek wyszedł piękny i zadbany, a pani Ola bardzo przyjazna i profesjonalna.', autor: 'Julka Lasyk' },
 ];
 
+function OpinieCard({ o, big }) {
+  return (
+    <div className="editorial-card" style={{ padding: big ? '40px 36px' : '30px 26px', height: big ? '320px' : '270px', display: 'flex', flexDirection: 'column', gap: '16px', backgroundColor: 'var(--bg-color)', boxShadow: big ? '0 18px 50px rgba(184,146,42,0.16)' : '0 8px 24px rgba(0,0,0,0.06)' }}>
+      <div style={{ display: 'flex', gap: '2px' }}>
+        {[...Array(5)].map((_, s) => <Star key={s} size={big ? 18 : 14} fill="var(--gold)" color="var(--gold)" />)}
+      </div>
+      <p style={{ color: 'var(--text-dark)', fontSize: big ? '1.08rem' : '0.95rem', lineHeight: 1.65, fontStyle: 'italic', flex: 1, overflow: 'hidden' }}>„{o.tekst}"</p>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '4px' }}>
+        <div style={{ width: big ? '46px' : '38px', height: big ? '46px' : '38px', borderRadius: '50%', backgroundColor: 'var(--pink)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontFamily: 'var(--font-heading)', fontSize: big ? '1.3rem' : '1.1rem', flexShrink: 0 }}>{o.autor.charAt(0)}</div>
+        <div>
+          <p style={{ fontWeight: 600, color: 'var(--text-dark)', fontSize: big ? '0.98rem' : '0.88rem' }}>{o.autor}</p>
+          <p style={{ fontSize: '0.78rem', color: 'var(--text-light)' }}>Opinia z Google</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function OpinieSection() {
+  const [active, setActive] = useState(0);
+  const len = OPINIE_DATA.length;
+  const go = (d) => setActive((a) => (a + d + len) % len);
+
   return (
     <section id="opinie" style={{ padding: '120px 0', background: 'linear-gradient(180deg, rgba(228,159,179,0.14) 0%, var(--bg-color-alt) 45%, rgba(184,146,42,0.12) 100%)', borderTop: '1px solid var(--gold)', position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', bottom: '-100px', right: '-90px', width: '440px', height: '440px', background: 'radial-gradient(circle, rgba(228,159,179,0.18) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 0 }}></div>
       <div className="container" style={{ maxWidth: '1100px', position: 'relative', zIndex: 1 }}>
-        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '50px' }}>
           <p style={{ fontSize: '0.9rem', color: 'var(--gold)', marginBottom: '16px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '2px' }}>Opinie</p>
           <h2 style={{ fontSize: '3.5rem', fontWeight: 400, marginBottom: '20px' }}>Co mówią <i className="text-italic text-pink">klienci</i></h2>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', marginTop: '8px' }}>
@@ -29,29 +51,35 @@ function OpinieSection() {
           </div>
         </div>
 
-        <div className="opinie-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))', gap: '24px', marginBottom: '50px' }}>
-          {OPINIE_DATA.map((o, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="editorial-card"
-              style={{ padding: '34px 30px', display: 'flex', flexDirection: 'column', gap: '18px', backgroundColor: 'var(--bg-color)' }}
-            >
-              <div style={{ display: 'flex', gap: '2px' }}>
-                {[...Array(5)].map((_, s) => <Star key={s} size={16} fill="var(--gold)" color="var(--gold)" />)}
-              </div>
-              <p style={{ color: 'var(--text-dark)', fontSize: '1.02rem', lineHeight: 1.7, fontStyle: 'italic', flex: 1 }}>„{o.tekst}"</p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '4px' }}>
-                <div style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'var(--pink)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontFamily: 'var(--font-heading)', fontSize: '1.2rem', flexShrink: 0 }}>{o.autor.charAt(0)}</div>
-                <div>
-                  <p style={{ fontWeight: 600, color: 'var(--text-dark)', fontSize: '0.95rem' }}>{o.autor}</p>
-                  <p style={{ fontSize: '0.8rem', color: 'var(--text-light)' }}>Opinia z Google</p>
-                </div>
-              </div>
-            </motion.div>
+        {/* Karuzela coverflow */}
+        <div style={{ position: 'relative', height: '360px', marginBottom: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          {OPINIE_DATA.map((o, i) => {
+            let off = i - active;
+            if (off > len / 2) off -= len;
+            if (off < -len / 2) off += len;
+            const visible = Math.abs(off) <= 1;
+            const big = off === 0;
+            return (
+              <motion.div
+                key={i}
+                animate={{ x: off * 340, scale: big ? 1 : 0.84, opacity: visible ? (big ? 1 : 0.55) : 0, zIndex: big ? 3 : 1 }}
+                transition={{ duration: 0.45, ease: 'easeInOut' }}
+                onClick={() => !big && visible && setActive(i)}
+                style={{ position: 'absolute', width: '400px', maxWidth: '88vw', cursor: big ? 'default' : 'pointer', pointerEvents: visible ? 'auto' : 'none' }}
+              >
+                <OpinieCard o={o} big={big} />
+              </motion.div>
+            );
+          })}
+
+          <button onClick={() => go(-1)} aria-label="Poprzednia opinia" className="opinie-arrow" style={{ position: 'absolute', left: '0', zIndex: 5, width: '52px', height: '52px', borderRadius: '50%', border: '1px solid var(--gold)', background: 'var(--bg-color)', color: 'var(--gold)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 16px rgba(0,0,0,0.1)' }}><ChevronLeft size={26} /></button>
+          <button onClick={() => go(1)} aria-label="Następna opinia" className="opinie-arrow" style={{ position: 'absolute', right: '0', zIndex: 5, width: '52px', height: '52px', borderRadius: '50%', border: '1px solid var(--gold)', background: 'var(--bg-color)', color: 'var(--gold)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 16px rgba(0,0,0,0.1)' }}><ChevronRight size={26} /></button>
+        </div>
+
+        {/* Kropki */}
+        <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginBottom: '46px' }}>
+          {OPINIE_DATA.map((_, i) => (
+            <button key={i} onClick={() => setActive(i)} aria-label={'Opinia ' + (i + 1)} style={{ width: i === active ? '24px' : '8px', height: '8px', borderRadius: '4px', border: 'none', background: i === active ? 'var(--gold)' : 'rgba(184,146,42,0.3)', cursor: 'pointer', transition: 'all 0.3s ease', padding: 0 }} />
           ))}
         </div>
 
@@ -64,7 +92,7 @@ function OpinieSection() {
           </a>
         </div>
       </div>
-      <style>{`@media (max-width: 860px) { .opinie-grid { grid-template-columns: 1fr !important; } }`}</style>
+      <style>{`@media (max-width: 600px) { .opinie-arrow { width: 42px !important; height: 42px !important; } }`}</style>
     </section>
   );
 }
