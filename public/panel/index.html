@@ -1123,20 +1123,17 @@ async function addWizyta(id) {
   const r = await apiPost({ action:'addWizyta', id, data, opis: document.getElementById('wiz_opis').value });
   if (r.ok) {
     toast('Wizyta dodana');
-    // odśwież dane i kartę
-    await loadDogs();
-    const p = _pieskiData.find(x => x.ID === id);
-    if (p) { document.getElementById('wizListContainer').innerHTML = renderWizyty(id, p.WizytyArr || []); document.getElementById('wiz_opis').value=''; }
+    await loadDogs();          // odśwież _pieskiData ze świeżą historią
+    openPiesekCard(id);        // przerysuj całą kartę — nagłówek + lista spójne
   } else toast('Błąd: ' + r.error, 'err');
 }
 
 async function deleteWizyta(id, index) {
   const r = await apiPost({ action:'deleteWizyta', id, index });
   if (r.ok) {
-    await loadDogs();
-    const p = _pieskiData.find(x => x.ID === id);
-    if (p) document.getElementById('wizListContainer').innerHTML = renderWizyty(id, p.WizytyArr || []);
     toast('Usunięto wizytę');
+    await loadDogs();
+    openPiesekCard(id);
   } else toast('Błąd: ' + r.error, 'err');
 }
 
