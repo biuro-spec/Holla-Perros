@@ -20,7 +20,8 @@ const CONFIG = {
     PIESKI:     'Pieski',
     BLOKADY:    'Blokady',
     FINANSE:    'Finanse',
-    METAMORFOZY:'Metamorfozy'
+    METAMORFOZY:'Metamorfozy',
+    BAZA_PIESKI:'BazaPieski'
   },
   DRIVE_FOLDER_NAME: 'hOla Perros - Metamorfozy',
   SLOTS: ['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00'],
@@ -95,7 +96,8 @@ function initSheets() {
     Pieski:     ['Email_klienta','Imie_psa','Rasa','Uwagi_behawioralne','Alergie','Notatki','Data_aktualizacji'],
     Blokady:    ['Data','Godzina','Powod'],
     Finanse:    ['ID','Data','ID_rezerwacji','Kwota','Typ','Opis','Metoda'],
-    Metamorfozy:['ID','FileId','Url','Tytul','Rasa','Opis','Data']
+    Metamorfozy:['ID','FileId','Url','Tytul','Rasa','Opis','Data'],
+    BazaPieski: ['ID','FileId','Imie','Rasa','Wlasciciel','Telefon','Opis','Wizyty','DataDodania']
   };
 
   for (const [name, headers] of Object.entries(sheetDefs)) {
@@ -127,6 +129,7 @@ function doGet(e) {
       case 'getStats':         return getStats();
       case 'getServices':      return jsonOK(USLUGI);
       case 'getMetamorfozy':   return getMetamorfozy();
+      case 'getPieski':        return getPieskiBaza();
       case 'init':             return initSheets();
       case 'test':             return jsonOK({ msg: 'hOla Perros API działa!' });
       default:                 return jsonErr('Nieznana akcja: ' + action);
@@ -153,6 +156,11 @@ function doPost(e) {
       case 'uploadMetamorfoza':   return uploadMetamorfoza(data);
       case 'updateMetamorfoza':   return updateMetamorfoza(data);
       case 'deleteMetamorfoza':   return deleteMetamorfoza(data);
+      case 'addPiesek':           return addPiesek(data);
+      case 'updatePiesek':        return updatePiesek(data);
+      case 'deletePiesek':        return deletePiesek(data);
+      case 'addWizyta':           return addWizyta(data);
+      case 'deleteWizyta':        return deleteWizyta(data);
       default:                    return jsonErr('Nieznana akcja: ' + data.action);
     }
   } catch(err) {
@@ -650,6 +658,116 @@ function deleteMetamorfoza(data) {
       try { DriveApp.getFileById(rows[i][1]).setTrashed(true); } catch(e) {}
       sheet.deleteRow(i + 1);
       return jsonOK('Usunięto');
+    }
+  }
+  return jsonErr('Nie znaleziono: ' + data.id);
+}
+
+// =====================================================
+// BAZA PIESKÓW (ręczna kartoteka + historia wizyt)
+// Kolumny: ID(1) FileId(2) Imie(3) Rasa(4) Wlasciciel(5) Telefon(6) Opis(7) Wizyty(8) DataDodania(9)
+// =====================================================
+
+function getPieskiFolder() {
+  const name = 'hOla Perros - Pieski';
+  const folders = DriveApp.getFoldersByName(name);
+  if (folders.hasNext()) return folders.next();
+  const folder = DriveApp.createFolder(name);
+  folder.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+  return folder;
+}
+
+function addPiesek(data) {
+  const sheet = getSheet(CONFIG.SHEETS.BAZA_PIESKI);
+  const id = 'P-' + Date.now();
+  let fileId = '';
+  if (data.imageBase64) {
+    const base64 = data.imageBase64.replace(/^data:image\/\w+;base64,/, '');
+    const ct = data.contentType || 'image/jpeg';
+    const ext = ct.indexOf('png') > -1 ? 'png' : (ct.indexOf('webp') > -1 ? 'webp' : 'jpg');
+    const blob = Utilities.newBlob(Utilities.base64Decode(base64), ct, 'pies-' + Date.now() + '.' + ext);
+    const file = getPieskiFolder().createFile(blob);
+    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    fileId = file.getId();
+  }
+  const dataStr = Utilities.formatDate(new Date(), 'Europe/Warsaw', 'yyyy-MM-dd');
+  sheet.appendRow([id, fileId, data.imie || '', data.rasa || '', data.wlasciciel || '', data.telefon || '', data.opis || '', '[]', dataStr]);
+  return jsonOK({ id });
+}
+
+function getPieskiBaza() {
+  const sheet = getSheet(CONFIG.SHEETS.BAZA_PIESKI);
+  const rows = sheet.getDataRange().getValues();
+  const headers = rows[0];
+  const result = [];
+  for (let i = 1; i < rows.length; i++) {
+    if (!rows[i][0]) continue;
+    const obj = {};
+    headers.forEach((h, idx) => { obj[h] = rows[i][idx]; });
+    // Parsuj wizyty
+    try { obj.WizytyArr = JSON.parse(rows[i][7] || '[]'); } catch(e) { obj.WizytyArr = []; }
+    result.push(obj);
+  }
+  result.reverse();
+  return jsonOK(result);
+}
+
+function updatePiesek(data) {
+  const sheet = getSheet(CONFIG.SHEETS.BAZA_PIESKI);
+  const rows = sheet.getDataRange().getValues();
+  for (let i = 1; i < rows.length; i++) {
+    if (rows[i][0] === data.id) {
+      if (data.imie       !== undefined) sheet.getRange(i+1, 3).setValue(data.imie);
+      if (data.rasa       !== undefined) sheet.getRange(i+1, 4).setValue(data.rasa);
+      if (data.wlasciciel !== undefined) sheet.getRange(i+1, 5).setValue(data.wlasciciel);
+      if (data.telefon    !== undefined) sheet.getRange(i+1, 6).setValue(data.telefon);
+      if (data.opis       !== undefined) sheet.getRange(i+1, 7).setValue(data.opis);
+      return jsonOK('Zaktualizowano');
+    }
+  }
+  return jsonErr('Nie znaleziono: ' + data.id);
+}
+
+function deletePiesek(data) {
+  const sheet = getSheet(CONFIG.SHEETS.BAZA_PIESKI);
+  const rows = sheet.getDataRange().getValues();
+  for (let i = rows.length - 1; i >= 1; i--) {
+    if (rows[i][0] === data.id) {
+      if (rows[i][1]) { try { DriveApp.getFileById(rows[i][1]).setTrashed(true); } catch(e) {} }
+      sheet.deleteRow(i + 1);
+      return jsonOK('Usunięto');
+    }
+  }
+  return jsonErr('Nie znaleziono: ' + data.id);
+}
+
+function addWizyta(data) {
+  const sheet = getSheet(CONFIG.SHEETS.BAZA_PIESKI);
+  const rows = sheet.getDataRange().getValues();
+  for (let i = 1; i < rows.length; i++) {
+    if (rows[i][0] === data.id) {
+      let wizyty = [];
+      try { wizyty = JSON.parse(rows[i][7] || '[]'); } catch(e) {}
+      wizyty.push({ data: data.data, opis: data.opis || '', cena: data.cena || '' });
+      // Sortuj malejąco po dacie
+      wizyty.sort(function(a,b){ return a.data < b.data ? 1 : -1; });
+      sheet.getRange(i+1, 8).setValue(JSON.stringify(wizyty));
+      return jsonOK({ liczba: wizyty.length });
+    }
+  }
+  return jsonErr('Nie znaleziono: ' + data.id);
+}
+
+function deleteWizyta(data) {
+  const sheet = getSheet(CONFIG.SHEETS.BAZA_PIESKI);
+  const rows = sheet.getDataRange().getValues();
+  for (let i = 1; i < rows.length; i++) {
+    if (rows[i][0] === data.id) {
+      let wizyty = [];
+      try { wizyty = JSON.parse(rows[i][7] || '[]'); } catch(e) {}
+      wizyty.splice(data.index, 1);
+      sheet.getRange(i+1, 8).setValue(JSON.stringify(wizyty));
+      return jsonOK({ liczba: wizyty.length });
     }
   }
   return jsonErr('Nie znaleziono: ' + data.id);
