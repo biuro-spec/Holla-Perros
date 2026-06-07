@@ -189,6 +189,8 @@ tr:last-child td{border:none}
 }
 .mobile-menu-btn{display:none;position:fixed;top:16px;left:16px;z-index:300;width:42px;height:42px;background:var(--dark);border:none;border-radius:6px;align-items:center;justify-content:center;cursor:pointer;color:var(--white);font-size:1.2rem}
 body.menu-open .mobile-menu-btn{display:none!important}
+.pies-link{cursor:pointer;color:var(--dark);font-weight:600;border-bottom:1px dashed var(--gold);transition:color .2s}
+.pies-link:hover{color:var(--gold)}
 .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(45,40,37,0.45);z-index:150;opacity:0;transition:opacity .3s}
 body.menu-open .sidebar-overlay{display:block;opacity:1}
 </style>
@@ -696,7 +698,7 @@ async function loadTodayReservations() {
 function resRowHtml(res) {
   return `<div class="day-res-item" onclick='openResModal(${JSON.stringify(res)})'>
     <div class="day-res-time">${fmtGodz(res['Godzina'])} <span class="badge badge-${res['Status']||'oczekuje'}">${res['Status']||'oczekuje'}</span></div>
-    <div class="day-res-name">🐶 ${res['Imie_psa']} · ${res['Imie_klienta']}</div>
+    <div class="day-res-name"><span class="pies-link" onclick='event.stopPropagation();otworzPieskaZRezerwacji(${JSON.stringify(res['Imie_psa']||'')},${JSON.stringify(res['Telefon']||'')})'>🐶 ${res['Imie_psa']}</span> · ${res['Imie_klienta']}</div>
     <div class="day-res-service">${res['Usługa']} · ${res['Cena']} zł</div>
   </div>`;
 }
@@ -826,7 +828,7 @@ async function loadReservations() {
       <td>${fmtData(res['Data'])}</td>
       <td><strong>${fmtGodz(res['Godzina'])}</strong></td>
       <td>${res['Imie_klienta']}<br><small style="color:var(--light)">${res['Email']}</small></td>
-      <td>🐶 ${res['Imie_psa']}<br><small style="color:var(--light)">${res['Rasa']||''}</small></td>
+      <td><span class="pies-link" onclick='otworzPieskaZRezerwacji(${JSON.stringify(res['Imie_psa']||'')},${JSON.stringify(res['Telefon']||'')})'>🐶 ${res['Imie_psa']}</span><br><small style="color:var(--light)">${res['Rasa']||''}</small></td>
       <td style="max-width:160px">${res['Usługa']}</td>
       <td><strong style="color:var(--gold)">${res['Cena']} zł</strong></td>
       <td><span class="badge badge-${res['Status']||'oczekuje'}">${res['Status']||'oczekuje'}</span></td>
@@ -842,7 +844,7 @@ function openResModal(res) {
       <div><small style="color:var(--light);font-size:0.75rem;text-transform:uppercase;letter-spacing:1px">Data i godzina</small><div style="font-size:1.1rem;font-weight:600">${fmtData(res['Data'])} ${fmtGodz(res['Godzina'])}</div></div>
       <div><small style="color:var(--light);font-size:0.75rem;text-transform:uppercase;letter-spacing:1px">Usługa</small><div>${res['Usługa']}</div></div>
       <div><small style="color:var(--light);font-size:0.75rem;text-transform:uppercase;letter-spacing:1px">Klient</small><div>${res['Imie_klienta']}<br><a href="tel:${res['Telefon']}" style="color:var(--gold)">${res['Telefon']}</a></div></div>
-      <div><small style="color:var(--light);font-size:0.75rem;text-transform:uppercase;letter-spacing:1px">Piesek</small><div>🐶 ${res['Imie_psa']} (${res['Rasa']||'?'})</div></div>
+      <div><small style="color:var(--light);font-size:0.75rem;text-transform:uppercase;letter-spacing:1px">Piesek</small><div><span class="pies-link" onclick='otworzPieskaZRezerwacji(${JSON.stringify(res['Imie_psa']||'')},${JSON.stringify(res['Telefon']||'')})'>🐶 ${res['Imie_psa']}</span> (${res['Rasa']||'?'})</div></div>
     </div>
     ${res['Uwagi']?`<div style="background:var(--bg-alt);padding:12px;border-radius:6px;font-size:0.88rem;margin-bottom:16px;color:var(--light)">📝 ${res['Uwagi']}</div>`:''}
     <div class="sep"></div>
@@ -1133,6 +1135,20 @@ async function submitPiesek() {
 }
 
 // --- Karta psa z historią wizyt ---
+// Otwórz kartę psa z bazy na podstawie danych z rezerwacji (dopasowanie po telefonie lub imieniu)
+async function otworzPieskaZRezerwacji(imiePsa, telefon) {
+  if (!_pieskiData.length) { const r = await api({ action:'getPieski' }); if (r.ok) _pieskiData = r.data; }
+  const tel = String(telefon||'').replace(/\D/g,'');
+  const imie = String(imiePsa||'').trim().toLowerCase();
+  const pies = _pieskiData.find(p => {
+    const pTel = String(p.Telefon||'').replace(/\D/g,'');
+    const pImie = String(p.Imie||'').trim().toLowerCase();
+    return (tel && pTel && pTel === tel) || (imie && pImie === imie);
+  });
+  if (pies) { closeModal('resModal'); openPiesekCard(pies.ID); }
+  else toast('Piesek „' + imiePsa + '" nie jest jeszcze w bazie — pojawi się po zrealizowanej rezerwacji.', 'err');
+}
+
 function openPiesekCard(id) {
   const p = _pieskiData.find(x => x.ID === id);
   if (!p) return;
