@@ -377,10 +377,61 @@ function updateReservation(data) {
           metoda: data.metoda_platnosci || 'gotówka'
         });
       }
+
+      // Jeśli zrealizowana → dopisz wizytę do historii psa w bazie
+      if (data.status === 'zrealizowana') {
+        try { syncWizytaZRezerwacji(rows[i]); } catch(e) { Logger.log('Sync wizyta error: ' + e); }
+      }
+
       return jsonOK('Zaktualizowano');
     }
   }
   return jsonErr('Nie znaleziono rezerwacji: ' + data.id);
+}
+
+// Rezerwacja zrealizowana → wizyta w kartotece psa (dopasuj lub utwórz psa)
+function syncWizytaZRezerwacji(rezRow) {
+  // Kolumny rezerwacji: ID(0) Data(1) Godzina(2) Usługa(3) Cena(4) Imie_klienta(5) Telefon(6) Email(7) Imie_psa(8) Rasa(9)
+  const rezId    = rezRow[0];
+  const dataWiz  = formatDate(rezRow[1]);
+  const usluga   = rezRow[3];
+  const cena     = rezRow[4];
+  const klient   = rezRow[5];
+  const telefon  = String(rezRow[6] || '').replace(/\s/g, '');
+  const imiePsa  = String(rezRow[8] || '').trim();
+  const rasa     = rezRow[9] || '';
+  if (!imiePsa) return;
+
+  const sheet = getSheet(CONFIG.SHEETS.BAZA_PIESKI);
+  const rows  = sheet.getDataRange().getValues();
+  // Kolumny BazaPieski: ID(0) FileId(1) Imie(2) Rasa(3) Wlasciciel(4) Telefon(5) Opis(6) Wizyty(7) DataDodania(8)
+
+  let foundRow = -1;
+  for (let i = 1; i < rows.length; i++) {
+    if (!rows[i][0]) continue;
+    const pImie = String(rows[i][2] || '').trim().toLowerCase();
+    const pTel  = String(rows[i][5] || '').replace(/\s/g, '');
+    const telMatch  = telefon && pTel && pTel === telefon;
+    const imieMatch = pImie && pImie === imiePsa.toLowerCase();
+    if (telMatch || imieMatch) { foundRow = i; break; }
+  }
+
+  const wpis = { data: dataWiz, opis: usluga, cena: cena, rezId: rezId };
+
+  if (foundRow > -1) {
+    // Dodaj wizytę jeśli jeszcze nie ma tej z danej rezerwacji
+    let wizyty = [];
+    try { wizyty = JSON.parse(rows[foundRow][7] || '[]'); } catch(e) {}
+    if (wizyty.some(function(w){ return w.rezId === rezId; })) return; // już dopisana
+    wizyty.push(wpis);
+    wizyty.sort(function(a,b){ return a.data < b.data ? 1 : -1; });
+    sheet.getRange(foundRow+1, 8).setValue(JSON.stringify(wizyty));
+  } else {
+    // Utwórz nowego psa w bazie z pierwszą wizytą
+    const id = 'P-' + Date.now();
+    const dataStr = Utilities.formatDate(new Date(), 'Europe/Warsaw', 'yyyy-MM-dd');
+    sheet.appendRow([id, '', imiePsa, rasa, klient, telefon, '', JSON.stringify([wpis]), dataStr]);
+  }
 }
 
 // =====================================================
