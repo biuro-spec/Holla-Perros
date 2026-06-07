@@ -1162,17 +1162,13 @@ function openPiesekCard(id) {
     <div class="card-title" style="display:flex;justify-content:space-between;align-items:center">
       <span>Historia wizyt (${wizyty.length})</span>
     </div>
-    <div style="display:flex;gap:8px;align-items:flex-end;margin:12px 0 16px;flex-wrap:wrap">
-      <div class="form-group" style="margin:0;flex:0 0 150px"><label>Data wizyty</label><input type="date" id="wiz_data" value="${new Date().toISOString().slice(0,10)}"></div>
-      <div class="form-group" style="margin:0;flex:1;min-width:140px"><label>Co robione</label><input type="text" id="wiz_opis" placeholder="np. Strzyżenie + kąpiel"></div>
-      <button class="btn btn-primary btn-sm" onclick="addWizyta('${p.ID}')">+ Dodaj wizytę</button>
-    </div>
+    <p style="font-size:0.82rem;color:var(--light);margin:6px 0 16px">Wizyty pojawiają się tu automatycznie po oznaczeniu rezerwacji jako <strong>zrealizowanej</strong>.</p>
     <div id="wizListContainer">${renderWizyty(p.ID, wizyty)}</div>`;
   openModal('piesekCardModal');
 }
 
 function renderWizyty(id, wizyty) {
-  if (!wizyty.length) return '<div class="empty" style="padding:16px">Brak wizyt. Dodaj pierwszą powyżej.</div>';
+  if (!wizyty.length) return '<div class="empty" style="padding:16px">Brak wizyt. Pojawią się po oznaczeniu rezerwacji jako zrealizowanej.</div>';
   return `<div style="display:flex;flex-direction:column;gap:8px">` + wizyty.map((w, i) => `
     <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg);border-left:3px solid var(--gold);border-radius:0 6px 6px 0">
       <div>
