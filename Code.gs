@@ -114,12 +114,38 @@ function initSheets() {
 }
 
 // =====================================================
+// BEZPIECZEŃSTWO — klucz dostępu do panelu
+// =====================================================
+
+// Akcje dostępne publicznie (galeria, rezerwacja klienta). Reszta wymaga klucza.
+const PUBLIC_ACTIONS = ['test','getMetamorfozy','getSlots','getServices','getBlocked','createReservation'];
+
+function getSecret() {
+  return PropertiesService.getScriptProperties().getProperty('PANEL_SECRET') || '';
+}
+
+// ⬇️ USTAW KLUCZ: wpisz swój tajny klucz poniżej i kliknij „Uruchom" (raz). Potem wpisz ten sam w panelu → Ustawienia.
+function ustawKlucz() {
+  const MOJ_KLUCZ = 'WPISZ-TUTAJ-SWOJ-KLUCZ';
+  PropertiesService.getScriptProperties().setProperty('PANEL_SECRET', MOJ_KLUCZ);
+  return 'Klucz ustawiony. Wpisz ten sam klucz w panelu → Ustawienia.';
+}
+
+function checkAuth(action, key) {
+  if (PUBLIC_ACTIONS.indexOf(action) > -1) return true;
+  const secret = getSecret();
+  if (!secret) return true; // klucz jeszcze nie ustawiony → działa otwarcie (do czasu konfiguracji)
+  return key === secret;
+}
+
+// =====================================================
 // GET HANDLER
 // =====================================================
 
 function doGet(e) {
   try {
     const action = e.parameter.action;
+    if (!checkAuth(action, e.parameter.key)) return jsonErr('Brak autoryzacji — nieprawidłowy klucz.');
     switch (action) {
       case 'getSlots':         return getAvailableSlots(e.parameter.date);
       case 'getReservations':  return getReservations(e.parameter);
@@ -146,6 +172,7 @@ function doGet(e) {
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
+    if (!checkAuth(data.action, data.key)) return jsonErr('Brak autoryzacji — nieprawidłowy klucz.');
     switch (data.action) {
       case 'createReservation':   return createReservation(data);
       case 'updateReservation':   return updateReservation(data);
