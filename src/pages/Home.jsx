@@ -14,7 +14,7 @@ const FAQ_DATA = [
 function FaqSection() {
   const [open, setOpen] = useState(0);
   return (
-    <section id="faq" style={{ padding: '120px 0', background: 'linear-gradient(180deg, rgba(184,146,42,0.16) 0%, var(--bg-color-alt) 38%, rgba(228,159,179,0.32) 100%)', borderTop: '2px solid var(--pink)', position: 'relative', overflow: 'hidden' }}>
+    <section id="faq" style={{ padding: '120px 0', background: 'linear-gradient(180deg, rgba(184,146,42,0.16) 0%, var(--bg-color-alt) 38%, rgba(228,159,179,0.32) 100%)', borderTop: '1px solid var(--gold)', position: 'relative', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: '-120px', right: '-80px', width: '420px', height: '420px', background: 'radial-gradient(circle, rgba(184,146,42,0.18) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 0 }}></div>
       <div className="container" style={{ maxWidth: '820px', position: 'relative', zIndex: 1 }}>
         <div style={{ textAlign: 'center', marginBottom: '60px' }}>
