@@ -502,7 +502,7 @@ export default function Home() {
       <FaqSection />
 
       {/* Kontakt */}
-      <section id="kontakt" style={{ padding: '120px 0', background: 'linear-gradient(180deg, rgba(228,159,179,0.32) 0%, var(--bg-color-alt) 52%, rgba(228,159,179,0.14) 100%)', position: 'relative', overflow: 'hidden' }}>
+      <section id="kontakt" style={{ padding: '120px 0', background: 'linear-gradient(180deg, rgba(228,159,179,0.32) 0%, var(--bg-color-alt) 52%, rgba(228,159,179,0.14) 100%)', borderTop: '1px solid var(--pink)', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', top: '-100px', left: '-90px', width: '440px', height: '440px', background: 'radial-gradient(circle, rgba(228,159,179,0.22) 0%, transparent 70%)', pointerEvents: 'none', zIndex: 0 }}></div>
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
 
