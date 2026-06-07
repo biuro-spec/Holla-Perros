@@ -54,8 +54,10 @@ body{font-family:var(--font-b);background:var(--bg);color:var(--dark);min-height
 .nav-item.active svg{color:var(--gold);transform:scale(1.08)}
 .nav-item.active::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:58%;background:var(--gold);border-radius:0 4px 4px 0}
 .sidebar-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,0.25)}
-.logout-btn{width:100%;padding:10px;background:transparent;border:1px solid rgba(45,40,37,0.2);border-radius:6px;color:rgba(45,40,37,0.6);font-family:var(--font-b);font-size:0.82rem;cursor:pointer;transition:all .2s;letter-spacing:1px}
-.logout-btn:hover{border-color:var(--dark);color:var(--dark)}
+.logout-btn{width:100%;padding:11px;background:transparent;border:1.5px solid rgba(45,40,37,0.45);border-radius:8px;color:rgba(45,40,37,0.8);font-family:var(--font-b);font-size:0.85rem;font-weight:600;cursor:pointer;transition:all .2s;letter-spacing:0.5px}
+.logout-btn:hover{border-color:var(--dark);color:var(--dark);background:rgba(255,255,255,0.25)}
+.back-btn{width:100%;padding:11px;display:block;text-align:center;text-decoration:none;margin-bottom:10px;background:var(--gold);border:1.5px solid var(--gold);border-radius:8px;color:#fff;font-family:var(--font-b);font-size:0.85rem;font-weight:600;cursor:pointer;transition:all .2s;letter-spacing:0.5px;box-shadow:0 4px 12px rgba(184,146,42,0.3)}
+.back-btn:hover{background:#a07e1f;border-color:#a07e1f;transform:translateY(-1px);box-shadow:0 6px 16px rgba(184,146,42,0.4)}
 
 .content{margin-left:var(--sidebar);padding:32px;min-height:100vh}
 .page{display:none}
@@ -227,7 +229,7 @@ tr:last-child td{border:none}
       <div class="nav-item" onclick="showPage('settings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg><span>Ustawienia</span></div>
     </div>
     <div class="sidebar-footer">
-      <a href="../" class="logout-btn" style="display:block;text-align:center;text-decoration:none;margin-bottom:10px;border-color:var(--gold);color:var(--gold)">← Powrót do strony</a>
+      <a href="../" class="back-btn">← Powrót do strony</a>
       <button class="logout-btn" onclick="logout()">Wyloguj się</button>
     </div>
   </div>
