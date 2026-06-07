@@ -883,9 +883,18 @@ const USLUGI_PANEL = [
   { nazwa:'Pakiet Élite Premium (+50 zł do ceny bazowej)', cena:50 },
 ];
 
-function openAddModal() {
+async function openAddModal() {
   const opts = USLUGI_PANEL.map(u =>
     `<option value="${u.nazwa}" data-cena="${u.cena}">${u.nazwa} — ${u.cena} zł</option>`
+  ).join('');
+
+  // załaduj pieski z bazy
+  if (!_pieskiData.length) {
+    const pr = await api({ action: 'getPieski' });
+    if (pr.ok) _pieskiData = pr.data;
+  }
+  const piesOpts = _pieskiData.map(p =>
+    `<option value="${p.ID}">${p.Imie}${p.Rasa ? ' (' + p.Rasa + ')' : ''}${p.Wlasciciel ? ' · ' + p.Wlasciciel : ''}</option>`
   ).join('');
 
   document.getElementById('resModalTitle').textContent='Nowa rezerwacja';
@@ -905,6 +914,14 @@ function openAddModal() {
     <div class="form-group"><label>Cena (zł) <span style="color:var(--light);font-weight:400;text-transform:none;letter-spacing:0">— możesz ręcznie zmienić</span></label>
       <input type="number" id="add_cena" placeholder="0">
     </div>
+
+    <div class="sep"></div>
+    <div class="form-group"><label>🐶 Piesek z bazy</label>
+      <select id="add_piesekSel" onchange="onAddPiesekChange()">
+        <option value="">— nowy piesek (wpisz dane poniżej) —</option>
+        ${piesOpts}
+      </select>
+    </div>
     <div class="form-row">
       <div class="form-group"><label>Imię klienta</label><input type="text" id="add_imie"></div>
       <div class="form-group"><label>Telefon</label><input type="tel" id="add_tel"></div>
@@ -915,6 +932,10 @@ function openAddModal() {
       <div class="form-group"><label>Rasa</label><input type="text" id="add_rasa"></div>
     </div>
     <div class="form-group"><label>Uwagi</label><textarea id="add_uwagi"></textarea></div>
+    <div class="gdpr" id="add_nowyPiesBox" style="background:var(--pink-l);align-items:center">
+      <input type="checkbox" id="add_zapiszPsa" checked style="accent-color:var(--gold)">
+      <label for="add_zapiszPsa" style="font-size:0.85rem">Zapisz tego psa w bazie (nowa karta)</label>
+    </div>
     <button class="btn btn-primary" style="width:100%;margin-top:8px" onclick="submitAddRes()">Dodaj rezerwację</button>`;
   openModal('resModal');
 }
@@ -925,22 +946,50 @@ function onUslugaChange(sel) {
   if (cena) document.getElementById('add_cena').value = cena;
 }
 
+function onAddPiesekChange() {
+  const id = document.getElementById('add_piesekSel').value;
+  const box = document.getElementById('add_nowyPiesBox');
+  if (id) {
+    const p = _pieskiData.find(x => x.ID === id);
+    if (p) {
+      document.getElementById('add_pies').value = p.Imie || '';
+      document.getElementById('add_rasa').value = p.Rasa || '';
+      document.getElementById('add_imie').value = p.Wlasciciel || '';
+      document.getElementById('add_tel').value = p.Telefon || '';
+    }
+    box.style.display = 'none'; // pies już w bazie, nie twórz nowego
+  } else {
+    box.style.display = 'flex';
+  }
+}
+
 async function submitAddRes() {
+  const piesekId = document.getElementById('add_piesekSel').value;
+  const imie_psa = document.getElementById('add_pies').value;
+  const rasa = document.getElementById('add_rasa').value;
+  const imie_klienta = document.getElementById('add_imie').value;
+  const telefon = document.getElementById('add_tel').value;
+
   const payload={
     action:'createReservation',
     data:document.getElementById('add_data').value,
     godzina:document.getElementById('add_godz').value,
     usluga:document.getElementById('add_usl').value || '—',
     cena:document.getElementById('add_cena').value,
-    imie_klienta:document.getElementById('add_imie').value,
-    telefon:document.getElementById('add_tel').value,
+    imie_klienta, telefon,
     email:document.getElementById('add_email').value,
-    imie_psa:document.getElementById('add_pies').value,
-    rasa:document.getElementById('add_rasa').value,
+    imie_psa, rasa,
     uwagi:document.getElementById('add_uwagi').value
   };
   const r=await apiPost(payload);
-  if(r.ok){closeModal('resModal');loadReservations();toast('Rezerwacja dodana: '+r.data.id);}
+  if(r.ok){
+    // utwórz psa w bazie jeśli nowy + zaznaczony checkbox
+    if (!piesekId && imie_psa && document.getElementById('add_zapiszPsa').checked) {
+      await apiPost({ action:'addPiesek', imie:imie_psa, rasa, wlasciciel:imie_klienta, telefon });
+      _pieskiData = []; // wymuś przeładowanie bazy przy następnym otwarciu
+    }
+    closeModal('resModal');loadReservations();toast('Rezerwacja dodana: '+r.data.id);
+  }
   else toast('Błąd: '+r.error,'err');
 }
 
