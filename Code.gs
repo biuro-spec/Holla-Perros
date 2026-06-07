@@ -151,6 +151,7 @@ function doPost(e) {
       case 'saveDog':             return saveDog(data);
       case 'addFinance':          return addFinance(data);
       case 'uploadMetamorfoza':   return uploadMetamorfoza(data);
+      case 'updateMetamorfoza':   return updateMetamorfoza(data);
       case 'deleteMetamorfoza':   return deleteMetamorfoza(data);
       default:                    return jsonErr('Nieznana akcja: ' + data.action);
     }
@@ -623,6 +624,21 @@ function getMetamorfozy() {
   // Najnowsze pierwsze
   result.reverse();
   return jsonOK(result);
+}
+
+function updateMetamorfoza(data) {
+  const sheet = getSheet(CONFIG.SHEETS.METAMORFOZY);
+  const rows = sheet.getDataRange().getValues();
+  // Kolumny: ID(1) FileId(2) Url(3) Tytul(4) Rasa(5) Opis(6) Data(7)
+  for (let i = 1; i < rows.length; i++) {
+    if (rows[i][0] === data.id) {
+      if (data.tytul !== undefined) sheet.getRange(i+1, 4).setValue(data.tytul);
+      if (data.rasa  !== undefined) sheet.getRange(i+1, 5).setValue(data.rasa);
+      if (data.opis  !== undefined) sheet.getRange(i+1, 6).setValue(data.opis);
+      return jsonOK('Zaktualizowano');
+    }
+  }
+  return jsonErr('Nie znaleziono: ' + data.id);
 }
 
 function deleteMetamorfoza(data) {

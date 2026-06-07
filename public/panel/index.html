@@ -442,6 +442,17 @@ tr:last-child td{border:none}
   </div>
 </div>
 
+<!-- MODAL EDYCJA METAMORFOZY -->
+<div class="modal-overlay" id="metaEditModal">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-head">
+      <h2 id="metaEditTitle">Edytuj wpis</h2>
+      <button class="modal-close" onclick="closeModal('metaEditModal')">×</button>
+    </div>
+    <div id="metaEditBody"></div>
+  </div>
+</div>
+
 <script>
 // =====================================================
 // KONFIGURACJA
@@ -1098,6 +1109,7 @@ async function submitMetamorfoza() {
   }
 }
 
+let _metaItems = [];
 async function loadPanelMetamorfozy() {
   const grid = document.getElementById('metaGrid');
   grid.innerHTML = '<div class="empty">Ładowanie...</div>';
@@ -1106,26 +1118,61 @@ async function loadPanelMetamorfozy() {
     grid.innerHTML = '<div class="empty">Brak opublikowanych prac. Dodaj pierwsze zdjęcie powyżej!</div>';
     return;
   }
+  _metaItems = r.data;
   grid.innerHTML = r.data.map(m => {
     const thumb = m.FileId ? `https://lh3.googleusercontent.com/d/${m.FileId}=w500` : m.Url;
     return `
-    <div class="dog-card" style="cursor:default;padding:0;overflow:hidden">
-      <img src="${thumb}" alt="${m.Tytul||''}" loading="lazy" referrerpolicy="no-referrer"
-           style="width:100%;height:180px;object-fit:cover;display:block;background:var(--bg-alt)"
-           onerror="if(!this.dataset.retry){this.dataset.retry=1;const s=this.src;this.src='';setTimeout(()=>this.src=s,2500);}else{this.style.opacity=0.3;}" />
+    <div class="dog-card meta-edit-card" style="cursor:pointer;padding:0;overflow:hidden" onclick="openMetaEdit('${m.ID}')" title="Kliknij, aby edytować">
+      <div style="position:relative">
+        <img src="${thumb}" alt="${m.Tytul||''}" loading="lazy" referrerpolicy="no-referrer"
+             style="width:100%;height:180px;object-fit:cover;display:block;background:var(--bg-alt)"
+             onerror="if(!this.dataset.retry){this.dataset.retry=1;const s=this.src;this.src='';setTimeout(()=>this.src=s,2500);}else{this.style.opacity=0.3;}" />
+        <div class="meta-edit-badge" style="position:absolute;top:10px;right:10px;background:rgba(45,40,37,0.78);color:#fff;font-size:0.72rem;padding:4px 10px;border-radius:20px;letter-spacing:0.5px">✎ Edytuj</div>
+      </div>
       <div style="padding:16px">
-        ${m.Rasa ? `<div class="dog-race" style="margin-bottom:4px">${m.Rasa}</div>` : ''}
-        ${m.Tytul ? `<div class="dog-name" style="font-size:1.1rem">${m.Tytul}</div>` : ''}
-        <button class="btn btn-danger btn-sm" style="width:100%;margin-top:12px" onclick="deletePanelMetamorfoza('${m.ID}')">Usuń</button>
+        ${m.Rasa ? `<div class="dog-race" style="margin-bottom:4px">${m.Rasa}</div>` : '<div class="dog-race" style="margin-bottom:4px;font-style:italic;opacity:0.6">bez rasy</div>'}
+        ${m.Tytul ? `<div class="dog-name" style="font-size:1.1rem">${m.Tytul}</div>` : '<div class="dog-name" style="font-size:1.1rem;font-style:italic;opacity:0.6">bez tytułu</div>'}
       </div>
     </div>`;
   }).join('');
 }
 
-async function deletePanelMetamorfoza(id) {
+function openMetaEdit(id) {
+  const m = _metaItems.find(x => x.ID === id);
+  if (!m) return;
+  const thumb = m.FileId ? `https://lh3.googleusercontent.com/d/${m.FileId}=w800` : m.Url;
+  document.getElementById('metaEditTitle').textContent = 'Edytuj wpis';
+  document.getElementById('metaEditBody').innerHTML = `
+    <div style="text-align:center;margin-bottom:20px">
+      <img src="${thumb}" referrerpolicy="no-referrer" style="max-width:100%;max-height:260px;border-radius:8px" />
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Rasa</label><input type="text" id="medit_rasa" value="${(m.Rasa||'').replace(/"/g,'&quot;')}" placeholder="np. Yorkshire terrier"></div>
+      <div class="form-group"><label>Tytuł</label><input type="text" id="medit_tytul" value="${(m.Tytul||'').replace(/"/g,'&quot;')}" placeholder="np. Autorskie strzyżenie"></div>
+    </div>
+    <div class="form-group"><label>Opis</label><textarea id="medit_opis" placeholder="Kilka słów o pracy...">${m.Opis||''}</textarea></div>
+    <div style="display:flex;gap:10px;margin-top:8px">
+      <button class="btn btn-gold" style="flex:1" onclick="saveMetaEdit('${m.ID}')">Zapisz zmiany</button>
+      <button class="btn btn-danger" onclick="deletePanelMetamorfoza('${m.ID}', true)">Usuń</button>
+    </div>`;
+  openModal('metaEditModal');
+}
+
+async function saveMetaEdit(id) {
+  const r = await apiPost({
+    action: 'updateMetamorfoza', id,
+    rasa: document.getElementById('medit_rasa').value,
+    tytul: document.getElementById('medit_tytul').value,
+    opis: document.getElementById('medit_opis').value
+  });
+  if (r.ok) { closeModal('metaEditModal'); toast('Zapisano zmiany'); loadPanelMetamorfozy(); }
+  else toast('Błąd: ' + r.error, 'err');
+}
+
+async function deletePanelMetamorfoza(id, fromModal) {
   if (!confirm('Na pewno usunąć to zdjęcie z galerii?')) return;
   const r = await apiPost({ action: 'deleteMetamorfoza', id });
-  if (r.ok) { toast('Usunięto'); loadPanelMetamorfozy(); }
+  if (r.ok) { if (fromModal) closeModal('metaEditModal'); toast('Usunięto'); loadPanelMetamorfozy(); }
   else toast('Błąd: ' + r.error, 'err');
 }
 
