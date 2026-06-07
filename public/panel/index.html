@@ -1031,7 +1031,12 @@ function resizeImage(file, maxW, quality) {
         ctx.drawImage(wm, canvas.width - wmW - margin, canvas.height - wmH - margin, wmW, wmH);
       }
 
-      resolve(canvas.toDataURL('image/jpeg', quality));
+      // WebP jeśli przeglądarka wspiera, w przeciwnym razie JPEG (fallback)
+      let out = canvas.toDataURL('image/webp', quality);
+      if (out.indexOf('data:image/webp') !== 0) {
+        out = canvas.toDataURL('image/jpeg', quality);
+      }
+      resolve(out);
       URL.revokeObjectURL(img.src);
     };
     img.onerror = () => reject(new Error('Nie udało się wczytać zdjęcia. Spróbuj inne (JPG/PNG).'));
@@ -1064,10 +1069,11 @@ async function submitMetamorfoza() {
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span> Wysyłanie...';
 
+  const ct = metaImageData.indexOf('data:image/webp') === 0 ? 'image/webp' : 'image/jpeg';
   const r = await apiPost({
     action: 'uploadMetamorfoza',
     imageBase64: metaImageData,
-    contentType: 'image/jpeg',
+    contentType: ct,
     rasa: document.getElementById('meta_rasa').value,
     tytul: document.getElementById('meta_tytul').value,
     opis: document.getElementById('meta_opis').value
