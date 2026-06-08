@@ -1604,8 +1604,28 @@ function openMetaEdit(id) {
     <div style="display:flex;gap:10px;margin-top:8px">
       <button class="btn btn-gold" style="flex:1" onclick="saveMetaEdit('${m.ID}')">Zapisz zmiany</button>
       <button class="btn btn-danger" onclick="deletePanelMetamorfoza('${m.ID}', true)">Usuń</button>
-    </div>`;
+    </div>
+    <div class="sep"></div>
+    <div class="card-title" style="font-size:1rem">📸 Gotowy post na Instagram</div>
+    <p style="font-size:0.8rem;color:var(--light);margin:4px 0 10px">Wygeneruję opis z hashtagami na podstawie pól powyżej — skopiuj i wklej na Instagramie.</p>
+    <textarea id="igPreview" readonly style="min-height:120px;font-size:0.85rem;background:var(--bg)" placeholder="Kliknij „Generuj i kopiuj"..."></textarea>
+    <button class="btn btn-primary btn-sm" style="width:100%;margin-top:8px" onclick="kopiujPostIG()">📋 Generuj i kopiuj opis</button>`;
   openModal('metaEditModal');
+}
+
+function kopiujPostIG() {
+  const rasa  = document.getElementById('medit_rasa').value.trim();
+  const tytul = document.getElementById('medit_tytul').value.trim();
+  const opis  = document.getElementById('medit_opis').value.trim();
+  const tag = rasa ? rasa.toLowerCase().replace(/[^a-ząćęłńóśźż0-9]/gi,'') : '';
+  const txt =
+    `✨ ${tytul || 'Metamorfoza'} ✨\n\n` +
+    (opis ? opis + '\n\n' : (rasa ? `${rasa} po wizycie w hOla Perros! 🐾\n\n` : 'Pełna pielęgnacja i stylizacja Twojego pupila. 🐾\n\n')) +
+    `Umów wizytę dla swojego pieska — link w bio! 📲\n📍 Racibórz, ul. Opawska 67\n\n` +
+    `#groomer #raciborz #salongroomerski #psifryzjer #grooming #pies #strzyzeniepsow #pielegnacjapsow #holaperros #piesek #dogstagram #doggrooming${tag ? ' #' + tag : ''}`;
+  document.getElementById('igPreview').value = txt;
+  if (navigator.clipboard) navigator.clipboard.writeText(txt).then(() => toast('Skopiowano opis na Instagram 📋')).catch(() => toast('Zaznacz tekst i skopiuj ręcznie'));
+  else toast('Zaznacz tekst i skopiuj ręcznie');
 }
 
 async function saveMetaEdit(id) {
