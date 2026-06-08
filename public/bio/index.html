@@ -19,8 +19,10 @@
   body::after{width:420px;height:420px;background:rgba(184,146,42,0.28);bottom:-140px;right:-120px}
   .wrap{width:100%;max-width:430px;text-align:center;position:relative;z-index:1}
 
-  .logo-ring{width:128px;height:128px;margin:0 auto 18px;border-radius:50%;padding:4px;background:linear-gradient(135deg,var(--gold),var(--pink));box-shadow:0 10px 34px rgba(184,146,42,0.3);animation:pop .7s cubic-bezier(.2,.8,.2,1) both}
-  .logo-ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#fff;border:3px solid #fff}
+  .logo-ring{width:130px;height:130px;margin:0 auto 16px;border-radius:50%;padding:4px;background:linear-gradient(135deg,var(--gold),var(--pink));box-shadow:0 10px 34px rgba(184,146,42,0.3);animation:pop .7s cubic-bezier(.2,.8,.2,1) both}
+  .logo-ring .inner{width:100%;height:100%;border-radius:50%;background:#fff;border:3px solid #fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .logo-ring .inner img{width:74%;height:74%;object-fit:contain}
+  .logo-napis{width:230px;max-width:72%;height:auto;margin:0 auto 6px;display:block;animation:fadeUp .6s .05s both}
   h1{font-family:'Cormorant Garamond',serif;font-size:2.3rem;font-weight:600;margin-bottom:4px;animation:fadeUp .6s .05s both}
   .tag{color:var(--light);font-size:0.95rem;margin-bottom:6px;animation:fadeUp .6s .1s both}
   .loc{color:var(--gold);font-size:0.85rem;font-weight:600;margin-bottom:30px;letter-spacing:0.5px;animation:fadeUp .6s .15s both}
@@ -57,8 +59,8 @@
 </head>
 <body>
   <div class="wrap">
-    <div class="logo-ring"><img src="../zdjecia/logo.webp" alt="hOla Perros" onerror="this.parentElement.style.display='none'" /></div>
-    <h1>hOla Perros</h1>
+    <div class="logo-ring"><div class="inner"><img src="../zdjecia/logo-glowa-psa.webp" alt="hOla Perros" onerror="this.parentElement.parentElement.style.display='none'" /></div></div>
+    <img class="logo-napis" src="../zdjecia/logo-napis.webp" alt="hOla Perros" onerror="this.style.display='none'" />
     <p class="tag">Salon groomerski · psi fryzjer</p>
     <p class="loc">Racibórz · ul. Opawska 67</p>
 
