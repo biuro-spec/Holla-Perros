@@ -192,6 +192,8 @@ tr:last-child td{border:none}
 body.menu-open .mobile-menu-btn{display:none!important}
 .pies-link{cursor:pointer;color:var(--dark);font-weight:600;border-bottom:1px dashed var(--gold);transition:color .2s}
 .pies-link:hover{color:var(--gold)}
+.ig-chip{cursor:pointer;padding:7px 16px;border-radius:20px;font-size:0.82rem;font-weight:600;border:1.5px solid var(--border);color:var(--light);background:var(--white);transition:all .2s;user-select:none}
+.ig-chip.on{border-color:var(--gold);background:var(--gold);color:#fff}
 .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(45,40,37,0.45);z-index:150;opacity:0;transition:opacity .3s}
 body.menu-open .sidebar-overlay{display:block;opacity:1}
 </style>
@@ -338,6 +340,7 @@ body.menu-open .sidebar-overlay{display:block;opacity:1}
     <div class="page" id="page-metamorfozy">
       <div class="page-title">Metamorfozy</div>
       <div class="page-sub">Dodawaj zdjęcia swoich prac — pojawią się w galerii na stronie.</div>
+      <button class="btn btn-primary btn-sm" style="margin-bottom:16px" onclick="openIgGen()">📸 Generator postów na Instagram</button>
 
       <div class="card" style="margin-bottom:20px;max-width:560px">
         <div class="card-title">Dodaj nowe zdjęcie</div>
@@ -514,6 +517,40 @@ body.menu-open .sidebar-overlay{display:block;opacity:1}
     <div class="form-group"><label>Opis (charakter, alergie, uwagi)</label><textarea id="p_opis" placeholder="np. nerwowy przy suszeniu, alergia na kukurydzę..."></textarea></div>
     <button class="btn btn-primary" style="width:100%" id="piesekSubmitBtn" onclick="submitPiesek()">Dodaj do bazy</button>
     <div id="piesekMsg" style="margin-top:10px;font-size:0.85rem;color:var(--light)"></div>
+  </div>
+</div>
+
+<!-- MODAL GENERATORA POSTÓW IG -->
+<div class="modal-overlay" id="igGenModal">
+  <div class="modal" style="max-width:560px">
+    <div class="modal-head">
+      <h2>📸 Generator postów na Instagram</h2>
+      <button class="modal-close" onclick="closeModal('igGenModal')">×</button>
+    </div>
+    <div class="form-group"><label>Typ posta</label>
+      <select id="ig_typ" onchange="igGenerate(true)">
+        <option value="metamorfoza">✨ Metamorfoza (efekt pracy)</option>
+        <option value="promocja">🎉 Promocja / rabat</option>
+        <option value="termin">📅 Wolny termin</option>
+        <option value="porada">💡 Porada pielęgnacyjna</option>
+        <option value="powitanie">👋 Powitanie / o salonie</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Rasa / pies (opcjonalnie)</label><input type="text" id="ig_rasa" placeholder="np. Shih-tzu" oninput="igGenerate(true)"></div>
+      <div class="form-group"><label>Szczegół (np. rabat, termin)</label><input type="text" id="ig_extra" placeholder="np. -20% w środy" oninput="igGenerate(true)"></div>
+    </div>
+    <div class="form-group"><label>Treść posta <span style="color:var(--light);font-weight:400;text-transform:none">— możesz edytować</span></label>
+      <textarea id="ig_tekst" style="min-height:120px;font-size:0.9rem"></textarea>
+    </div>
+    <div class="form-group"><label>Hashtagi (zaznacz zestawy)</label>
+      <div id="ig_hashSets" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px"></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:12px">
+      <button class="btn btn-outline btn-sm" onclick="igGenerate(false)">🎲 Inny wariant</button>
+      <button class="btn btn-gold btn-sm" style="flex:1" onclick="igCopy()">📋 Kopiuj cały post</button>
+    </div>
+    <div id="ig_msg" style="margin-top:10px;font-size:0.85rem;color:var(--light)"></div>
   </div>
 </div>
 
@@ -1614,6 +1651,83 @@ function openMetaEdit(id) {
     <textarea id="igPreview" readonly style="min-height:120px;font-size:0.85rem;background:var(--bg)" placeholder="Kliknij „Generuj i kopiuj"..."></textarea>
     <button class="btn btn-primary btn-sm" style="width:100%;margin-top:8px" onclick="kopiujPostIG()">📋 Generuj i kopiuj opis</button>`;
   openModal('metaEditModal');
+}
+
+// ===== GENERATOR POSTÓW IG (pełne narzędzie) =====
+const IG_WARIANTY = {
+  metamorfoza: [
+    '✨ Nowy look gotowy! {rasa} po wizycie w hOla Perros 🐾\n\nU nas każdy piesek wychodzi zadbany, piękny i szczęśliwy. Umów swojego pupila!',
+    '🐾 Metamorfoza dnia! {rasa} lśni po profesjonalnej pielęgnacji ✨\n\nStrzyżenie, kąpiel i mnóstwo czułości — tak pracujemy w hOla Perros.',
+    'Pokazujemy tylko efekt PO! 😍 {rasa} prosto z naszego salonu.\n\nZadbana szata, czysty pyszczek i zadowolony piesek — o to właśnie chodzi.',
+  ],
+  promocja: [
+    '🎉 Promocja w hOla Perros! {extra}\n\nZadbaj o swojego pupila w wyjątkowej cenie. Liczba miejsc ograniczona — dzwoń i rezerwuj!',
+    '💛 Mamy coś dla Was! {extra}\n\nPiękny, zadbany piesek nie musi kosztować fortuny. Skorzystaj z naszej oferty już dziś!',
+    '✂️ Czas na strzyżenie? {extra}\n\nUmów wizytę i odbierz pupila w świeżej, nowej odsłonie. Zapraszamy!',
+  ],
+  termin: [
+    '📅 Mamy wolny termin! {extra}\n\nTwój piesek zasługuje na pielęgnację — napisz lub zadzwoń, dobierzemy idealną godzinę.',
+    '🐶 Zwolnił się termin! {extra}\n\nNie czekaj — wolne okienka znikają błyskawicznie. Pisz na WhatsApp!',
+    '✨ Wolne okienko! {extra}\n\nIdealny moment, żeby Twój pupil wyszedł od nas piękny i pachnący.',
+  ],
+  porada: [
+    '💡 Wskazówka od groomera 🐾\n\nRegularne szczotkowanie zapobiega kołtunom i sprawia, że szata psa jest zdrowa i lśniąca. Rób to kilka razy w tygodniu!',
+    '💡 Czy wiesz, że...? 🐾\n\nPies powinien odwiedzać groomera co 6–8 tygodni. Regularna pielęgnacja to nie tylko estetyka, ale i zdrowie pupila!',
+    '💡 Mała rada na dziś 🐾\n\nPrzyzwyczajaj psa do pielęgnacji od szczeniaka — łapki, uszy, pyszczek. Dzięki temu wizyty będą dla niego przyjemnością.',
+  ],
+  powitanie: [
+    '👋 Cześć pieski (i Wasi opiekunowie)! 🐾\n\nJesteśmy hOla Perros — salon groomerski w Raciborzu. Strzyżenie, kąpiel, pielęgnacja i mnóstwo miłości do zwierząt. Zapraszamy!',
+    '🐾 hOla Perros to miejsce, gdzie Twój pies jest naszym priorytetem.\n\nBezstresowe wizyty, indywidualne podejście i efekt, który pokochacie. Umów się już dziś!',
+    '✨ Marzysz o zadbanym pupilu? Dobrze trafiłeś!\n\nW hOla Perros każdy piesek dostaje pełną opiekę i uwagę. Zadzwoń i przekonaj się sam!',
+  ],
+};
+const IG_HASH_SETS = {
+  ogolne:  { label: 'Ogólne',  tags: '#groomer #grooming #psifryzjer #salongroomerski #pies #piesek #pieskistagram' },
+  lokalne: { label: 'Racibórz',tags: '#raciborz #raciborzmiasto #śląsk #groomerraciborz' },
+  rasa:    { label: 'Rasa',    tags: '' },
+  trendy:  { label: 'Trendy',  tags: '#dogstagram #instadog #doggrooming #dogsofinstagram #petgrooming' },
+};
+let _igVariant = 0;
+let _igHashSel = { ogolne: true, lokalne: true, rasa: true, trendy: false };
+
+function openIgGen() {
+  _igVariant = 0;
+  const box = document.getElementById('ig_hashSets');
+  box.innerHTML = Object.keys(IG_HASH_SETS).map(k =>
+    `<span class="ig-chip${_igHashSel[k]?' on':''}" data-k="${k}" onclick="igToggleHash('${k}')">${IG_HASH_SETS[k].label}</span>`
+  ).join('');
+  igGenerate(true);
+  openModal('igGenModal');
+}
+function igToggleHash(k) {
+  _igHashSel[k] = !_igHashSel[k];
+  document.querySelector(`.ig-chip[data-k="${k}"]`)?.classList.toggle('on', _igHashSel[k]);
+}
+function igGenerate(reset) {
+  const typ = document.getElementById('ig_typ').value;
+  const rasa = document.getElementById('ig_rasa').value.trim();
+  const extra = document.getElementById('ig_extra').value.trim();
+  const arr = IG_WARIANTY[typ] || IG_WARIANTY.metamorfoza;
+  if (reset) _igVariant = 0; else _igVariant = (_igVariant + 1) % arr.length;
+  let t = arr[_igVariant]
+    .replace(/\{rasa\}/g, rasa || 'Twój pupil')
+    .replace(/\{extra\}/g, extra || '')
+    .replace(/ +/g, ' ').replace(/\n /g, '\n').trim();
+  t += `\n\nUmów wizytę — link w bio! 📲\n🔗 ${SITE_URL}\n📍 Racibórz, ul. Opawska 67`;
+  document.getElementById('ig_tekst').value = t;
+}
+function igCopy() {
+  const rasa = document.getElementById('ig_rasa').value.trim().toLowerCase().replace(/[^a-ząćęłńóśźż0-9]/gi,'');
+  let hash = [];
+  Object.keys(IG_HASH_SETS).forEach(k => {
+    if (!_igHashSel[k]) return;
+    if (k === 'rasa') { if (rasa) hash.push('#' + rasa); }
+    else hash.push(IG_HASH_SETS[k].tags);
+  });
+  hash.push('#holaperros');
+  const full = document.getElementById('ig_tekst').value + '\n\n' + hash.filter(Boolean).join(' ');
+  if (navigator.clipboard) navigator.clipboard.writeText(full).then(()=>document.getElementById('ig_msg').textContent='✅ Skopiowano cały post — wklej na Instagramie!').catch(()=>{ document.getElementById('ig_tekst').value=full; document.getElementById('ig_msg').textContent='Zaznacz tekst i skopiuj ręcznie.'; });
+  else { document.getElementById('ig_tekst').value=full; document.getElementById('ig_msg').textContent='Zaznacz tekst i skopiuj ręcznie.'; }
 }
 
 function kopiujPostIG() {
