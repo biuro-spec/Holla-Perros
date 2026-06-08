@@ -606,6 +606,14 @@ body.menu-open .sidebar-overlay{display:block;opacity:1}
       </div>
     </div>
 
+    <label style="font-size:0.78rem;font-weight:600;color:var(--light);text-transform:uppercase;letter-spacing:1px">Tło</label>
+    <div class="kolaz-opts" id="kolazTloOpts" style="margin:6px 0 14px">
+      <span class="ig-chip on" onclick="setKolaz('tlo','white',this)">Białe</span>
+      <span class="ig-chip" onclick="setKolaz('tlo','pink',this)">Różowe</span>
+      <span class="ig-chip" onclick="setKolaz('tlo','cream',this)">Kremowe</span>
+      <span class="ig-chip" onclick="setKolaz('tlo','gradient',this)">Gradient</span>
+    </div>
+
     <label style="font-size:0.78rem;font-weight:600;color:var(--light);text-transform:uppercase;letter-spacing:1px">Zdjęcia (2–6) — etykietę możesz zmienić</label>
     <div id="kolazSlots" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:8px 0 16px"></div>
 
@@ -1720,12 +1728,13 @@ function openMetaEdit(id) {
 const KOLAZ_DOMYSLNE = ['Przed', 'W trakcie', 'Po', '', '', ''];
 const KOLAZ_FORMATY = { kwadrat: [1080, 1080], portret: [1080, 1350], stories: [1080, 1920] };
 const KOLAZ_KOLORY = { gold: 'rgba(184,146,42,0.92)', pink: 'rgba(228,159,179,0.95)', dark: 'rgba(45,40,37,0.82)' };
+const KOLAZ_TLA = { white: '#ffffff', pink: '#F2CEDB', cream: '#FAF3E8' };
 let _kolazImgs = [null, null, null, null, null, null];
-let _kolazCfg = { format: 'kwadrat', uklad: 'auto', kolor: 'gold', gap: 10 };
+let _kolazCfg = { format: 'kwadrat', uklad: 'auto', kolor: 'gold', gap: 10, tlo: 'white' };
 
 function openKolaz() {
   _kolazImgs = [null, null, null, null, null, null];
-  _kolazCfg = { format: 'kwadrat', uklad: 'auto', kolor: 'gold', gap: 10 };
+  _kolazCfg = { format: 'kwadrat', uklad: 'auto', kolor: 'gold', gap: 10, tlo: 'white' };
   const wrap = document.getElementById('kolazSlots');
   wrap.innerHTML = '';
   for (let i = 0; i < 6; i++) {
@@ -1783,7 +1792,13 @@ function generujKolaz() {
   const canvas = document.getElementById('kolazCanvas');
   canvas.width = W; canvas.height = H;
   const ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, W, H);
+  // tło
+  if (_kolazCfg.tlo === 'gradient') {
+    const g = ctx.createLinearGradient(0, 0, W, H);
+    g.addColorStop(0, '#F2CEDB'); g.addColorStop(0.5, '#FAF3E8'); g.addColorStop(1, '#E8D199');
+    ctx.fillStyle = g;
+  } else { ctx.fillStyle = KOLAZ_TLA[_kolazCfg.tlo] || '#ffffff'; }
+  ctx.fillRect(0, 0, W, H);
 
   const cellW = (W - gap * (cols + 1)) / cols;
   const cellH = (H - gap * (rows + 1)) / rows;
