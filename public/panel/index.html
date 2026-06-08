@@ -194,6 +194,11 @@ body.menu-open .mobile-menu-btn{display:none!important}
 .pies-link:hover{color:var(--gold)}
 .ig-chip{cursor:pointer;padding:7px 16px;border-radius:20px;font-size:0.82rem;font-weight:600;border:1.5px solid var(--border);color:var(--light);background:var(--white);transition:all .2s;user-select:none}
 .ig-chip.on{border-color:var(--gold);background:var(--gold);color:#fff}
+.kolaz-slot{aspect-ratio:1;border:2px dashed var(--border);border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;background:var(--bg);transition:all .2s;overflow:hidden;position:relative}
+.kolaz-slot:hover{border-color:var(--gold)}
+.kolaz-slot span{font-size:1.5rem}
+.kolaz-slot small{color:var(--light);font-size:0.75rem;font-weight:600}
+.kolaz-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(45,40,37,0.45);z-index:150;opacity:0;transition:opacity .3s}
 body.menu-open .sidebar-overlay{display:block;opacity:1}
 </style>
@@ -340,7 +345,10 @@ body.menu-open .sidebar-overlay{display:block;opacity:1}
     <div class="page" id="page-metamorfozy">
       <div class="page-title">Metamorfozy</div>
       <div class="page-sub">Dodawaj zdjęcia swoich prac — pojawią się w galerii na stronie.</div>
-      <button class="btn btn-primary btn-sm" style="margin-bottom:16px" onclick="openIgGen()">📸 Generator postów na Instagram</button>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
+        <button class="btn btn-primary btn-sm" onclick="openIgGen()">📸 Generator postów</button>
+        <button class="btn btn-outline btn-sm" onclick="openKolaz()">🖼️ Kolaż przed / po</button>
+      </div>
 
       <div class="card" style="margin-bottom:20px;max-width:560px">
         <div class="card-title">Dodaj nowe zdjęcie</div>
@@ -551,6 +559,27 @@ body.menu-open .sidebar-overlay{display:block;opacity:1}
       <button class="btn btn-gold btn-sm" style="flex:1" onclick="igCopy()">📋 Kopiuj cały post</button>
     </div>
     <div id="ig_msg" style="margin-top:10px;font-size:0.85rem;color:var(--light)"></div>
+  </div>
+</div>
+
+<!-- MODAL KOLAŻ PRZED/PO -->
+<div class="modal-overlay" id="kolazModal">
+  <div class="modal" style="max-width:600px">
+    <div class="modal-head">
+      <h2>🖼️ Kolaż przed / po</h2>
+      <button class="modal-close" onclick="closeModal('kolazModal')">×</button>
+    </div>
+    <p style="font-size:0.85rem;color:var(--light);margin-bottom:14px">Wgraj zdjęcia (min. 2). „W trakcie" jest opcjonalne. Kolaż zapisze się gotowy na Instagram.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">
+      <div><div class="kolaz-slot" id="kolazSlot0" onclick="document.getElementById('kolazFile0').click()"><span>📷</span><small>Przed</small></div><input type="file" id="kolazFile0" accept="image/*" style="display:none" onchange="handleKolazSlot(this,0)"></div>
+      <div><div class="kolaz-slot" id="kolazSlot1" onclick="document.getElementById('kolazFile1').click()"><span>📷</span><small>W trakcie</small></div><input type="file" id="kolazFile1" accept="image/*" style="display:none" onchange="handleKolazSlot(this,1)"></div>
+      <div><div class="kolaz-slot" id="kolazSlot2" onclick="document.getElementById('kolazFile2').click()"><span>📷</span><small>Po</small></div><input type="file" id="kolazFile2" accept="image/*" style="display:none" onchange="handleKolazSlot(this,2)"></div>
+    </div>
+    <button class="btn btn-gold" style="width:100%;margin-bottom:14px" onclick="generujKolaz()">✨ Generuj kolaż</button>
+    <canvas id="kolazCanvas" style="display:none"></canvas>
+    <img id="kolazPreview" style="display:none;width:100%;border-radius:8px;border:1px solid var(--border);margin-bottom:12px" />
+    <a id="kolazDownload" class="btn btn-primary" style="display:none;width:100%;text-align:center;text-decoration:none" download="kolaz-hola-perros.jpg">⬇️ Pobierz kolaż</a>
+    <div id="kolazMsg" style="margin-top:8px;font-size:0.85rem;color:var(--light)"></div>
   </div>
 </div>
 
@@ -1651,6 +1680,80 @@ function openMetaEdit(id) {
     <textarea id="igPreview" readonly style="min-height:120px;font-size:0.85rem;background:var(--bg)" placeholder="Kliknij „Generuj i kopiuj"..."></textarea>
     <button class="btn btn-primary btn-sm" style="width:100%;margin-top:8px" onclick="kopiujPostIG()">📋 Generuj i kopiuj opis</button>`;
   openModal('metaEditModal');
+}
+
+// ===== KOLAŻ PRZED / W TRAKCIE / PO =====
+const KOLAZ_ETYKIETY = ['Przed', 'W trakcie', 'Po'];
+let _kolazImgs = [null, null, null];
+
+function openKolaz() {
+  _kolazImgs = [null, null, null];
+  for (let i = 0; i < 3; i++) {
+    document.getElementById('kolazSlot' + i).innerHTML = `<span>📷</span><small>${KOLAZ_ETYKIETY[i]}</small>`;
+    document.getElementById('kolazFile' + i).value = '';
+  }
+  document.getElementById('kolazPreview').style.display = 'none';
+  document.getElementById('kolazDownload').style.display = 'none';
+  document.getElementById('kolazMsg').textContent = '';
+  openModal('kolazModal');
+}
+
+async function handleKolazSlot(input, slot) {
+  let file = input.files[0];
+  if (!file) return;
+  const slotEl = document.getElementById('kolazSlot' + slot);
+  slotEl.innerHTML = '<small>Wczytuję...</small>';
+  try {
+    file = await convertIfHeic(file);
+    const dataUrl = await resizeImagePlain(file, 1000, 0.9);
+    const img = new Image();
+    img.onload = () => { _kolazImgs[slot] = img; };
+    img.src = dataUrl;
+    slotEl.innerHTML = `<img src="${dataUrl}" />`;
+  } catch(e) { slotEl.innerHTML = `<small style="color:#c00">Błąd</small>`; }
+}
+
+function generujKolaz() {
+  const imgs = _kolazImgs.map((im, i) => ({ im, label: KOLAZ_ETYKIETY[i] })).filter(x => x.im);
+  if (imgs.length < 2) { document.getElementById('kolazMsg').textContent = 'Wgraj co najmniej 2 zdjęcia (Przed i Po).'; return; }
+  const n = imgs.length;
+  const H = 1080, cellW = Math.round(1080 / n) * n / n; // równe kolumny
+  const W = 1080, colW = Math.floor(W / n);
+  const canvas = document.getElementById('kolazCanvas');
+  canvas.width = colW * n; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, canvas.width, H);
+
+  imgs.forEach((o, i) => {
+    const x = i * colW;
+    // cover-crop zdjęcia w kolumnie colW x H
+    const ir = o.im.width / o.im.height, cr = colW / H;
+    let sw, sh, sx, sy;
+    if (ir > cr) { sh = o.im.height; sw = sh * cr; sx = (o.im.width - sw) / 2; sy = 0; }
+    else { sw = o.im.width; sh = sw / cr; sx = 0; sy = (o.im.height - sh) / 2; }
+    ctx.drawImage(o.im, sx, sy, sw, sh, x, 0, colW, H);
+    // pasek z etykietą na dole
+    ctx.fillStyle = 'rgba(184,146,42,0.92)';
+    ctx.fillRect(x, H - 64, colW, 64);
+    ctx.fillStyle = '#fff';
+    ctx.font = '600 30px "DM Sans", sans-serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(o.label.toUpperCase(), x + colW / 2, H - 32);
+    // biała linia między kolumnami
+    if (i > 0) { ctx.fillStyle = '#fff'; ctx.fillRect(x - 3, 0, 6, H); }
+  });
+  // podpis salonu
+  ctx.fillStyle = 'rgba(45,40,37,0.55)';
+  ctx.fillRect(0, 0, 230, 44);
+  ctx.fillStyle = '#fff'; ctx.font = '600 22px "DM Sans", sans-serif'; ctx.textAlign = 'left';
+  ctx.fillText('hOla Perros 🐾', 16, 22);
+
+  const out = canvas.toDataURL('image/jpeg', 0.9);
+  const prev = document.getElementById('kolazPreview');
+  prev.src = out; prev.style.display = 'block';
+  const dl = document.getElementById('kolazDownload');
+  dl.href = out; dl.style.display = 'block';
+  document.getElementById('kolazMsg').textContent = '✅ Gotowe! Pobierz i wrzuć na Instagram.';
 }
 
 // ===== GENERATOR POSTÓW IG (pełne narzędzie) =====
