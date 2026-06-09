@@ -79,7 +79,9 @@ function OpinieSection() {
         {/* Kropki */}
         <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginBottom: '46px' }}>
           {OPINIE_DATA.map((_, i) => (
-            <button key={i} onClick={() => setActive(i)} aria-label={'Opinia ' + (i + 1)} style={{ width: i === active ? '24px' : '8px', height: '8px', borderRadius: '4px', border: 'none', background: i === active ? 'var(--gold)' : 'rgba(184,146,42,0.3)', cursor: 'pointer', transition: 'all 0.3s ease', padding: 0 }} />
+            <button key={i} onClick={() => setActive(i)} aria-label={'Pokaż opinię ' + (i + 1)} style={{ width: '24px', height: '24px', border: 'none', background: 'none', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ display: 'block', width: i === active ? '24px' : '8px', height: '8px', borderRadius: '4px', background: i === active ? 'var(--gold)' : 'rgba(184,146,42,0.35)', transition: 'all 0.3s ease' }} />
+            </button>
           ))}
         </div>
 
@@ -338,7 +340,7 @@ export default function Home() {
                         <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. {r.przyklad})</p>
                       </div>
                       <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
-                        <div style={{ fontSize: '1.2rem', color: 'var(--gold)' }}>{r.cena}</div>
+                        <div style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--gold)' }}>{r.cena}</div>
                         <div style={{ fontSize: '0.8rem', color: 'var(--text-light)', marginTop: '4px' }}>⏱ {r.czas}</div>
                       </div>
                     </div>
@@ -361,7 +363,7 @@ export default function Home() {
                         <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. {r.przyklad})</p>
                       </div>
                       <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
-                        <div style={{ fontSize: '1.2rem', color: 'var(--gold)' }}>{r.cena}</div>
+                        <div style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--gold)' }}>{r.cena}</div>
                         <div style={{ fontSize: '0.8rem', color: 'var(--text-light)', marginTop: '4px' }}>⏱ {r.czas}</div>
                       </div>
                     </div>
@@ -380,7 +382,7 @@ export default function Home() {
                       <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Szpic miniaturowy, Chihuahua, Pekińczyk, Chart włoski)</p>
                     </div>
                     <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
-                      <div style={{ fontSize: '1.2rem', color: 'var(--gold)' }}>150–200 zł</div>
+                      <div style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--gold)' }}>150–200 zł</div>
                       <div style={{ fontSize: '0.8rem', color: 'var(--text-light)', marginTop: '4px' }}>⏱ 1,5–2,5 h</div>
                     </div>
                   </div>
@@ -391,7 +393,7 @@ export default function Home() {
                       <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Jamnik, Mops, Boston terrier)</p>
                     </div>
                     <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
-                      <div style={{ fontSize: '1.2rem', color: 'var(--gold)' }}>160–220 zł</div>
+                      <div style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--gold)' }}>160–220 zł</div>
                       <div style={{ fontSize: '0.8rem', color: 'var(--text-light)', marginTop: '4px' }}>⏱ 1,5–2,5 h</div>
                     </div>
                   </div>
@@ -402,7 +404,7 @@ export default function Home() {
                       <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Beagle, Buldog francuski, Shiba Inu, Cavalier, Owczarek Szetlandzki)</p>
                     </div>
                     <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
-                      <div style={{ fontSize: '1.2rem', color: 'var(--gold)' }}>180–280 zł</div>
+                      <div style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--gold)' }}>180–280 zł</div>
                       <div style={{ fontSize: '0.8rem', color: 'var(--text-light)', marginTop: '4px' }}>⏱ 2–3 h</div>
                     </div>
                   </div>
@@ -413,7 +415,7 @@ export default function Home() {
                       <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Border Collie, Owczarek australijski, Owczarek niemiecki, Golden retriever, Labrador, Husky)</p>
                     </div>
                     <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
-                      <div style={{ fontSize: '1.2rem', color: 'var(--gold)' }}>190–390 zł</div>
+                      <div style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--gold)' }}>190–390 zł</div>
                       <div style={{ fontSize: '0.8rem', color: 'var(--text-light)', marginTop: '4px' }}>⏱ 3–4 h</div>
                     </div>
                   </div>
@@ -424,7 +426,7 @@ export default function Home() {
                       <p style={{ fontSize: '0.88rem', color: 'var(--text-light)', lineHeight: '1.5' }}>(np. Berneński pies pasterski, Malamut, Akita, Nowofundland)</p>
                     </div>
                     <div style={{ textAlign: 'right', whiteSpace: 'nowrap' }}>
-                      <div style={{ fontSize: '1.2rem', color: 'var(--gold)' }}>450–800 zł</div>
+                      <div style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--gold)' }}>450–800 zł</div>
                       <div style={{ fontSize: '0.8rem', color: 'var(--text-light)', marginTop: '4px' }}>⏱ 3–4 h</div>
                     </div>
                   </div>
@@ -441,7 +443,7 @@ export default function Home() {
               <div className="editorial-card" style={{ padding: '30px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
                   <h4 style={{ fontSize: '1.3rem', fontWeight: 500 }}>Kosmetyczne czyszczenie zębów</h4>
-                  <span style={{ fontSize: '1.2rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>190 zł</span>
+                  <span style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--gold)', whiteSpace: 'nowrap' }}>190 zł</span>
                 </div>
                 <p style={{ fontSize: '0.95rem', color: 'var(--text-light)', lineHeight: '1.6' }}>Bezpieczne i komfortowe usuwanie osadu nazębnego bez znieczulenia. Odświeża oddech i poprawia estetykę uzębienia.</p>
               </div>
@@ -449,7 +451,7 @@ export default function Home() {
               <div className="editorial-card" style={{ padding: '30px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
                   <h4 style={{ fontSize: '1.3rem', fontWeight: 500 }}>Obcinanie pazurków</h4>
-                  <span style={{ fontSize: '1.2rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>35 zł</span>
+                  <span style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--gold)', whiteSpace: 'nowrap' }}>35 zł</span>
                 </div>
                 <p style={{ fontSize: '0.95rem', color: 'var(--text-light)', lineHeight: '1.6' }}>Precyzyjne skrócenie pazurów dla komfortu i estetyki łap. Zabieg wykonany z dbałością o higienę i dobro pupila.</p>
               </div>
@@ -457,7 +459,7 @@ export default function Home() {
               <div className="editorial-card" style={{ padding: '30px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
                   <h4 style={{ fontSize: '1.3rem', fontWeight: 500 }}>Czyszczenie oczu</h4>
-                  <span style={{ fontSize: '1.2rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>25 zł</span>
+                  <span style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--gold)', whiteSpace: 'nowrap' }}>25 zł</span>
                 </div>
                 <p style={{ fontSize: '0.95rem', color: 'var(--text-light)', lineHeight: '1.6' }}>Delikatne oczyszczenie okolic oczu usuwa nadmiar wydzieliny i zanieczyszczenia.</p>
               </div>
@@ -465,7 +467,7 @@ export default function Home() {
               <div className="editorial-card" style={{ padding: '30px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
                   <h4 style={{ fontSize: '1.3rem', fontWeight: 500 }}>Czyszczenie uszu</h4>
-                  <span style={{ fontSize: '1.2rem', color: 'var(--gold)', whiteSpace: 'nowrap' }}>25 zł</span>
+                  <span style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--gold)', whiteSpace: 'nowrap' }}>25 zł</span>
                 </div>
                 <p style={{ fontSize: '0.95rem', color: 'var(--text-light)', lineHeight: '1.6' }}>Delikatne usunięcie nadmiaru woskowiny i zanieczyszczeń wspierające higienę i komfort psa.</p>
               </div>
@@ -669,7 +671,7 @@ export default function Home() {
                   <Phone size={22} className="text-gold" style={{ flexShrink: 0, marginTop: '3px' }}/>
                   <div style={{ textAlign: 'left' }}>
                     <p style={{ fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px', color: 'var(--text-dark)' }}>Rezerwacje</p>
-                    <a href="tel:+48512501558" style={{ textDecoration: 'none', color: 'var(--text-light)', fontSize: '1.05rem' }}>+48 512 501 558</a>
+                    <a href="tel:+48512501558" aria-label="Zadzwoń: +48 512 501 558" style={{ textDecoration: 'none', color: 'var(--text-light)', fontSize: '1.05rem' }}>+48 512 501 558</a>
                   </div>
                 </div>
 
@@ -677,7 +679,7 @@ export default function Home() {
                   <MessageCircle size={22} style={{ flexShrink: 0, marginTop: '3px', color: '#25D366' }}/>
                   <div style={{ textAlign: 'left' }}>
                     <p style={{ fontSize: '0.85rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px', color: 'var(--text-dark)' }}>WhatsApp</p>
-                    <a href="https://wa.me/48512501558" target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: 'var(--text-light)', fontSize: '1.05rem' }}>+48 512 501 558</a>
+                    <a href="https://wa.me/48512501558" target="_blank" rel="noreferrer" aria-label="Napisz na WhatsApp: +48 512 501 558" style={{ textDecoration: 'none', color: 'var(--text-light)', fontSize: '1.05rem' }}>+48 512 501 558</a>
                   </div>
                 </div>
 
@@ -735,9 +737,10 @@ export default function Home() {
               className="map-container" 
               style={{ width: '100%', height: '450px', border: '1px solid var(--gold)', borderRadius: '6px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}
             >
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2552.0911760193164!2d18.2045542!3d50.0945533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471161d00f681a05%3A0xc6c449c2537f55b9!2sOpawska%2067%2C%2047-400%20Racib%C3%B3rz!5e0!3m2!1spl!2spl!4v1700000000000!5m2!1spl!2spl" 
-                width="100%" 
+              <iframe
+                title="Mapa dojazdu do salonu hOla Perros — ul. Opawska 67, Racibórz"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2552.0911760193164!2d18.2045542!3d50.0945533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471161d00f681a05%3A0xc6c449c2537f55b9!2sOpawska%2067%2C%2047-400%20Racib%C3%B3rz!5e0!3m2!1spl!2spl!4v1700000000000!5m2!1spl!2spl"
+                width="100%"
                 height="100%" 
                 style={{ border: 0 }} 
                 allowFullScreen="" 
