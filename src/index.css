@@ -3,7 +3,7 @@
 :root {
   --bg-color: #FCFBF8;
   --bg-color-alt: #F4F1ED;
-  --gold: #B8922A;
+  --gold: #8A6E14; /* przyciemnione złoto dla kontrastu WCAG AA na jasnym tle (było #B8922A) */
   --pink: #E49FB3; /* Dopasowane do ścian salonu ze zdjęcia */
   --text-dark: #2D2825;
   --text-light: #6B6560; /* przyciemnione dla kontrastu WCAG AA (było #7A7571) */
