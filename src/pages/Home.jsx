@@ -62,9 +62,10 @@ function OpinieSection() {
             return (
               <motion.div
                 key={i}
-                animate={{ x: off * 340, scale: big ? 1 : 0.84, opacity: visible ? (big ? 1 : 0.55) : 0, zIndex: big ? 3 : 1 }}
+                animate={{ x: off * 340, scale: big ? 1 : 0.84, opacity: visible ? (big ? 1 : 0.72) : 0, zIndex: big ? 3 : 1 }}
                 transition={{ duration: 0.45, ease: 'easeInOut' }}
                 onClick={() => !big && visible && setActive(i)}
+                aria-hidden={!big}
                 style={{ position: 'absolute', width: '400px', maxWidth: '88vw', cursor: big ? 'default' : 'pointer', pointerEvents: visible ? 'auto' : 'none' }}
               >
                 <OpinieCard o={o} big={big} />
