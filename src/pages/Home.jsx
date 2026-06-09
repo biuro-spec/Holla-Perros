@@ -532,7 +532,7 @@ export default function Home() {
             </motion.div>
           </div>
 
-          <p style={{ fontSize: '0.9rem', color: 'var(--text-light)', textAlign: 'center', opacity: 0.7 }}>
+          <p style={{ fontSize: '0.9rem', color: 'var(--text-light)', textAlign: 'center' }}>
             * Ceny mają charakter orientacyjny. Ostateczny koszt ustalany jest indywidualnie w zależności od stanu szaty i zachowania pupila.
           </p>
         </div>
