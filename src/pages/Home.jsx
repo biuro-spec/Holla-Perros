@@ -318,7 +318,7 @@ export default function Home() {
       {/* Cennik & Pakiety */}
       <section id="cennik" style={{ padding: '120px 0', backgroundColor: 'var(--bg-color-alt)', position: 'relative', overflow: 'hidden' }}>
         <div className="cennik-paw" style={{ position: 'absolute', top: '25%', right: '18%', width: '46%', maxWidth: '500px', opacity: 0.1, pointerEvents: 'none', zIndex: 0 }}>
-          <img src="./zdjecia/lapka.webp" alt="" style={{ width: '100%', height: 'auto', filter: 'hue-rotate(-55deg) saturate(0.7) brightness(1.3)' }} />
+          <img src="./zdjecia/lapka.webp" alt="" width="1000" height="1152" loading="lazy" style={{ width: '100%', height: 'auto', filter: 'hue-rotate(-55deg) saturate(0.7) brightness(1.3)' }} />
         </div>
         <div className="container" style={{ maxWidth: '900px', position: 'relative', zIndex: 1 }}>
           <div style={{ textAlign: 'center', marginBottom: '30px' }}>

@@ -19,6 +19,7 @@ export default function Footer() {
         <img
           src="./zdjecia/logo-stopka.webp"
           alt="hOla Perros"
+          width="420" height="171" loading="lazy"
           style={{ height: '76px', width: 'auto', objectFit: 'contain', marginBottom: '24px' }}
         />
 
