@@ -768,6 +768,25 @@ function getPieskiFolder() {
   return getSubFolder(getMainFolder(), 'Pieski');
 }
 
+// ⬇️ JEDNORAZOWO: czyści WSZYSTKIE dane (rezerwacje, psy, finanse, metamorfozy, blokady).
+// Zostawia nagłówki. Uruchom raz w edytorze: wybierz wyczyscWszystkieDane → ▶ Uruchom.
+function wyczyscWszystkieDane() {
+  const arkusze = [
+    CONFIG.SHEETS.REZERWACJE, CONFIG.SHEETS.BAZA_PIESKI, CONFIG.SHEETS.FINANSE,
+    CONFIG.SHEETS.METAMORFOZY, CONFIG.SHEETS.BLOKADY, CONFIG.SHEETS.PIESKI
+  ];
+  const log = [];
+  arkusze.forEach(function(nazwa) {
+    try {
+      const sh = getSheet(nazwa);
+      if (!sh) return;
+      const last = sh.getLastRow();
+      if (last > 1) { sh.deleteRows(2, last - 1); log.push(nazwa + ' (-' + (last - 1) + ')'); }
+    } catch(e) {}
+  });
+  return log.length ? ('Wyczyszczono: ' + log.join(', ')) : 'Wszystko już było puste.';
+}
+
 // Diagnostyka struktury folderów na Dysku
 function getDriveInfo() {
   const main = getMainFolder();
