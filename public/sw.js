@@ -3,7 +3,7 @@
 // API (Apps Script) zawsze z sieci. Offline → wersja z cache.
 
 const CACHE = 'hola-perros-v1';
-const BASE = '/Hola-Perros/';
+const BASE = '/';
 const PRECACHE = [
   BASE,
   BASE + 'manifest.json',

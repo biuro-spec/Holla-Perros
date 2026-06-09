@@ -2,16 +2,16 @@
   "name": "hOla Perros — Groomer Racibórz",
   "short_name": "hOla Perros",
   "description": "Profesjonalny salon groomerski w Raciborzu — strzyżenie, kąpiel i pielęgnacja psów.",
-  "start_url": "/Hola-Perros/",
-  "scope": "/Hola-Perros/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#FCFBF8",
   "theme_color": "#E49FB3",
   "lang": "pl",
   "icons": [
-    { "src": "/Hola-Perros/favicon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "/Hola-Perros/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "/Hola-Perros/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    { "src": "/favicon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }
