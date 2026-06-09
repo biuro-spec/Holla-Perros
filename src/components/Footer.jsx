@@ -73,7 +73,7 @@ export default function Footer() {
       <div style={{ backgroundColor: '#0d0d0f', padding: '14px 40px', textAlign: 'center' }}>
         <p style={{ margin: 0, fontSize: '0.82rem', color: 'rgba(255,255,255,0.6)', display: 'inline-flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
           Strona przygotowana i streamowana przez
-          <a href="https://www.instagram.com/webstudio47" target="_blank" rel="noreferrer" aria-label="WebStudio47" style={{ textDecoration: 'none', fontFamily: "'Courier New', monospace", fontWeight: 700, fontSize: '0.95rem', letterSpacing: '0.5px' }}>
+          <a href="https://webstudio47.pl/" target="_blank" rel="noreferrer" aria-label="WebStudio47" style={{ textDecoration: 'none', fontFamily: "'Courier New', monospace", fontWeight: 700, fontSize: '0.95rem', letterSpacing: '0.5px' }}>
             <span style={{ color: '#ffffff' }}>&lt;WebStudio</span><span style={{ color: '#29ABE2' }}>47</span><span style={{ color: '#ffffff' }}>&gt;</span>
           </a>
         </p>
