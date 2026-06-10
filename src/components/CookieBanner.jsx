@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function CookieBanner() {
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!localStorage.getItem('hp_cookies_ok')) setShow(true);
@@ -11,6 +12,7 @@ export default function CookieBanner() {
   const accept = () => {
     localStorage.setItem('hp_cookies_ok', '1');
     setShow(false);
+    navigate('/');
   };
 
   if (!show) return null;
