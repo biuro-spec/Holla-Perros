@@ -22,8 +22,8 @@ export default function Metamorfozy() {
       .then(r => r.json())
       .then(res => {
         if (res.ok && Array.isArray(res.data) && res.data.length) {
-          // Nowe z API na początku, potem seed
-          setItems([...res.data, ...SEED]);
+          // Najpierw przykłady (od razu się ładują), nowe zdjęcia na dole — zdążą doczytać się zanim klient przewinie
+          setItems([...SEED, ...res.data]);
         }
       })
       .catch(() => {})
@@ -57,11 +57,11 @@ export default function Metamorfozy() {
               onClick={() => setActive(item)}
             >
               <img
-                src={item.FileId ? `https://lh3.googleusercontent.com/d/${item.FileId}=w1000` : item.Url}
+                src={item.FileId ? `https://lh3.googleusercontent.com/d/${item.FileId}=w600` : item.Url}
                 alt={item.Tytul || 'Metamorfoza psa'}
                 loading="lazy"
                 referrerPolicy="no-referrer"
-                style={{ width: '100%', display: 'block', borderRadius: '8px' }}
+                style={{ width: '100%', display: 'block', borderRadius: '8px', minHeight: '180px', backgroundColor: 'var(--bg-color-alt)' }}
                 onError={(e) => {
                   if (!e.target.dataset.retry) { e.target.dataset.retry = 1; const s = e.target.src; e.target.src = ''; setTimeout(() => { e.target.src = s; }, 2500); }
                   else { e.target.parentElement.style.display = 'none'; }
