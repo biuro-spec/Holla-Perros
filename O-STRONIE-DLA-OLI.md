@@ -151,6 +151,31 @@ Masz już opinie w Google, więc wizytówka pewnie istnieje. **Upewnij się, że
 - **PIN do panelu:** _(podany osobno)_
 - **Klucz dostępu:** _(podany osobno)_
 - **Link do bio (Instagram):** https://holaperros.pl/bio/
+- **Poczta e-mail:** salon@holaperros.pl
+- **Hasło do poczty:** _(podane osobno)_
+- **Webmail (logowanie do poczty):** https://poczta.cyber-folks.pl
+
+---
+
+## 📧 TWOJA POCZTA E-MAIL
+
+Masz teraz firmowy adres e-mail: **salon@holaperros.pl** — wygląda profesjonalnie i pasuje do strony. Używaj go do kontaktu z klientami, Wizytówki Google i innych usług.
+
+### Jak sprawdzać pocztę
+
+**Najprościej — przez przeglądarkę (nic nie instalujesz):**
+1. Wejdź na **https://poczta.cyber-folks.pl**
+2. Zaloguj się: **salon@holaperros.pl** + hasło (podane osobno)
+
+**Albo w aplikacji pocztowej na telefonie** (Poczta / Outlook → dodaj konto → „Inne / IMAP"):
+| Ustawienie | Wartość |
+|---|---|
+| E-mail / login | salon@holaperros.pl |
+| Serwer poczty | s75.cyber-folks.pl |
+| Poczta przychodząca (IMAP) | port 993, szyfrowanie SSL |
+| Poczta wychodząca (SMTP) | port 465, szyfrowanie SSL |
+
+> 💡 Wybierz **IMAP** — wtedy poczta jest taka sama na telefonie i komputerze.
 
 ---
 

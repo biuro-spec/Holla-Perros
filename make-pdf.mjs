@@ -83,10 +83,20 @@ const html = `<!doctype html><html lang="pl"><head><meta charset="utf-8">
     <li>Sprawdź <b>Wizytówkę Google</b> (godziny, zdjęcia, link)</li>
   </ol>
 
+  <h2>📧 Twoja poczta e-mail</h2>
+  <p>Masz firmowy adres: <b>salon@holaperros.pl</b>. Najprościej sprawdzać przez przeglądarkę: <b>poczta.cyber-folks.pl</b> (login: adres e-mail + hasło).</p>
+  <table>
+    <tr><th>Ustawienie (do aplikacji pocztowej)</th><th>Wartość</th></tr>
+    <tr><td>Serwer poczty</td><td>s75.cyber-folks.pl</td></tr>
+    <tr><td>Przychodząca (IMAP)</td><td>port 993, SSL</td></tr>
+    <tr><td>Wychodząca (SMTP)</td><td>port 465, SSL</td></tr>
+  </table>
+
   <h2>🔑 Dane dostępowe</h2>
   <div class="key">
     PIN do panelu: <b>_______________</b><br>
-    Klucz dostępu: <b>_______________________________</b>
+    Klucz dostępu: <b>_______________________________</b><br>
+    Poczta: <b>salon@holaperros.pl</b> &nbsp; Hasło: <b>____________________</b>
   </div>
   <p style="font-size:9pt; color:#8a807a; margin-top:6px;">(uzupełnij ręcznie — przekazane osobno, dla bezpieczeństwa)</p>
 
