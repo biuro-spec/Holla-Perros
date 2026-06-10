@@ -65,6 +65,7 @@ export default function Footer() {
           </p>
           <div style={{ display: 'flex', gap: '24px' }}>
             <Link to="/regulamin" style={{ fontSize: '0.85rem', color: 'var(--text-dark)', textDecoration: 'none', fontWeight: 500 }}>Regulamin</Link>
+            <Link to="/polityka-prywatnosci" style={{ fontSize: '0.85rem', color: 'var(--text-dark)', textDecoration: 'none', fontWeight: 500 }}>Polityka prywatności</Link>
             <Link to="/blog" style={{ fontSize: '0.85rem', color: 'var(--text-dark)', textDecoration: 'none', fontWeight: 500 }}>Blog</Link>
           </div>
         </div>
