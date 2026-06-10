@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Robocze pliki instrukcji
+_instrukcja_img/
