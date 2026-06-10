@@ -27,7 +27,7 @@ export default function PolitykaPrywatnosci() {
         <p style={p}>Administratorem Twoich danych osobowych jest <span style={fill}>[NAZWA PODMIOTU / IMIĘ I NAZWISKO]</span>, prowadzący salon groomerski <strong>hOla Perros</strong>, ul. Opawska 67, 47-400 Racibórz.</p>
         <ul>
           <li style={li}>NIP: <span style={fill}>[NIP]</span></li>
-          <li style={li}>E-mail kontaktowy w sprawach danych: <span style={fill}>[ADRES E-MAIL]</span></li>
+          <li style={li}>E-mail kontaktowy w sprawach danych: <span style={fill}>salon@holaperros.pl</span></li>
           <li style={li}>Telefon: +48 512 501 558</li>
         </ul>
 
@@ -72,7 +72,7 @@ export default function PolitykaPrywatnosci() {
         <p style={p}>Możesz zarządzać plikami cookies w ustawieniach swojej przeglądarki (zablokować lub usunąć). Korzystając ze strony, akceptujesz używanie cookies zgodnie z niniejszą polityką.</p>
 
         <h2 style={h2}>8. Kontakt</h2>
-        <p style={p}>W sprawach dotyczących danych osobowych napisz na: <span style={fill}>[ADRES E-MAIL]</span> lub zadzwoń: +48 512 501 558.</p>
+        <p style={p}>W sprawach dotyczących danych osobowych napisz na: <span style={fill}>salon@holaperros.pl</span> lub zadzwoń: +48 512 501 558.</p>
 
         <div style={{ marginTop: '40px', padding: '18px 20px', borderRadius: '10px', backgroundColor: 'var(--bg-color-alt)', fontSize: '0.9rem', color: 'var(--text-light)' }}>
           ℹ️ Dokument stanowi wzór dostosowany do tej strony. Przed publikacją uzupełnij pola oznaczone <span style={fill}>[…]</span> i — w razie wątpliwości — skonsultuj treść z osobą zajmującą się ochroną danych.
