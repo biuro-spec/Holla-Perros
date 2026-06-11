@@ -25,3 +25,7 @@ dist-ssr
 
 # Robocze pliki instrukcji
 _instrukcja_img/
+
+# Surowe materiały (nie do repo)
+/zdjecia/
+holaperros-strona.zip
