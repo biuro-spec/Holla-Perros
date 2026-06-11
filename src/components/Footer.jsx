@@ -72,7 +72,7 @@ export default function Footer() {
       </div>
 
       {/* Pasek autora */}
-      <div style={{ backgroundColor: '#0d0d0f', padding: '14px 40px', textAlign: 'center' }}>
+      <div style={{ backgroundColor: 'var(--text-dark)', padding: '14px 40px', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
         <p style={{ margin: 0, fontSize: '0.82rem', color: 'rgba(255,255,255,0.6)', display: 'inline-flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
           Strona przygotowana i streamowana przez
           <a href="https://webstudio47.pl/" target="_blank" rel="noreferrer" aria-label="WebStudio47" style={{ textDecoration: 'none', fontFamily: "'Courier New', monospace", fontWeight: 700, fontSize: '0.95rem', letterSpacing: '0.5px' }}>
