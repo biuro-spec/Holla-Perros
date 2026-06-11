@@ -67,9 +67,9 @@ export default function Metamorfozy() {
                   else { e.target.parentElement.style.display = 'none'; }
                 }}
               />
-              <div className="meta-overlay" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(45,40,37,0.78) 0%, transparent 55%)', opacity: 0, transition: 'opacity 0.35s ease', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '24px' }}>
-                {item.Rasa && <span style={{ color: 'var(--gold)', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px' }}>{item.Rasa}</span>}
-                {item.Tytul && <span style={{ color: '#fff', fontFamily: 'var(--font-heading)', fontSize: '1.4rem' }}>{item.Tytul}</span>}
+              <div className="meta-overlay" style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(30,26,23,0.92) 0%, rgba(30,26,23,0.35) 45%, transparent 70%)', opacity: 0, transition: 'opacity 0.35s ease', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '24px' }}>
+                {item.Rasa && <span style={{ color: '#E8C766', fontSize: '0.78rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '4px', textShadow: '0 1px 4px rgba(0,0,0,0.5)' }}>{item.Rasa}</span>}
+                {item.Tytul && <span style={{ color: '#fff', fontFamily: 'var(--font-heading)', fontSize: '1.4rem', textShadow: '0 1px 6px rgba(0,0,0,0.5)' }}>{item.Tytul}</span>}
               </div>
             </motion.div>
           ))}
@@ -105,7 +105,7 @@ export default function Metamorfozy() {
               <img src={active.FileId ? `https://lh3.googleusercontent.com/d/${active.FileId}=w1400` : active.Url} alt={active.Tytul} referrerPolicy="no-referrer" style={{ maxWidth: '100%', maxHeight: '75vh', borderRadius: '8px', boxShadow: '0 20px 60px rgba(0,0,0,0.4)' }} />
               {(active.Tytul || active.Opis) && (
                 <div style={{ marginTop: '20px', color: '#fff' }}>
-                  {active.Rasa && <p style={{ color: 'var(--gold)', fontSize: '0.82rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '6px' }}>{active.Rasa}</p>}
+                  {active.Rasa && <p style={{ color: '#E8C766', fontSize: '0.82rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '6px' }}>{active.Rasa}</p>}
                   {active.Tytul && <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.8rem', fontWeight: 400, marginBottom: '8px' }}>{active.Tytul}</h3>}
                   {active.Opis && <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '1rem', maxWidth: '500px', margin: '0 auto', lineHeight: 1.6 }}>{active.Opis}</p>}
                 </div>
