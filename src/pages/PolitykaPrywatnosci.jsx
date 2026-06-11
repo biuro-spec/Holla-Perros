@@ -53,7 +53,7 @@ export default function PolitykaPrywatnosci() {
         <p style={p}>Dane mogą być przetwarzane przez zaufanych dostawców usług, z których korzystamy:</p>
         <ul>
           <li style={li}><strong>cyber_Folks S.A.</strong> — hosting strony (przechowywanie na serwerze),</li>
-          <li style={li}><strong>Google Ireland Ltd.</strong> — narzędzia, w których prowadzimy rezerwacje i kartotekę (Arkusze i Dysk Google), oraz mapy i czcionki na stronie.</li>
+          <li style={li}><strong>Google Ireland Ltd.</strong> — narzędzia, w których prowadzimy rezerwacje i kartotekę (Arkusze i Dysk Google) oraz mapa dojazdu na stronie.</li>
         </ul>
         <p style={p}>Nie sprzedajemy ani nie udostępniamy Twoich danych w celach marketingowych podmiotom trzecim.</p>
 
@@ -68,7 +68,7 @@ export default function PolitykaPrywatnosci() {
         <p style={p}>Strona korzysta z plików cookies oraz podobnych technologii:</p>
         <ul>
           <li style={li}><strong>niezbędne</strong> — zapewniają poprawne działanie strony (np. zapamiętanie zgody, działanie panelu),</li>
-          <li style={li}><strong>zewnętrzne</strong> — mapy Google (dojazd) oraz czcionki Google, które mogą zapisywać własne pliki cookies.</li>
+          <li style={li}><strong>zewnętrzne</strong> — mapa Google (dojazd), która może zapisywać własne pliki cookies.</li>
         </ul>
         <p style={p}>Możesz zarządzać plikami cookies w ustawieniach swojej przeglądarki (zablokować lub usunąć). Korzystając ze strony, akceptujesz używanie cookies zgodnie z niniejszą polityką.</p>
 
