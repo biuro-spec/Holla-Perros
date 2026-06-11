@@ -74,10 +74,6 @@ export default function PolitykaPrywatnosci() {
 
         <h2 style={h2}>8. Kontakt</h2>
         <p style={p}>W sprawach dotyczących danych osobowych napisz na: <span style={fill}>salon@holaperros.pl</span> lub zadzwoń: +48 512 501 558.</p>
-
-        <div style={{ marginTop: '40px', padding: '18px 20px', borderRadius: '10px', backgroundColor: 'var(--bg-color-alt)', fontSize: '0.9rem', color: 'var(--text-light)' }}>
-          ℹ️ W razie pytań dotyczących przetwarzania danych zachęcamy do kontaktu pod adresem salon@holaperros.pl.
-        </div>
       </div>
     </div>
   );
