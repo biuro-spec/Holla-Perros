@@ -72,7 +72,7 @@ const html = `<!doctype html><html lang="pl"><head><meta charset="utf-8">
 
   <h2>🔑 Pierwsze logowanie — wpisz klucz (raz)</h2>
   <p>Za pierwszym razem na danym telefonie/komputerze wejdź w <b>Ustawienia</b> i wpisz <b>klucz dostępu</b> (podany na końcu), potem kliknij „Zapisz klucz". To chroni dane klientów.</p>
-  <div class="imgs"><figure><img src="${img('4-klucz.png')}" width="420"><figcaption>Ustawienia → Tajny klucz dostępu</figcaption></figure></div>
+  <div class="imgs"><figure><img src="${img('4-klucz.png')}" width="430"><figcaption>Tu wklejasz klucz (Ustawienia → „Tajny klucz dostępu") i klikasz „Zapisz klucz"</figcaption></figure></div>
 
   <h2>📋 Co możesz w panelu</h2>
   <div style="display:flex; gap:16px; align-items:flex-start;">
@@ -131,7 +131,7 @@ const b = await chromium.launch();
 const p = await b.newPage();
 await p.setContent(html, { waitUntil: 'networkidle' });
 await p.waitForTimeout(1500);
-await p.pdf({ path: 'PRZEWODNIK-OLI.pdf', format: 'A4', printBackground: true });
+await p.pdf({ path: 'INSTRUKCJA-OLI.pdf', format: 'A4', printBackground: true });
 await p.setViewportSize({ width: 794, height: 1400 });
 await p.screenshot({ path: '_instrukcja_img/pdf-preview.png' });
 await b.close();
