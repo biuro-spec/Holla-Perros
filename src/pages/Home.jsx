@@ -87,12 +87,8 @@ function OpinieSection() {
         </div>
 
         <div style={{ textAlign: 'center', display: 'flex', gap: '24px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
-            <button className="btn-primary" style={{ padding: '16px 30px', minHeight: '48px' }}>Zobacz wszystkie opinie</button>
-          </a>
-          <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
-            <button className="btn-secondary" style={{ padding: '16px 30px', minHeight: '48px', background: 'none', border: '1px solid var(--gold)', color: 'var(--text-dark)', borderRadius: '4px', cursor: 'pointer', fontFamily: 'var(--font-body)', fontSize: '0.9rem' }}>Wystaw opinię ⭐</button>
-          </a>
+          <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: '16px 30px', minHeight: '48px', textDecoration: 'none', justifyContent: 'center' }}>Zobacz wszystkie opinie</a>
+          <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noreferrer" style={{ padding: '16px 30px', minHeight: '48px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: '1px solid var(--gold)', color: 'var(--text-dark)', borderRadius: '4px', cursor: 'pointer', fontFamily: 'var(--font-body)', fontSize: '0.9rem', textDecoration: 'none', boxSizing: 'border-box' }}>Wystaw opinię ⭐</a>
         </div>
       </div>
       <style>{`@media (max-width: 600px) { .opinie-arrow { width: 42px !important; height: 42px !important; } }`}</style>

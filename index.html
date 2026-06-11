@@ -2,10 +2,8 @@
 <html lang="pl">
   <head>
     <meta charset="UTF-8" />
-    <!-- Fonty — preconnect + nieblokujące ładowanie (wydajność) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@0,400;0,500;0,600&display=swap" />
+    <!-- Czcionki są self-hosted (bundlowane lokalnie przez Vite, import w main.jsx) — brak zależności od Google -->
+
     <!-- Preload obrazu hero (LCP) -->
     <link rel="preload" as="image" href="/zdjecia/groomer-raciborz-salon-hola-perros.webp" fetchpriority="high" />
     <!-- Favicon -->
