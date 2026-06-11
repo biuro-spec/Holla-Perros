@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, MessageCircle } from 'lucide-react';
+import { MapPin, Phone, MessageCircle, Facebook } from 'lucide-react';
 
 const InstagramIcon = ({ size = 20 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -45,6 +45,10 @@ export default function Footer() {
           <a href="https://www.instagram.com/holaperros_salon" target="_blank" rel="noreferrer" aria-label="Instagram"
             className="footer-social" style={{ width: '44px', height: '44px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.85)', textDecoration: 'none', transition: 'all 0.3s ease' }}>
             <InstagramIcon size={20} />
+          </a>
+          <a href="https://www.facebook.com/salonhOlaperros" target="_blank" rel="noreferrer" aria-label="Facebook"
+            className="footer-social" style={{ width: '44px', height: '44px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.85)', textDecoration: 'none', transition: 'all 0.3s ease' }}>
+            <Facebook size={20} />
           </a>
           <a href="https://wa.me/48512501558" target="_blank" rel="noreferrer" aria-label="WhatsApp"
             className="footer-social" style={{ width: '44px', height: '44px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.85)', textDecoration: 'none', transition: 'all 0.3s ease' }}>
