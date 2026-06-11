@@ -187,7 +187,7 @@ Warto wiedzieć, co dostałaś — bo to **nie jest zwykła strona-wizytówka**,
 - **panel do zarządzania** (rezerwacje, baza klientów, finanse, galeria) — to działa jak prawdziwy program dla firmy,
 - obecność w Google, dokumenty prawne, link na Instagram, narzędzia marketingowe.
 
-**Wartość rynkowa takiego projektu to ok. 9 000 – 15 000 zł** (sama strona-wizytówka bez panelu kosztuje 2 000 – 4 000 zł — to panel stanowi większość wartości).
+**Wartość rynkowa takiego projektu to kilka tysięcy złotych** (sama strona-wizytówka bez panelu kosztuje 2 000 – 4 000 zł — to panel stanowi większość wartości).
 
 ### Najważniejsze: brak kosztów miesięcznych 💰
 

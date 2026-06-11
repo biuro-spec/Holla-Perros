@@ -113,7 +113,7 @@ const html = `<!doctype html><html lang="pl"><head><meta charset="utf-8">
   </table>
 
   <h2>💎 Wartość Twojej strony</h2>
-  <p>To kompletny system (strona + panel zarządzania), nie zwykła wizytówka. Wartość rynkowa takiego projektu to <b>ok. 9 000 – 15 000 zł</b>.</p>
+  <p>To kompletny system (strona + panel zarządzania), nie zwykła wizytówka. Wartość rynkowa takiego projektu to <b>kilka tysięcy złotych</b>.</p>
   <div class="box">💰 <b>Najważniejsze — brak kosztów miesięcznych.</b> Systemy do rezerwacji (jak Booksy) kosztują 100–300 zł/mies. bez końca. Twój działa za darmo (narzędzia Google + tani hosting) — oszczędność nawet kilku tysięcy zł rocznie. Do tego <b>wszystkie dane są Twoje</b>, w Twoim koncie Google.</div>
 
   <h2>🔑 Dane dostępowe</h2>
