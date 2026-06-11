@@ -30,6 +30,12 @@ export default function Metamorfozy() {
       .finally(() => setLoading(false));
   }, []);
 
+  // Blokuj przewijanie strony, gdy podgląd (lightbox) jest otwarty
+  useEffect(() => {
+    document.body.style.overflow = active ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [active]);
+
   return (
     <div className="blog-page-wrapper" style={{ paddingTop: '120px', minHeight: '100vh', backgroundColor: 'var(--bg-color)' }}>
       <div className="container" style={{ paddingBottom: '100px' }}>
