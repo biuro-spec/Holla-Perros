@@ -226,9 +226,9 @@ export default function Home() {
                 src="./zdjecia/groomer-raciborz-salon-hola-perros.webp"
                 alt="Ekskluzywna pielęgnacja"
                 fetchPriority="high"
-                width="420" height="560"
+                width="1209" height="1710"
                 className="hero-img"
-                style={{ width: '100%', maxWidth: '420px', aspectRatio: '3/4', objectFit: 'cover', objectPosition: 'center', display: 'block', borderRadius: '4px', boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}
+                style={{ width: '100%', maxWidth: '420px', height: 'auto', display: 'block', borderRadius: '4px', boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}
                 onError={(e) => { e.target.style.display = 'none'; }}
               />
             </div>
